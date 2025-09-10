@@ -1,0 +1,11 @@
+﻿__pycache__/
+*.pyc
+.venv/
+.env
+.DS_Store
+out/*.json
+out/*.csv
+.vscode/
+.idea/
+.out/*.py
+.out
