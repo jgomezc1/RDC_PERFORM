@@ -336,11 +336,17 @@ def _emit_columns(lines: List[str], cols_json: Dict[str, Any],
         i_node = _to_int(c.get("i_node")); j_node = _to_int(c.get("j_node"))
         transf_tag_raw = _to_int(c.get("transf_tag")) or 111
         tr = _derive_transf_tag("COLUMN", tag, transf_tag_raw)
+
         A = _to_float(c.get("A")); E = _to_float(c.get("E")); G = _to_float(c.get("G"))
         J = _to_float(c.get("J")); Iy = _to_float(c.get("Iy")); Iz = _to_float(c.get("Iz"))
-        line_name = str(c.get("line", "?"))
 
-        picked = ov.find("COLUMN", tag, line_name)
+        # Use 'parent_line' from columns.json (fallback to 'line' if ever present)
+        line_name = str(c.get("parent_line") or c.get("line") or "?")
+        seg = str(c.get("segment") or "").lower()
+
+        # Apply nonlinear overrides ONLY on deformable segments
+        picked = ov.find("COLUMN", tag, line_name) if seg == "deformable" else None
+
         if picked:
             hs, tgt = picked
             # An override may provide its own transf_tag; still derive a per-element default if it is 0.
