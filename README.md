@@ -5,9 +5,10 @@ This version has the following modeling capabilities:
 
 * elasticBeamColumn elements
 * forceBeamColumn elements
-*Nonlienar material properties through section aggregattors
-*Rigid Diaphragms
-*Rigid ends.
+* Nonlienar material properties through section aggregattors
+* Rigid Diaphragms
+* Rigid ends.
+
 
 
 
