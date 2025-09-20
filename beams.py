@@ -64,6 +64,105 @@ def _load_json(path: str) -> Dict[str, Any]:
         return json.load(f)
 
 
+def _get_section_properties(section_name: str, parsed_data: Dict[str, Any]) -> Dict[str, float]:
+    """
+    Extract material and geometric properties for a given section from parsed .e2k data.
+    Returns structural properties ready for OpenSees elasticBeamColumn element.
+
+    Parameters
+    ----------
+    section_name : str
+        Section name (e.g., "V40X55")
+    parsed_data : dict
+        Parsed .e2k data containing materials and frame_sections
+
+    Returns
+    -------
+    dict
+        Properties with keys: A, E, G, J, Iy, Iz, b_sec, h_sec
+        Falls back to hardcoded values if section not found.
+    """
+    frame_sections = parsed_data.get("frame_sections", {})
+    materials = parsed_data.get("materials", {})
+
+    # Default fallback values (original hardcoded)
+    defaults = {
+        "b_sec": 0.40,  # width [m]
+        "h_sec": 0.50,  # depth [m]
+        "E": 2.50e10,   # [Pa]
+        "nu": 0.20,     # Poisson's ratio
+    }
+
+    section_data = frame_sections.get(section_name)
+    if not section_data:
+        print(f"[beams] Warning: Section '{section_name}' not found, using defaults")
+        return _calculate_structural_properties(**defaults)
+
+    # Extract dimensions
+    dimensions = section_data.get("dimensions", {})
+    shape = section_data.get("shape", "")
+
+    if "Rectangular" in shape:
+        # ETABS rectangular: D=height, B=width
+        h_sec = float(dimensions.get("D", defaults["h_sec"]))  # depth/height
+        b_sec = float(dimensions.get("B", defaults["b_sec"]))  # width
+    else:
+        print(f"[beams] Warning: Unsupported shape '{shape}' for section '{section_name}', using defaults")
+        h_sec = defaults["h_sec"]
+        b_sec = defaults["b_sec"]
+
+    # Extract material properties
+    material_name = section_data.get("material")
+    material_props = materials.get("properties", {}).get(material_name, {}) if material_name else {}
+
+    # Determine Young's modulus E
+    if material_props.get("type") == "Concrete":
+        # For concrete, estimate E from fc using ACI formula: E ≈ 4700√fc [MPa]
+        fc_pa = float(material_props.get("fc", 21e6))  # Pa
+        fc_mpa = fc_pa / 1e6  # Convert to MPa
+        E = 4700 * (fc_mpa ** 0.5) * 1e6  # Convert back to Pa
+    elif material_props.get("type") in ["Steel", "Kinematic"]:
+        # Use steel modulus if available, otherwise standard value
+        E = float(material_props.get("E", 200e9))  # Pa
+    else:
+        print(f"[beams] Warning: Unknown material type for '{material_name}', using default E")
+        E = defaults["E"]
+
+    return _calculate_structural_properties(b_sec=b_sec, h_sec=h_sec, E=E, nu=defaults["nu"])
+
+
+def _calculate_structural_properties(b_sec: float, h_sec: float, E: float, nu: float) -> Dict[str, float]:
+    """
+    Calculate structural properties for rectangular section.
+
+    Parameters
+    ----------
+    b_sec : float
+        Width [m]
+    h_sec : float
+        Height/depth [m]
+    E : float
+        Young's modulus [Pa]
+    nu : float
+        Poisson's ratio
+
+    Returns
+    -------
+    dict
+        Structural properties: A, E, G, J, Iy, Iz, b_sec, h_sec
+    """
+    G = E / (2.0 * (1.0 + nu))
+    A = b_sec * h_sec
+    Iy = (b_sec * h_sec**3) / 12.0  # Moment of inertia about y-axis
+    Iz = (h_sec * b_sec**3) / 12.0  # Moment of inertia about z-axis
+    J = b_sec * h_sec**3 / 3.0      # Torsional constant (rectangular approximation)
+
+    return {
+        "A": A, "E": E, "G": G, "J": J, "Iy": Iy, "Iz": Iz,
+        "b_sec": b_sec, "h_sec": h_sec
+    }
+
+
 def _point_pid(p: Dict[str, Any]) -> Optional[str]:
     for key in ("id", "tag", "point", "pid"):
         if key in p and p[key] is not None:
@@ -113,29 +212,17 @@ def _dedupe_last_section_wins(lines_for_story: List[Dict[str, Any]]) -> List[Dic
 def define_beams(
     story_path: str = os.path.join(OUT_DIR, "story_graph.json"),
     raw_path: str = os.path.join(OUT_DIR, "parsed_raw.json"),
-    *,
-    # --- Placeholder properties (override as needed; units consistent with your model) ---
-    b_sec: float = 0.40,   # width  [m]
-    h_sec: float = 0.50,   # depth  [m]
-    E_beam: float = 2.50e10,  # [Pa]
-    nu_beam: float = 0.20
 ) -> List[int]:
     """
     Builds BEAM elements per-story with "last section wins" within each story.
+    Uses actual section and material properties from parsed .e2k data.
     Returns the list of created element tags. Also writes OUT_DIR/beams.json.
     """
     # Ensure OpenSees domain exists
     _ensure_ops_model(3, 6)
 
     story = _load_json(story_path)
-    _raw = _load_json(raw_path)  # parity/debugging
-
-    # --- Section / Material ---
-    G_beam = E_beam / (2.0 * (1.0 + nu_beam))
-    A_beam = b_sec * h_sec
-    Iy_beam = (b_sec * h_sec**3) / 12.0
-    Iz_beam = (h_sec * b_sec**3) / 12.0
-    J_beam = b_sec * h_sec**3 / 3.0
+    _raw = _load_json(raw_path)  # Contains parsed .e2k data with materials/sections
 
     story_names: List[str] = list(story.get("story_order_top_to_bottom", []))  # top -> bottom
     story_index = {name: i for i, name in enumerate(story_names)}
@@ -170,11 +257,21 @@ def define_beams(
             LoffI = float(ln.get("length_off_i", 0.0) or 0.0)  # preserved for artifact
             LoffJ = float(ln.get("length_off_j", 0.0) or 0.0)  # preserved for artifact
             line_name = str(ln.get("name", "?"))
+            section_name = ln.get("section", "")
+
+            # Get section-specific properties from parsed .e2k data
+            section_props = _get_section_properties(section_name, _raw)
+            A_beam = section_props["A"]
+            E_beam = section_props["E"]
+            G_beam = section_props["G"]
+            J_beam = section_props["J"]
+            Iy_beam = section_props["Iy"]
+            Iz_beam = section_props["Iz"]
 
             # Create single element connecting directly between grid nodes
             etag = element_tag("BEAM", line_name, int(sidx))
-            transf_tag = 1000000000 + etag  # avoid collisions with columns
-            ops.geomTransf('Linear', transf_tag, 0, 0, 1)  # local z axis
+            transf_tag = 1000000000 + etag  # avoid collisions with columns (unchanged)
+            ops.geomTransf('Linear', transf_tag, 0, 0, 1)  # local z axis (unchanged)
 
             ops.element('elasticBeamColumn', etag, nI, nJ, A_beam, E_beam, G_beam, J_beam, Iy_beam, Iz_beam, transf_tag)
             created.append(etag)
@@ -185,7 +282,7 @@ def define_beams(
                 "story": sname,
                 "i_node": nI,
                 "j_node": nJ,
-                "section": ln.get("section"),
+                "section": section_name,
                 "transf_tag": transf_tag,
                 "A": A_beam, "E": E_beam, "G": G_beam, "J": J_beam, "Iy": Iy_beam, "Iz": Iz_beam,
                 "length_off_i": LoffI, "length_off_j": LoffJ,  # preserved but unused
