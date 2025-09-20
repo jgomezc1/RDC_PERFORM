@@ -5,14 +5,9 @@ emit_nodes.py
 Emit the nodes artifact (nodes.json) representing the actual OpenSees node set:
 - Grid nodes derived from story_graph.json (Phase-1, Z already resolved there)
 - Diaphragm master nodes derived from diaphragms.json (Phase-2)
-- Intermediate interface nodes registered by rigid-end splitting
-  via _intermediate_nodes.json, merged here without changing nodes.json schema.
 
 Deterministic tag:
     grid/master: node_tag = point_id * 1000 + story_index   (story_index = 0 at top, increasing downward)
-    intermediate (rigid interfaces): bounded 32-bit deterministic hash in the band
-        [1_500_000_000, 2_100_000_000), with even/odd = I/J to avoid overlap.
-        Collisions are resolved by +2 probing (still deterministic for a given set).
 
 Z rule used by this emitter (aligned with current repo):
   - Prefer the pre-resolved absolute Z stored in story_graph.json at active_points[*]["z"].
@@ -202,6 +197,8 @@ def _master_nodes_from_diaphragms(
 
 # -----------------------
 # Intermediate node registry (32-bit bounded tags)
+# DEPRECATED: No longer used since removing rigid end splitting
+# Kept for potential future use or backward compatibility
 # -----------------------
 _INT32_MAX = 2_147_483_647
 # Reserve a safe band for interface nodes. We'll fill it with even/odd = I/J.
@@ -340,27 +337,17 @@ def register_intermediate_node(
 def emit_nodes_json(out_dir: str = "out") -> str:
     """
     Build and save nodes.json to 'out_dir'. Returns the output path.
-    Merges grid + masters + any registered intermediate nodes (schema unchanged).
+    Merges grid + master nodes only (no more intermediate nodes).
     """
     sg = _load_json(os.path.join(out_dir, "story_graph.json"))
     dg = _load_json(os.path.join(out_dir, "diaphragms.json"))
-    reg = _load_registry(out_dir)
 
     grid_nodes = _grid_nodes_from_story_graph(sg)
     master_nodes = _master_nodes_from_diaphragms(dg, sg, grid_nodes)
-    interm_nodes: List[Dict[str, Any]] = reg.get("nodes", [])
 
     all_nodes: Dict[int, Dict[str, Any]] = {int(n["tag"]): n for n in grid_nodes}
     for m in master_nodes:
         all_nodes[int(m["tag"])] = m  # overwrite if collision (shouldn't happen)
-    for k in interm_nodes:
-        # Only accept in-range, integer tags when merging
-        try:
-            kt = int(k["tag"])
-        except Exception:
-            continue
-        if 0 < kt <= _INT32_MAX:
-            all_nodes[kt] = k
 
     nodes_list = [all_nodes[k] for k in sorted(all_nodes.keys())]
     out = {
@@ -378,7 +365,7 @@ def emit_nodes_json(out_dir: str = "out") -> str:
     print(
         "[ARTIFACTS] Wrote nodes.json with "
         f"{out['counts']['total']} nodes ({out['counts']['grid']} grid, "
-        f"{out['counts']['master']} masters, +{len(interm_nodes)} intermediates merged) at: {out_path}"
+        f"{out['counts']['master']} masters) at: {out_path}"
     )
     return out_path
 

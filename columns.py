@@ -1,22 +1,15 @@
 """
-Create COLUMN elements as OpenSeesPy elasticBeamColumn members with support for
-ETABS rigid end zones (LENGTHOFFI/LENGTHOFFJ when RIGIDZONE=1). Writes Phase-2
+Create COLUMN elements as OpenSeesPy elasticBeamColumn members. Writes Phase-2
 artifact `columns.json`.
 
-Rules (retained)
-----------------
+Rules
+-----
 - **find-next-lower-story**: For a COLUMN line at story S, connect its endpoint
   'i' at story S to endpoint 'j' at the next lower story K where **both** i and j
   appear in that story's active points. If none is found, skip.
 - Enforce local-axis convention (configurable): by default **i = bottom, j = top**.
-
-New in this version
--------------------
 - Auto-initialize OpenSees model if ndm/ndf are zero (no wipe).
-- Splits members into up to **three segments** (rigid I, deformable mid, rigid J).
-- Creates deterministic **intermediate nodes** at the offset boundaries.
-- Per-segment **geomTransf** (one per element) derived from the element tag.
-- Emits richer `columns.json` records with a `segment` field.
+- One element per ETABS line, connecting directly between grid nodes.
 
 OpenSeesPy signatures (exact):
     ops.geomTransf('Linear', transf_tag, 1, 0, 0)
@@ -58,7 +51,7 @@ except Exception:
         s = f"{kind}|{name}|{story_index}".encode("utf-8")
         return int.from_bytes(hashlib.md5(s).digest()[:4], "big") & 0x7FFFFFFF
 
-from rigid_end_utils import split_with_rigid_ends  # type: ignore
+# Removed rigid end splitting - rigid_end_utils no longer used
 
 
 def _ensure_ops_model(ndm: int = 3, ndf: int = 6) -> None:
@@ -137,7 +130,7 @@ def define_columns(
     nu_col: float = 0.20
 ) -> List[int]:
     """
-    Build COLUMN elements with the next-lower-story rule and rigid ends.
+    Build COLUMN elements with the next-lower-story rule.
     Returns the list of created element tags. Also writes OUT_DIR/columns.json.
     """
     # Ensure OpenSees domain exists
@@ -200,81 +193,41 @@ def define_columns(
                 skips.append(f"{ln.get('name','?')} @ '{sname}' skipped — endpoint nodes missing")
                 continue
 
-            pTop = act_pt_map[(pid_i, sname)]
-            pBot = act_pt_map[(pid_j, sK)]
-
             # Orientation enforcement (i=bottom, j=top) if requested
             nI, nJ = (nBot, nTop)
-            pI, pJ = (pBot, pTop)
-            LoffI = float(ln.get("length_off_i", 0.0) or 0.0)
-            LoffJ = float(ln.get("length_off_j", 0.0) or 0.0)
             line_name = str(ln.get("name", "?"))
+            LoffI = float(ln.get("length_off_i", 0.0) or 0.0)  # preserved for artifact
+            LoffJ = float(ln.get("length_off_j", 0.0) or 0.0)  # preserved for artifact
 
             if not ENFORCE_COLUMN_I_AT_BOTTOM:
                 # Keep ETABS i->j direction (i at S (top), j at K (bottom)):
                 nI, nJ = (nTop, nBot)
-                pI, pJ = (pTop, pBot)
-            else:
-                # ETABS i is upper; our convention is i=bottom. Swap offsets accordingly.
-                LoffI, LoffJ = float(LoffJ), float(LoffI)
 
-            parts = split_with_rigid_ends(
-                kind="COLUMN", line_name=line_name, story_index=int(sidx),
-                nI=nI, nJ=nJ, pI=pI, pJ=pJ, LoffI=LoffI, LoffJ=LoffJ
-            )
+            # Create single element connecting directly between grid nodes
+            etag = element_tag("COLUMN", line_name, int(sidx))
+            transf_tag = 1100000000 + etag
+            ops.geomTransf('Linear', transf_tag, 1, 0, 0)
 
-            # Create elements for each segment
-            for seg in parts['segments']:
-                role = seg['role']
-                i_tag, j_tag = seg['i'], seg['j']
+            ops.element('elasticBeamColumn', etag, nI, nJ, A_col, E_col, G_col, J_col, Iy_col, Iz_col, transf_tag)
+            created.append(etag)
 
-                etag = element_tag("COLUMN", line_name + seg['suffix'], int(sidx))
-                transf_tag = 1100000000 + etag
-                ops.geomTransf('Linear', transf_tag, 1, 0, 0)
-
-                if role.startswith("rigid"):
-                    A = A_col * RIGID_END_SCALE
-                    Iy = Iy_col * RIGID_END_SCALE
-                    Iz = Iz_col * RIGID_END_SCALE
-                    J = J_col * RIGID_END_SCALE
-                else:
-                    A, Iy, Iz, J = A_col, Iy_col, Iz_col, J_col
-
-                # Ensure split interface nodes exist in the OpenSees domain
-                coord_by_tag = {
-                    int(parts['nodes']['nI']): parts['coords']['nI'],
-                    int(parts['nodes']['nIm']): parts['coords']['nIm'],
-                    int(parts['nodes']['nJm']): parts['coords']['nJm'],
-                    int(parts['nodes']['nJ']): parts['coords']['nJ'],
-                }
-                for t in (i_tag, j_tag):
-                    if t not in existing_nodes:
-                        cx, cy, cz = coord_by_tag[int(t)]
-                        ops.node(int(t), float(cx), float(cy), float(cz))
-                        existing_nodes.add(int(t))
-
-                ops.element('elasticBeamColumn', etag, i_tag, j_tag, A, E_col, G_col, J, Iy, Iz, transf_tag)
-                created.append(etag)
-
-                coords = parts['coords']
-                emitted.append({
-                    "tag": etag,
-                    "segment": role,
-                    "parent_line": line_name,
-                    "story": sname,
-                    "i_node": i_tag,
-                    "j_node": j_tag,
-                    "section": ln.get("section"),
-                    "transf_tag": transf_tag,
-                    "A": A, "E": E_col, "G": G_col, "J": J, "Iy": Iy, "Iz": Iz,
-                    "length_off_i": LoffI, "length_off_j": LoffJ,
-                })
+            emitted.append({
+                "tag": etag,
+                "line": line_name,
+                "story": sname,
+                "i_node": nI,
+                "j_node": nJ,
+                "section": ln.get("section"),
+                "transf_tag": transf_tag,
+                "A": A_col, "E": E_col, "G": G_col, "J": J_col, "Iy": Iy_col, "Iz": Iz_col,
+                "length_off_i": LoffI, "length_off_j": LoffJ,  # preserved but unused
+            })
 
     if skips:
         print("[columns] Skips:")
         for s in skips:
             print(" -", s)
-    print(f"[columns] Created {len(created)} column segments (including rigid ends).")
+    print(f"[columns] Created {len(created)} column elements.")
 
     try:
         os.makedirs(OUT_DIR, exist_ok=True)

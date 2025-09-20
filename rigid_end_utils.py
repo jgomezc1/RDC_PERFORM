@@ -2,7 +2,9 @@
 """
 rigid_end_utils.py
 
-Implements the split hook used by beams.py / columns.py to support ETABS rigid ends.
+DEPRECATED: This module is no longer used since removing rigid end splitting.
+Previously implemented the split hook used by beams.py / columns.py to support ETABS rigid ends.
+Kept for potential future reference or backward compatibility.
 Signature matches current usage:
 
     parts = split_with_rigid_ends(

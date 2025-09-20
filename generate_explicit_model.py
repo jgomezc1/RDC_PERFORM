@@ -340,12 +340,14 @@ def _emit_columns(lines: List[str], cols_json: Dict[str, Any],
         A = _to_float(c.get("A")); E = _to_float(c.get("E")); G = _to_float(c.get("G"))
         J = _to_float(c.get("J")); Iy = _to_float(c.get("Iy")); Iz = _to_float(c.get("Iz"))
 
-        # Use 'parent_line' from columns.json (fallback to 'line' if ever present)
-        line_name = str(c.get("parent_line") or c.get("line") or "?")
+        # Use 'line' from simplified columns.json (fallback to 'parent_line' for backward compatibility)
+        line_name = str(c.get("line") or c.get("parent_line") or "?")
         seg = str(c.get("segment") or "").lower()
 
-        # Apply nonlinear overrides ONLY on deformable segments
-        picked = ov.find("COLUMN", tag, line_name) if seg == "deformable" else None
+        # Apply nonlinear overrides: with simplified model, all elements are deformable
+        # (no more segment splitting, so check for simplified format or legacy deformable segments)
+        is_deformable = (seg == "deformable") or (c.get("line") and not seg)
+        picked = ov.find("COLUMN", tag, line_name) if is_deformable else None
 
         if picked:
             hs, tgt = picked

@@ -1,29 +1,14 @@
 """
-Create BEAM elements as OpenSeesPy elasticBeamColumn members with support for
-ETABS rigid end zones (LENGTHOFFI/LENGTHOFFJ when RIGIDZONE=1). Writes Phase-2
+Create BEAM elements as OpenSeesPy elasticBeamColumn members. Writes Phase-2
 artifact `beams.json`.
 
-New in this version
--------------------
+Rules
+-----
 - Auto-initialize OpenSees model if ndm/ndf are zero (no wipe).
-- Splits members into up to **three segments** (rigid I, deformable mid, rigid J).
-- Creates deterministic **intermediate nodes** at the offset boundaries.
-- Per-segment **geomTransf** (one per element) derived from the element tag.
-- Emits richer `beams.json` records with a `segment` field ('rigid_i'|'deformable'|'rigid_j').
-
-Assumptions (unchanged)
------------------------
-- Deterministic node tags:
-      node_tag = point_int * 1000 + story_index
+- One element per ETABS line, connecting directly between grid nodes.
+- Deterministic node tags: node_tag = point_int * 1000 + story_index
 - Story index 0 = Roof (top), increasing downward.
 - Orientation vector: local z-axis = (0, 0, 1) for beams.
-
-Schema note
------------
-Previous `beams.json` contained one entry per line/element. We now emit
-**one entry per created segment** while preserving prior fields. New fields:
-`segment` (role), `parent_line`, and optional `i_coords`/`j_coords`.
-Downstream consumers expecting one-per-line can filter `segment == "deformable"`.
 """
 from __future__ import annotations
 
@@ -56,7 +41,7 @@ try:
 except Exception:
     RIGID_END_SCALE = 1.0e6
 
-from rigid_end_utils import split_with_rigid_ends  # type: ignore
+# Removed rigid end splitting - rigid_end_utils no longer used
 
 
 def _ensure_ops_model(ndm: int = 3, ndf: int = 6) -> None:
@@ -137,7 +122,6 @@ def define_beams(
 ) -> List[int]:
     """
     Builds BEAM elements per-story with "last section wins" within each story.
-    Supports rigid ends via LENGTHOFFI/LENGTHOFFJ in story_graph.
     Returns the list of created element tags. Also writes OUT_DIR/beams.json.
     """
     # Ensure OpenSees domain exists
@@ -183,74 +167,35 @@ def define_beams(
                 skips.append(f"{ln.get('name','?')} @ '{sname}' skipped — endpoint(s) not present on this story")
                 continue
 
-            pI = act_pt_map[(pid_i, sname)]
-            pJ = act_pt_map[(pid_j, sname)]
-
-            LoffI = float(ln.get("length_off_i", 0.0) or 0.0)
-            LoffJ = float(ln.get("length_off_j", 0.0) or 0.0)
+            LoffI = float(ln.get("length_off_i", 0.0) or 0.0)  # preserved for artifact
+            LoffJ = float(ln.get("length_off_j", 0.0) or 0.0)  # preserved for artifact
             line_name = str(ln.get("name", "?"))
 
-            parts = split_with_rigid_ends(
-                kind="BEAM", line_name=line_name, story_index=int(sidx),
-                nI=nI, nJ=nJ, pI=pI, pJ=pJ, LoffI=LoffI, LoffJ=LoffJ
-            )
+            # Create single element connecting directly between grid nodes
+            etag = element_tag("BEAM", line_name, int(sidx))
+            transf_tag = 1000000000 + etag  # avoid collisions with columns
+            ops.geomTransf('Linear', transf_tag, 0, 0, 1)  # local z axis
 
-            # Create elements for each segment
-            for seg in parts['segments']:
-                role = seg['role']
-                i_tag, j_tag = seg['i'], seg['j']
+            ops.element('elasticBeamColumn', etag, nI, nJ, A_beam, E_beam, G_beam, J_beam, Iy_beam, Iz_beam, transf_tag)
+            created.append(etag)
 
-                # unique element + transform tags
-                etag = element_tag("BEAM", line_name + seg['suffix'], int(sidx))
-                transf_tag = 1000000000 + etag  # avoid collisions with columns
-                ops.geomTransf('Linear', transf_tag, 0, 0, 1)  # local z axis
-
-                if role.startswith("rigid"):
-                    A = A_beam * RIGID_END_SCALE
-                    Iy = Iy_beam * RIGID_END_SCALE
-                    Iz = Iz_beam * RIGID_END_SCALE
-                    J = J_beam * RIGID_END_SCALE
-                else:
-                    A, Iy, Iz, J = A_beam, Iy_beam, Iz_beam, J_beam
-
-                # Ensure split interface nodes exist in the OpenSees domain
-                coord_by_tag = {
-                    int(parts['nodes']['nI']): parts['coords']['nI'],
-                    int(parts['nodes']['nIm']): parts['coords']['nIm'],
-                    int(parts['nodes']['nJm']): parts['coords']['nJm'],
-                    int(parts['nodes']['nJ']): parts['coords']['nJ'],
-                }
-                for t in (i_tag, j_tag):
-                    if t not in existing_nodes:
-                        cx, cy, cz = coord_by_tag[int(t)]
-                        ops.node(int(t), float(cx), float(cy), float(cz))
-                        existing_nodes.add(int(t))
-
-                ops.element('elasticBeamColumn', etag, i_tag, j_tag, A, E_beam, G_beam, J, Iy, Iz, transf_tag)
-                created.append(etag)
-
-                coords = parts['coords']
-                emitted.append({
-                    "tag": etag,
-                    "segment": role,
-                    "parent_line": line_name,
-                    "story": sname,
-                    "line": line_name,  # backward compat
-                    "i_node": i_tag,
-                    "j_node": j_tag,
-                    "i_coords": coords['nI'] if i_tag in (parts['nodes']['nI'], parts['nodes']['nIm']) else None,
-                    "j_coords": coords['nJ'] if j_tag in (parts['nodes']['nJ'], parts['nodes']['nJm']) else None,
-                    "section": ln.get("section"),
-                    "transf_tag": transf_tag,
-                    "A": A, "E": E_beam, "G": G_beam, "J": J, "Iy": Iy, "Iz": Iz,
-                    "length_off_i": LoffI, "length_off_j": LoffJ,
-                })
+            emitted.append({
+                "tag": etag,
+                "line": line_name,
+                "story": sname,
+                "i_node": nI,
+                "j_node": nJ,
+                "section": ln.get("section"),
+                "transf_tag": transf_tag,
+                "A": A_beam, "E": E_beam, "G": G_beam, "J": J_beam, "Iy": Iy_beam, "Iz": Iz_beam,
+                "length_off_i": LoffI, "length_off_j": LoffJ,  # preserved but unused
+            })
 
     if skips:
         print("[beams] Skips:")
         for s in skips:
             print(" -", s)
-    print(f"[beams] Created {len(created)} beam segments (including rigid ends).")
+    print(f"[beams] Created {len(created)} beam elements.")
 
     # Emit artifact
     try:

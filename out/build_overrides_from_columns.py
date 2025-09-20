@@ -58,8 +58,8 @@ def build_from_columns(columns_path: str, output_path: str, hinge_len: float = 0
     records = json.load(open(columns_path, "r", encoding="utf-8"))
     records = records.get("columns", records)
 
-    # 1) Pick only deformable segments (rigid_i / rigid_j remain elastic by omission)
-    deformable = [r for r in records if str(r.get("segment","")).lower() == "deformable"]
+    # 1) With simplified model, all columns are deformable (no more segment splitting)
+    deformable = [r for r in records if r.get("line")]  # All records with "line" field are valid elements
 
     # 2) Group by section and collect nominal elastic props from the deformable piece
     by_sec = defaultdict(list)
