@@ -67,7 +67,7 @@ def _load_json(path: str) -> Dict[str, Any]:
 def _get_section_properties(section_name: str, parsed_data: Dict[str, Any]) -> Dict[str, float]:
     """
     Extract material and geometric properties for a given section from parsed .e2k data.
-    Returns structural properties ready for OpenSees elasticBeamColumn element.
+    Uses ETABS-derived material and section property calculators for accurate properties.
 
     Parameters
     ----------
@@ -81,6 +81,57 @@ def _get_section_properties(section_name: str, parsed_data: Dict[str, Any]) -> D
     dict
         Properties with keys: A, E, G, J, Iy, Iz, b_sec, h_sec
         Falls back to hardcoded values if section not found.
+    """
+    # Import calculators (lazy import to avoid circular dependencies)
+    try:
+        from material_property_calculator import MaterialPropertyCalculator
+        from section_property_calculator import SectionPropertyCalculator
+
+        # Initialize calculators with parsed data path
+        material_calc = MaterialPropertyCalculator()
+        section_calc = SectionPropertyCalculator()
+
+        # Get section properties from ETABS calculations
+        section_props = section_calc.get_section_properties(section_name)
+        if section_props:
+            # Get material properties for this section
+            material_props = material_calc.get_material_properties(section_props.material)
+
+            if material_props:
+                # Calculate shear modulus
+                E = material_props.Ec
+                nu = material_props.poisson_ratio
+                G = E / (2.0 * (1.0 + nu))
+
+                print(f"[beams] Using ETABS properties for {section_name}: "
+                      f"E={E/1e9:.1f} GPa, A={section_props.area:.4f} m²")
+
+                return {
+                    "A": section_props.area,
+                    "E": E,
+                    "G": G,
+                    "J": section_props.J,
+                    "Iy": section_props.Iyy,  # Minor axis
+                    "Iz": section_props.Ixx,  # Major axis
+                    "b_sec": section_props.width,
+                    "h_sec": section_props.depth
+                }
+            else:
+                print(f"[beams] Warning: Material '{section_props.material}' not found for section '{section_name}'")
+        else:
+            print(f"[beams] Warning: Section '{section_name}' not found in ETABS calculator")
+
+    except Exception as e:
+        print(f"[beams] Warning: Could not load ETABS calculators ({e}), using fallback calculation")
+
+    # Fallback to original calculation method
+    return _get_section_properties_fallback(section_name, parsed_data)
+
+
+def _get_section_properties_fallback(section_name: str, parsed_data: Dict[str, Any]) -> Dict[str, float]:
+    """
+    Fallback method for extracting section properties when ETABS calculators are not available.
+    This maintains backward compatibility with the original calculation approach.
     """
     frame_sections = parsed_data.get("frame_sections", {})
     materials = parsed_data.get("materials", {})
@@ -111,21 +162,20 @@ def _get_section_properties(section_name: str, parsed_data: Dict[str, Any]) -> D
         h_sec = defaults["h_sec"]
         b_sec = defaults["b_sec"]
 
-    # Extract material properties
+    # Extract material properties from concrete materials
     material_name = section_data.get("material")
-    material_props = materials.get("properties", {}).get(material_name, {}) if material_name else {}
+    concrete_materials = materials.get("concrete", {})
+    material_data = concrete_materials.get(material_name, {}) if material_name else {}
 
     # Determine Young's modulus E
-    if material_props.get("type") == "Concrete":
+    if material_data and "fc" in material_data:
         # For concrete, estimate E from fc using ACI formula: E ≈ 4700√fc [MPa]
-        fc_pa = float(material_props.get("fc", 21e6))  # Pa
+        fc_pa = float(material_data["fc"])  # Already in Pa from ETABS
         fc_mpa = fc_pa / 1e6  # Convert to MPa
         E = 4700 * (fc_mpa ** 0.5) * 1e6  # Convert back to Pa
-    elif material_props.get("type") in ["Steel", "Kinematic"]:
-        # Use steel modulus if available, otherwise standard value
-        E = float(material_props.get("E", 200e9))  # Pa
+        print(f"[beams] Using ETABS material {material_name}: fc={fc_mpa:.1f} MPa → E={E/1e9:.1f} GPa")
     else:
-        print(f"[beams] Warning: Unknown material type for '{material_name}', using default E")
+        print(f"[beams] Warning: Material '{material_name}' not found in concrete materials, using default E")
         E = defaults["E"]
 
     return _calculate_structural_properties(b_sec=b_sec, h_sec=h_sec, E=E, nu=defaults["nu"])
@@ -161,6 +211,80 @@ def _calculate_structural_properties(b_sec: float, h_sec: float, E: float, nu: f
         "A": A, "E": E, "G": G, "J": J, "Iy": Iy, "Iz": Iz,
         "b_sec": b_sec, "h_sec": h_sec
     }
+
+
+def _calculate_joint_offsets(
+    pI: Tuple[float, float, float],
+    pJ: Tuple[float, float, float],
+    length_off_i: float = 0.0,
+    length_off_j: float = 0.0,
+    offsets_i: Optional[Dict[str, float]] = None,
+    offsets_j: Optional[Dict[str, float]] = None
+) -> Tuple[Tuple[float, float, float], Tuple[float, float, float]]:
+    """
+    Calculate joint offsets for OpenSees geomTransf based on ETABS rigid ends and offsets.
+
+    Implementation follows PDF guidance:
+    - d_I = d_I^(len) + Δ_I (axial rigid end + lateral offset)
+    - d_J = d_J^(len) + Δ_J (axial rigid end + lateral offset)
+
+    Parameters
+    ----------
+    pI, pJ : tuple
+        Grid node coordinates (x, y, z) for I and J ends
+    length_off_i, length_off_j : float
+        LENGTHOFFI/J from ETABS (rigid end lengths)
+    offsets_i, offsets_j : dict
+        OFFSETX/Y/ZI/J from ETABS (lateral eccentricities)
+
+    Returns
+    -------
+    tuple
+        (dI, dJ) where each is (dx, dy, dz) for -jntOffset parameter
+    """
+    import math
+
+    # Calculate unit vector along member axis (I -> J)
+    xi, yi, zi = pI
+    xj, yj, zj = pJ
+    vx, vy, vz = (xj - xi), (yj - yi), (zj - zi)
+    length = math.sqrt(vx*vx + vy*vy + vz*vz)
+
+    if length == 0.0:
+        # Degenerate case
+        return (0.0, 0.0, 0.0), (0.0, 0.0, 0.0)
+
+    # Unit vector components
+    ex, ey, ez = vx/length, vy/length, vz/length
+
+    # Axial rigid end components (along member axis)
+    # d_I^(len) = +L_I * e (positive direction from I toward J)
+    # d_J^(len) = -L_J * e (negative direction from J toward I)
+    dI_len_x = length_off_i * ex
+    dI_len_y = length_off_i * ey
+    dI_len_z = length_off_i * ez
+
+    dJ_len_x = -length_off_j * ex
+    dJ_len_y = -length_off_j * ey
+    dJ_len_z = -length_off_j * ez
+
+    # Lateral offset components (from ETABS OFFSETX/Y/ZI/J)
+    offsets_i = offsets_i or {}
+    offsets_j = offsets_j or {}
+
+    dI_lat_x = offsets_i.get('x', 0.0)
+    dI_lat_y = offsets_i.get('y', 0.0)
+    dI_lat_z = offsets_i.get('z', 0.0)
+
+    dJ_lat_x = offsets_j.get('x', 0.0)
+    dJ_lat_y = offsets_j.get('y', 0.0)
+    dJ_lat_z = offsets_j.get('z', 0.0)
+
+    # Total joint offsets (axial + lateral)
+    dI = (dI_len_x + dI_lat_x, dI_len_y + dI_lat_y, dI_len_z + dI_lat_z)
+    dJ = (dJ_len_x + dJ_lat_x, dJ_len_y + dJ_lat_y, dJ_len_z + dJ_lat_z)
+
+    return dI, dJ
 
 
 def _point_pid(p: Dict[str, Any]) -> Optional[str]:
@@ -268,10 +392,29 @@ def define_beams(
             Iy_beam = section_props["Iy"]
             Iz_beam = section_props["Iz"]
 
+            # Get node coordinates for joint offset calculation
+            pI = act_pt_map.get((pid_i, sname), (0.0, 0.0, 0.0))
+            pJ = act_pt_map.get((pid_j, sname), (0.0, 0.0, 0.0))
+
+            # Extract offsets from line assigns (beams typically have none per modeling convention)
+            offsets_i = ln.get("offsets_i")
+            offsets_j = ln.get("offsets_j")
+
+            # Calculate joint offsets for geomTransf
+            dI, dJ = _calculate_joint_offsets(
+                pI, pJ, LoffI, LoffJ, offsets_i, offsets_j
+            )
+
             # Create single element connecting directly between grid nodes
             etag = element_tag("BEAM", line_name, int(sidx))
             transf_tag = 1000000000 + etag  # avoid collisions with columns (unchanged)
-            ops.geomTransf('Linear', transf_tag, 0, 0, 1)  # local z axis (unchanged)
+
+            # Apply joint offsets if any non-zero offsets exist
+            if any(abs(x) > 1e-12 for x in (*dI, *dJ)):
+                ops.geomTransf('Linear', transf_tag, 0, 0, 1, '-jntOffset',
+                              dI[0], dI[1], dI[2], dJ[0], dJ[1], dJ[2])
+            else:
+                ops.geomTransf('Linear', transf_tag, 0, 0, 1)  # no offsets
 
             ops.element('elasticBeamColumn', etag, nI, nJ, A_beam, E_beam, G_beam, J_beam, Iy_beam, Iz_beam, transf_tag)
             created.append(etag)
@@ -285,7 +428,10 @@ def define_beams(
                 "section": section_name,
                 "transf_tag": transf_tag,
                 "A": A_beam, "E": E_beam, "G": G_beam, "J": J_beam, "Iy": Iy_beam, "Iz": Iz_beam,
-                "length_off_i": LoffI, "length_off_j": LoffJ,  # preserved but unused
+                "length_off_i": LoffI, "length_off_j": LoffJ,
+                "offsets_i": offsets_i, "offsets_j": offsets_j,  # lateral offsets from ETABS
+                "joint_offset_i": list(dI), "joint_offset_j": list(dJ),  # calculated joint offsets
+                "has_joint_offsets": any(abs(x) > 1e-12 for x in (*dI, *dJ))  # flag for verification
             })
 
     if skips:

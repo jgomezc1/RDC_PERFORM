@@ -21,7 +21,7 @@ import importlib.util
 import sys
 import tempfile
 import json
-from typing import Dict, Tuple, List
+from typing import Dict, Tuple, List, Any
 from openseespy.opensees import (
     wipe, getNodeTags, nodeCoord, getEleTags, eleNodes
 )
@@ -36,6 +36,13 @@ except Exception:
 
 # Plotting utilities
 import view_utils_App as vu
+
+# Model testing framework
+try:
+    from opensees_model_tests import OpenSeesModelTester
+    TESTING_AVAILABLE = True
+except ImportError:
+    TESTING_AVAILABLE = False
 
 
 # -----------------------
@@ -183,6 +190,33 @@ def load_supports_meta(path: str = os.path.join(APP_DIR, "out", "supports.json")
     except Exception:
         return {}
 
+def run_model_tests(test_categories: List[str]) -> Dict[str, Any]:
+    """Run selected model test categories and return results."""
+    if not TESTING_AVAILABLE:
+        return {}
+
+    try:
+        tester = OpenSeesModelTester()
+
+        # Map category names to test methods
+        category_map = {
+            "Model Integrity": tester.test_model_integrity,
+            "Geometric Validation": tester.test_geometric_validation,
+            "Structural Validation": tester.test_structural_validation,
+            "ETABS Consistency": tester.test_etabs_consistency
+        }
+
+        results = {}
+        for category in test_categories:
+            if category in category_map:
+                with st.spinner(f"Running {category} tests..."):
+                    results[category.lower().replace(" ", "_")] = category_map[category]()
+
+        return results
+    except Exception as e:
+        st.error(f"Error running tests: {str(e)}")
+        return {}
+
 
 # -----------------------
 # UI
@@ -263,6 +297,25 @@ with st.sidebar:
         dof_RY = st.checkbox("RY", value=True)
         dof_RZ = st.checkbox("RZ", value=True)
 
+    # NEW: Model Testing Controls
+    st.markdown("---")
+    st.subheader("Model Testing")
+    if not TESTING_AVAILABLE:
+        st.warning("⚠️ Model testing framework not available (OpenSeesPy import issue)")
+        enable_testing = False
+        test_categories = []
+    else:
+        enable_testing = st.checkbox("Enable model validation tests", value=True)
+        if enable_testing:
+            test_categories = st.multiselect(
+                "Select test categories to run",
+                options=["Model Integrity", "Geometric Validation", "Structural Validation", "ETABS Consistency"],
+                default=["Model Integrity", "Geometric Validation"],
+                help="Choose which test suites to run after model build"
+            )
+        else:
+            test_categories = []
+
     st.caption("Tip: build in stages and filter the view to diagnose issues.")
 
     build_btn = st.button("Build & Visualize Model", use_container_width=True, type="primary")
@@ -316,6 +369,12 @@ if build_btn:
                 "RY": bool(dof_RY),
                 "RZ": bool(dof_RZ),
             }
+
+            # Run model tests if enabled
+            if enable_testing and test_categories and TESTING_AVAILABLE:
+                st.session_state.test_results = run_model_tests(test_categories)
+            else:
+                st.session_state.test_results = None
 
             st.success("Model built successfully. Use story filters below if needed.")
         except Exception as e:
@@ -381,6 +440,59 @@ else:
             st.caption(f"Active range: {start_story} ↔ {end_story}")
 
         st.session_state.elements = elements
+
+# -----------------------
+# Model Test Results
+# -----------------------
+if hasattr(st.session_state, 'test_results') and st.session_state.test_results:
+    st.subheader("🧪 Model Validation Results")
+
+    # Calculate overall statistics
+    all_suites = st.session_state.test_results.values()
+    total_tests = sum(suite.total_tests for suite in all_suites)
+    total_passed = sum(suite.passed_tests for suite in all_suites)
+    overall_success = (total_passed / total_tests * 100) if total_tests > 0 else 0
+
+    # Overall summary
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric("Total Tests", total_tests)
+    with col2:
+        st.metric("Passed", total_passed, delta=f"{overall_success:.1f}%")
+    with col3:
+        st.metric("Failed", total_tests - total_passed)
+
+    # Test suite results
+    for suite_key, suite in st.session_state.test_results.items():
+        with st.expander(f"{suite.name} ({suite.passed_tests}/{suite.total_tests} passed)",
+                        expanded=(suite.failed_tests > 0)):  # Expand if there are failures
+
+            # Suite summary
+            if suite.success_rate == 100:
+                st.success(f"✅ All {suite.total_tests} tests passed!")
+            elif suite.success_rate >= 80:
+                st.warning(f"⚠️ {suite.passed_tests}/{suite.total_tests} tests passed ({suite.success_rate:.1f}%)")
+            else:
+                st.error(f"❌ Only {suite.passed_tests}/{suite.total_tests} tests passed ({suite.success_rate:.1f}%)")
+
+            # Individual test results
+            for result in suite.results:
+                if result.passed:
+                    st.success(f"✅ **{result.name}**: {result.message}")
+                else:
+                    if result.severity == "CRITICAL":
+                        st.error(f"🚨 **{result.name}**: {result.message}")
+                    elif result.severity == "ERROR":
+                        st.error(f"❌ **{result.name}**: {result.message}")
+                    elif result.severity == "WARNING":
+                        st.warning(f"⚠️ **{result.name}**: {result.message}")
+                    else:
+                        st.info(f"ℹ️ **{result.name}**: {result.message}")
+
+                # Show details if available
+                if result.details:
+                    st.caption("📋 Details:")
+                    st.json(result.details)
 
 # -----------------------
 # Visualization + Summary
