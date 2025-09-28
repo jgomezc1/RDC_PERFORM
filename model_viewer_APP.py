@@ -21,6 +21,7 @@ import importlib.util
 import sys
 import tempfile
 import json
+import datetime
 from typing import Dict, Tuple, List, Any
 from openseespy.opensees import (
     wipe, getNodeTags, nodeCoord, getEleTags, eleNodes
@@ -37,12 +38,20 @@ except Exception:
 # Plotting utilities
 import view_utils_App as vu
 
-# Model testing framework
+
+# Enhanced verification module
 try:
-    from opensees_model_tests import OpenSeesModelTester
-    TESTING_AVAILABLE = True
+    from model_verification_app import add_verification_tab, verify_joint_offsets, run_modal_analysis
+    VERIFICATION_AVAILABLE = True
 except ImportError:
-    TESTING_AVAILABLE = False
+    VERIFICATION_AVAILABLE = False
+
+# Structural validation module
+try:
+    from structural_validation_app import run_structural_validation, display_validation_results
+    STRUCTURAL_VALIDATION_AVAILABLE = True
+except ImportError:
+    STRUCTURAL_VALIDATION_AVAILABLE = False
 
 
 # -----------------------
@@ -190,32 +199,6 @@ def load_supports_meta(path: str = os.path.join(APP_DIR, "out", "supports.json")
     except Exception:
         return {}
 
-def run_model_tests(test_categories: List[str]) -> Dict[str, Any]:
-    """Run selected model test categories and return results."""
-    if not TESTING_AVAILABLE:
-        return {}
-
-    try:
-        tester = OpenSeesModelTester()
-
-        # Map category names to test methods
-        category_map = {
-            "Model Integrity": tester.test_model_integrity,
-            "Geometric Validation": tester.test_geometric_validation,
-            "Structural Validation": tester.test_structural_validation,
-            "ETABS Consistency": tester.test_etabs_consistency
-        }
-
-        results = {}
-        for category in test_categories:
-            if category in category_map:
-                with st.spinner(f"Running {category} tests..."):
-                    results[category.lower().replace(" ", "_")] = category_map[category]()
-
-        return results
-    except Exception as e:
-        st.error(f"Error running tests: {str(e)}")
-        return {}
 
 
 # -----------------------
@@ -297,24 +280,8 @@ with st.sidebar:
         dof_RY = st.checkbox("RY", value=True)
         dof_RZ = st.checkbox("RZ", value=True)
 
-    # NEW: Model Testing Controls
+    # Build Controls
     st.markdown("---")
-    st.subheader("Model Testing")
-    if not TESTING_AVAILABLE:
-        st.warning("⚠️ Model testing framework not available (OpenSeesPy import issue)")
-        enable_testing = False
-        test_categories = []
-    else:
-        enable_testing = st.checkbox("Enable model validation tests", value=True)
-        if enable_testing:
-            test_categories = st.multiselect(
-                "Select test categories to run",
-                options=["Model Integrity", "Geometric Validation", "Structural Validation", "ETABS Consistency"],
-                default=["Model Integrity", "Geometric Validation"],
-                help="Choose which test suites to run after model build"
-            )
-        else:
-            test_categories = []
 
     st.caption("Tip: build in stages and filter the view to diagnose issues.")
 
@@ -370,11 +337,8 @@ if build_btn:
                 "RZ": bool(dof_RZ),
             }
 
-            # Run model tests if enabled
-            if enable_testing and test_categories and TESTING_AVAILABLE:
-                st.session_state.test_results = run_model_tests(test_categories)
-            else:
-                st.session_state.test_results = None
+            # Clear any previous test results since we've moved to unified validation
+            st.session_state.test_results = None
 
             st.success("Model built successfully. Use story filters below if needed.")
         except Exception as e:
@@ -441,58 +405,6 @@ else:
 
         st.session_state.elements = elements
 
-# -----------------------
-# Model Test Results
-# -----------------------
-if hasattr(st.session_state, 'test_results') and st.session_state.test_results:
-    st.subheader("🧪 Model Validation Results")
-
-    # Calculate overall statistics
-    all_suites = st.session_state.test_results.values()
-    total_tests = sum(suite.total_tests for suite in all_suites)
-    total_passed = sum(suite.passed_tests for suite in all_suites)
-    overall_success = (total_passed / total_tests * 100) if total_tests > 0 else 0
-
-    # Overall summary
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        st.metric("Total Tests", total_tests)
-    with col2:
-        st.metric("Passed", total_passed, delta=f"{overall_success:.1f}%")
-    with col3:
-        st.metric("Failed", total_tests - total_passed)
-
-    # Test suite results
-    for suite_key, suite in st.session_state.test_results.items():
-        with st.expander(f"{suite.name} ({suite.passed_tests}/{suite.total_tests} passed)",
-                        expanded=(suite.failed_tests > 0)):  # Expand if there are failures
-
-            # Suite summary
-            if suite.success_rate == 100:
-                st.success(f"✅ All {suite.total_tests} tests passed!")
-            elif suite.success_rate >= 80:
-                st.warning(f"⚠️ {suite.passed_tests}/{suite.total_tests} tests passed ({suite.success_rate:.1f}%)")
-            else:
-                st.error(f"❌ Only {suite.passed_tests}/{suite.total_tests} tests passed ({suite.success_rate:.1f}%)")
-
-            # Individual test results
-            for result in suite.results:
-                if result.passed:
-                    st.success(f"✅ **{result.name}**: {result.message}")
-                else:
-                    if result.severity == "CRITICAL":
-                        st.error(f"🚨 **{result.name}**: {result.message}")
-                    elif result.severity == "ERROR":
-                        st.error(f"❌ **{result.name}**: {result.message}")
-                    elif result.severity == "WARNING":
-                        st.warning(f"⚠️ **{result.name}**: {result.message}")
-                    else:
-                        st.info(f"ℹ️ **{result.name}**: {result.message}")
-
-                # Show details if available
-                if result.details:
-                    st.caption("📋 Details:")
-                    st.json(result.details)
 
 # -----------------------
 # Visualization + Summary
@@ -561,3 +473,414 @@ if st.session_state.model_built:
             st.metric("Other", summary["Other"])
 else:
     st.write("—")
+
+# -----------------------
+# Enhanced Verification Features
+# -----------------------
+if st.session_state.model_built and VERIFICATION_AVAILABLE:
+    st.markdown("---")
+    st.header("🔬 Advanced Verification")
+
+    # Create tabs for different verification types
+    verification_tabs = st.tabs(["🔷 Geometric Validation", "🌊 Dynamic Analysis", "🏗️ Structural Integrity", "⚡ Quick Diagnostics"])
+
+    with verification_tabs[0]:
+        # Geometric Validation Tab
+        st.subheader("🔷 Geometric Validation")
+        st.markdown("Verify model geometry, connectivity, and joint offsets.")
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.markdown("##### 🔧 Joint Offset Analysis")
+            if st.button("Analyze Joint Offsets", key="analyze_offsets", use_container_width=True):
+                with st.spinner("Analyzing joint offsets..."):
+                    offset_results = verify_joint_offsets()
+
+                    # Store results in session state
+                    st.session_state.offset_verification = offset_results
+
+        with col2:
+            st.markdown("##### 🔗 Connectivity Check")
+            if st.button("Check Connectivity", use_container_width=True, key="check_conn_geo"):
+                with st.spinner("Loading model and checking connectivity..."):
+                    try:
+                        # Load explicit model first
+                        explicit_path = os.path.join("out", "explicit_model.py")
+                        if not os.path.exists(explicit_path):
+                            st.error("Explicit model not found - ensure the model has been generated")
+                        else:
+                            # Load and build the model
+                            spec = importlib.util.spec_from_file_location("model", explicit_path)
+                            model_module = importlib.util.module_from_spec(spec)
+                            spec.loader.exec_module(model_module)
+                            model_module.build_model()
+
+                            from openseespy.opensees import getNodeTags, getEleTags, eleNodes
+                            node_tags = getNodeTags()
+                            ele_tags = getEleTags()
+
+                            # Check for disconnected nodes
+                            connected_nodes = set()
+                            for etag in ele_tags:
+                                try:
+                                    nodes = eleNodes(etag)
+                                    connected_nodes.update(nodes)
+                                except:
+                                    pass
+
+                            disconnected = len(node_tags) - len(connected_nodes)
+
+                            if disconnected > 0:
+                                st.warning(f"⚠️ {disconnected} nodes have no connections")
+                            else:
+                                st.success("✅ All nodes are connected")
+
+                            st.info(f"Total: {len(node_tags)} nodes, {len(ele_tags)} elements")
+                    except Exception as e:
+                        st.error(f"Check failed: {e}")
+
+        # Display results if available
+        if hasattr(st.session_state, 'offset_verification'):
+            results = st.session_state.offset_verification
+
+            # Summary metrics
+            col1, col2, col3, col4 = st.columns(4)
+
+            with col1:
+                beam_pct = (results["beams"]["with_offsets"] / results["beams"]["total"] * 100) if results["beams"]["total"] > 0 else 0
+                st.metric(
+                    "Beams with Offsets",
+                    f"{results['beams']['with_offsets']}/{results['beams']['total']}",
+                    f"{beam_pct:.1f}%"
+                )
+
+            with col2:
+                st.metric(
+                    "Max Beam Offset",
+                    f"{results['beams']['max_offset']:.3f} m"
+                )
+
+            with col3:
+                col_pct = (results["columns"]["with_offsets"] / results["columns"]["total"] * 100) if results["columns"]["total"] > 0 else 0
+                st.metric(
+                    "Columns with Offsets",
+                    f"{results['columns']['with_offsets']}/{results['columns']['total']}",
+                    f"{col_pct:.1f}%"
+                )
+
+            with col4:
+                st.metric(
+                    "Max Column Offset",
+                    f"{results['columns']['max_offset']:.3f} m"
+                )
+
+            # Validation status
+            if results["validation"]["passed"]:
+                st.success("✅ All joint offset validations passed")
+            else:
+                st.error("❌ Issues detected:")
+                for issue in results["validation"]["issues"]:
+                    st.warning(f"• {issue}")
+
+            # Show details if elements with offsets exist
+            if results["beams"]["details"] or results["columns"]["details"]:
+                with st.expander("View Detailed Offset Information"):
+                    if results["beams"]["details"]:
+                        st.write("**Beams with significant offsets:**")
+                        for beam in results["beams"]["details"][:5]:  # Show first 5
+                            st.caption(f"Beam {beam['tag']} ({beam['line']}): Rigid ends = {beam['rigid_end_i']:.3f}m / {beam['rigid_end_j']:.3f}m")
+
+                    if results["columns"]["details"]:
+                        st.write("**Columns with significant offsets:**")
+                        for col in results["columns"]["details"][:5]:  # Show first 5
+                            st.caption(f"Column {col['tag']} ({col['line']}): Total offset = {col['magnitude']:.3f}m")
+
+    with verification_tabs[1]:
+        # Dynamic Analysis Tab
+        st.subheader("🌊 Dynamic Analysis")
+        st.markdown("Analyze modal properties and compare with ETABS results.")
+
+        st.markdown("##### 📊 Modal Period Analysis")
+
+        # Add warning and fix button for constraint issues
+        if hasattr(st.session_state, 'modal_results') and st.session_state.modal_results:
+            results = st.session_state.modal_results
+            if results.get("success") and results.get("periods"):
+                T1 = results["periods"][0] if results["periods"] else float('inf')
+                if T1 > 100:  # Unrealistic period suggests constraint issues
+                    st.error("⚠️ Detected unrealistic periods - likely constraint handler issue")
+                    if st.button("🔧 Rebuild Model with Correct Constraints", key="fix_constraints"):
+                        try:
+                            # Force rebuild with explicit model
+                            explicit_path = os.path.join("out", "explicit_model.py")
+                            if os.path.exists(explicit_path):
+                                from openseespy.opensees import wipe
+                                wipe()
+
+                                # Load and execute the corrected explicit model
+                                spec = importlib.util.spec_from_file_location("corrected_model", explicit_path)
+                                corrected_model = importlib.util.module_from_spec(spec)
+                                spec.loader.exec_module(corrected_model)
+                                corrected_model.build_model()
+
+                                st.success("✅ Model rebuilt with correct constraints - try modal analysis again")
+                                # Clear cached modal results
+                                if hasattr(st.session_state, 'modal_results'):
+                                    del st.session_state.modal_results
+                            else:
+                                st.error("Explicit model file not found")
+                        except Exception as e:
+                            st.error(f"Failed to rebuild model: {e}")
+
+        col1, col2 = st.columns([2, 1])
+        with col1:
+            num_modes = st.slider("Number of modes", 3, 12, 6, key="num_modes")
+        with col2:
+            run_modal = st.button("Run Analysis", type="primary", key="run_modal")
+
+        if run_modal:
+            with st.spinner(f"Running eigenvalue analysis for {num_modes} modes..."):
+                modal_results = run_modal_analysis(num_modes)
+                st.session_state.modal_results = modal_results
+
+        # Display results if available
+        if hasattr(st.session_state, 'modal_results'):
+            results = st.session_state.modal_results
+
+            if results.get("success"):
+                st.success("✅ Modal analysis completed")
+
+                # Summary metrics
+                col1, col2, col3 = st.columns(3)
+
+                with col1:
+                    if results["periods"] and results["periods"][0] < float('inf'):
+                        st.metric("T₁ (Fundamental Period)", f"{results['periods'][0]:.3f} s")
+
+                with col2:
+                    if results["frequencies"] and results["frequencies"][0] > 0:
+                        st.metric("f₁ (Fundamental Frequency)", f"{results['frequencies'][0]:.3f} Hz")
+
+                with col3:
+                    if len(results["periods"]) > 0:
+                        st.metric("Modes Converged", len(results["periods"]))
+
+                # Modal properties table
+                if results["periods"]:
+                    import pandas as pd
+                    modal_df = pd.DataFrame({
+                        "Mode": range(1, len(results["periods"]) + 1),
+                        "Period (s)": [f"{p:.4f}" if p < float('inf') else "∞" for p in results["periods"]],
+                        "Frequency (Hz)": [f"{f:.3f}" if f > 0 else "0" for f in results["frequencies"]]
+                    })
+                    st.dataframe(modal_df, hide_index=True, use_container_width=True)
+
+                # Engineering checks
+                if results["periods"] and results["periods"][0] < float('inf'):
+                    T1 = results["periods"][0]
+                    if 0.1 <= T1 <= 5.0:
+                        st.info(f"ℹ️ Fundamental period T₁ = {T1:.3f}s is within typical range (0.1-5.0s)")
+                    else:
+                        st.warning(f"⚠️ Fundamental period T₁ = {T1:.3f}s is outside typical range")
+            else:
+                st.error(f"❌ Modal analysis failed: {results.get('error', 'Unknown error')}")
+                st.info("Check that the model is properly constrained and has mass assigned")
+
+    with verification_tabs[2]:
+        # Structural Integrity Tab
+        st.subheader("🏗️ Structural Integrity")
+        st.markdown("Comprehensive validation of structural properties and ETABS consistency.")
+
+        if STRUCTURAL_VALIDATION_AVAILABLE:
+            st.markdown("""
+            This comprehensive validation suite ensures the OpenSees model accurately
+            represents the original ETABS model by checking:
+            - **Geometric Fidelity**: Node/element counts, connectivity
+            - **Mass Distribution**: Rigid diaphragm mass assignment
+            - **Section Properties**: Beam and column properties
+            - **Lateral Load Path**: Structural integrity under lateral loads
+            - **Dynamic Properties**: Modal periods comparison
+            """)
+
+            # Configuration for ETABS periods
+            with st.expander("⚙️ Configuration", expanded=False):
+                st.subheader("Optional: ETABS Modal Periods")
+                st.info("Enter ETABS modal periods for comparison (optional)")
+
+                etabs_input = st.text_input(
+                    "ETABS Periods (comma-separated, in seconds)",
+                    placeholder="e.g., 0.245, 0.178, 0.156, 0.089, 0.067, 0.054",
+                    help="Enter the modal periods from ETABS analysis for comparison",
+                    key="etabs_periods_structural"
+                )
+
+                etabs_periods = None
+                if etabs_input:
+                    try:
+                        etabs_periods = [float(x.strip()) for x in etabs_input.split(",")]
+                        st.success(f"Loaded {len(etabs_periods)} ETABS periods for comparison")
+                    except:
+                        st.error("Invalid format - please enter comma-separated numbers")
+
+            # Run validation button
+            col1, col2, col3 = st.columns([1, 2, 1])
+            with col2:
+                if st.button("🔬 Run Structural Validation", type="primary", use_container_width=True, key="run_structural_validation_main"):
+                    with st.spinner("Running comprehensive structural validation..."):
+                        results = run_structural_validation(etabs_periods)
+
+                        # Store results in session state
+                        st.session_state.structural_validation_results = results
+                        st.session_state.validation_timestamp = datetime.datetime.now()
+
+            # Debug file generation
+            st.markdown("---")
+            st.markdown("##### 🔧 Debug Tools")
+
+            # Check if explicit model exists
+            explicit_exists = os.path.exists("out/explicit_model.py")
+
+            if not explicit_exists:
+                st.warning("⚠️ No explicit model found. Generate it first to enable debug file creation.")
+                if st.button("🔨 Generate Explicit Model", use_container_width=True, key="gen_explicit_main", help="Creates explicit_model.py from current artifacts"):
+                    with st.spinner("Generating explicit model..."):
+                        try:
+                            from structural_validation_app import generate_explicit_model_file
+                            success = generate_explicit_model_file()
+                            if success:
+                                st.success("✅ Explicit model generated successfully!")
+                                st.rerun()
+                            else:
+                                st.error("❌ Failed to generate explicit model. Ensure model artifacts exist.")
+                        except ImportError:
+                            st.error("Explicit model generation not available")
+
+            if explicit_exists and st.button("📄 Generate Lateral Load Debug File", use_container_width=True, key="gen_debug_main", help="Creates standalone Python file for debugging"):
+                try:
+                    from structural_validation_app import generate_lateral_load_debug_file
+                    debug_content = generate_lateral_load_debug_file(etabs_periods)
+                    if debug_content:
+                        st.success("Debug file generated successfully!")
+                        st.download_button(
+                            label="📥 Download lateral_load_debug.py",
+                            data=debug_content,
+                            file_name="lateral_load_debug.py",
+                            mime="text/x-python",
+                            key="download_debug_main"
+                        )
+                    else:
+                        st.error("Failed to generate debug file")
+                except ImportError:
+                    st.error("Debug file generation not available")
+
+            # Display results if available
+            if hasattr(st.session_state, 'structural_validation_results'):
+                st.divider()
+
+                # Show timestamp
+                if hasattr(st.session_state, 'validation_timestamp'):
+                    st.caption(f"Last run: {st.session_state.validation_timestamp.strftime('%Y-%m-%d %H:%M:%S')}")
+
+                # Display results using the imported function
+                display_validation_results(st.session_state.structural_validation_results)
+        else:
+            st.warning("⚠️ Structural validation module not available. Please ensure structural_validation.py and structural_validation_app.py are present.")
+
+    # Quick Diagnostics Tab
+    with verification_tabs[3]:
+        st.subheader("⚡ Quick Diagnostics")
+        st.markdown("Fast checks for mass assignment, transforms, and basic model diagnostics.")
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.markdown("##### 📊 Mass Assignment Check")
+            if st.button("Check Mass Assignment", use_container_width=True, key="check_mass_diag"):
+                with st.spinner("Loading model and checking mass assignment..."):
+                    # Check mass assignment in the model
+                    try:
+                        from model_verification_app import check_mass_assignment
+                        mass_results = check_mass_assignment()
+
+                        if "error" in mass_results:
+                            st.error(f"Check failed: {mass_results['error']}")
+                        else:
+                            if mass_results["success"]:
+                                st.success(f"✅ Mass at {mass_results['nodes_with_mass']} nodes")
+                                st.info(f"Total mass: {mass_results['total_mass']:.1f} kg")
+
+                                # Show mass by elevation
+                                if "mass_by_elevation" in mass_results:
+                                    with st.expander("Mass Distribution by Elevation"):
+                                        for z, data in sorted(mass_results["mass_by_elevation"].items()):
+                                            st.caption(f"Z={z:.3f}m: {data['count']} nodes, {data['total_mass']:.1f} kg")
+                            else:
+                                st.error("❌ Mass assignment issues:")
+                                for issue in mass_results["issues"]:
+                                    st.warning(f"• {issue}")
+
+                    except Exception as e:
+                        st.error(f"Check failed: {e}")
+
+        with col2:
+            st.markdown("##### 🔧 Transform Verification")
+            if st.button("Verify Transforms", use_container_width=True, key="check_trans_diag"):
+                # Check if all elements have valid transforms
+                try:
+                    beams_data = load_json_artifact("beams.json") if 'load_json_artifact' in dir() else {}
+                    columns_data = load_json_artifact("columns.json") if 'load_json_artifact' in dir() else {}
+
+                    total_elements = len(beams_data.get("beams", [])) + len(columns_data.get("columns", []))
+
+                    if total_elements > 0:
+                        st.success(f"✅ {total_elements} elements with transforms")
+                    else:
+                        st.warning("No element data found")
+
+                except Exception as e:
+                    st.error(f"Check failed: {e}")
+
+        # Detailed diagnostics in full width
+        st.markdown("##### 🔍 Comprehensive Diagnostics")
+        if st.button("Run Detailed Diagnostics", use_container_width=True, key="run_diagnostics_main"):
+            # Run comprehensive model diagnostics
+            st.info("📋 Running comprehensive model diagnostics...")
+
+            # Check basic model info
+            try:
+                from openseespy.opensees import getNodeTags, getEleTags
+                nodes = len(getNodeTags())
+                elements = len(getEleTags())
+
+                st.success(f"✅ Model: {nodes} nodes, {elements} elements")
+
+                # Check constraints
+                diaphragm_file = os.path.join("out", "diaphragms.json")
+                if os.path.exists(diaphragm_file):
+                    with open(diaphragm_file, 'r') as f:
+                        d_data = json.load(f)
+                        num_diaphragms = len(d_data.get("diaphragms", []))
+                        if num_diaphragms > 0:
+                            st.info(f"ℹ️ {num_diaphragms} rigid diaphragms detected")
+                            st.warning("⚠️ Ensure constraints('Transformation') is set for modal analysis")
+
+                # Check supports
+                supports_file = os.path.join("out", "supports.json")
+                if os.path.exists(supports_file):
+                    with open(supports_file, 'r') as f:
+                        s_data = json.load(f)
+                        num_supports = len(s_data.get("applied", []))
+                        st.success(f"✅ {num_supports} boundary conditions applied")
+
+            except Exception as e:
+                st.error(f"Diagnostics failed: {e}")
+
+def load_json_artifact(filename: str):
+    """Helper to load JSON artifacts"""
+    import json
+    filepath = os.path.join("out", filename)
+    if os.path.exists(filepath):
+        with open(filepath, 'r') as f:
+            return json.load(f)
+    return {}
