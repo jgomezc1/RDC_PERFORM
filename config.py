@@ -7,6 +7,7 @@ from pathlib import Path
 #E2K_PATH = Path("models/EjemploNew.e2k")
 #E2K_PATH = Path("models/selecto.e2k")
 E2K_PATH = Path("models/plata_kosmos.e2k")
+#E2K_PATH = Path("models/selecto.e2k")
 
 # Output folder
 OUT_DIR = Path("out")
