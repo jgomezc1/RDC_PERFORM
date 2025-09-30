@@ -255,30 +255,48 @@ def define_rigid_diaphragms(
             skips.append(f"{sname}: no candidates on story plane z={z0}")
             continue
 
-        # Diaphragm labels
-        labels: List[str | None] = []
-        all_valid_named = True
+        # Diaphragm labels - filter to valid subset
+        # Build list of (point, label) tuples, excluding DISCONNECTED and None
+        valid_points_with_labels: List[Tuple[Dict[str, Any], str]] = []
+        disconnected_count = 0
+        none_count = 0
+
         for p in plane_pts:
-            label = str(p.get("diaphragm", "")).strip()
+            label = str(p.get("diaphragm", "")).strip() if p.get("diaphragm") is not None else ""
+
+            # Skip DISCONNECTED and empty labels
             if not label or label.lower() == "disconnected":
-                labels.append(None)
-                all_valid_named = False
-            else:
-                labels.append(label)
-                if known_diaph and (label not in known_diaph):
-                    all_valid_named = False
+                if label.lower() == "disconnected":
+                    disconnected_count += 1
+                else:
+                    none_count += 1
+                continue
 
-        # Require *all* candidates to have a valid (non-empty, not DISCONNECTED) label
-        if not all(lbl is not None for lbl in labels):
-            skips.append(f"{sname}: mixed or missing diaphragm labels → no rigid diaphragm (all-or-nothing rule)")
-            continue
-        if not all_valid_named:
-            skips.append(f"{sname}: found label not present in diaphragm_names → skip")
+            # Skip labels not in known diaphragm names (if we have that list)
+            if known_diaph and (label not in known_diaph):
+                continue
+
+            valid_points_with_labels.append((p, label))
+
+        # Report filtering results
+        filtered_out = disconnected_count + none_count
+        if filtered_out > 0:
+            print(f"[diaphragms] {sname}: filtered out {disconnected_count} DISCONNECTED + {none_count} None from {len(plane_pts)} candidates")
+
+        # Check if we have enough valid points for a diaphragm
+        if len(valid_points_with_labels) < 2:
+            skips.append(f"{sname}: only {len(valid_points_with_labels)} valid points after filtering (need ≥2) → skip diaphragm")
             continue
 
-        # Gather slave node tags and coordinates
+        # Check for consistency: all valid points should have the same diaphragm label
+        labels_in_use = set(lbl for _, lbl in valid_points_with_labels)
+        if len(labels_in_use) > 1:
+            skips.append(f"{sname}: multiple diaphragm labels in valid subset {labels_in_use} → skip (ambiguous)")
+            continue
+
+        # Gather slave node tags and coordinates from valid points only
         tags_coords: List[Tuple[int, float, float, float]] = []
-        for p in plane_pts:
+        for p, label in valid_points_with_labels:
             p_id = int(p.get("tag", p.get("id")))
             tag = int(p_id) * 1000 + int(sidx) if "tag" not in p else int(p["tag"])
             tags_coords.append((tag, float(p["x"]), float(p["y"]), float(p["z"])))

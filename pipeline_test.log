@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "/mnt/c/Users/jgomez/Desktop/opensees/RDC_PERFORM/phase1_run.py", line 13, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+[PIPELINE] Phase-1: running phase1_run.py ...
+Traceback (most recent call last):
+  File "/mnt/c/Users/jgomez/Desktop/opensees/RDC_PERFORM/run_pipeline.py", line 172, in <module>
+    main()
+  File "/mnt/c/Users/jgomez/Desktop/opensees/RDC_PERFORM/run_pipeline.py", line 149, in main
+    run_phase1()
+  File "/mnt/c/Users/jgomez/Desktop/opensees/RDC_PERFORM/run_pipeline.py", line 46, in run_phase1
+    subprocess.run([sys.executable, "phase1_run.py"], check=True)
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/usr/bin/python3', 'phase1_run.py']' returned non-zero exit status 1.
