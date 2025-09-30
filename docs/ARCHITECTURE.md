@@ -32,7 +32,7 @@ Goal: translate ETABS `.e2k` into an OpenSeesPy model + machine-readable artifac
 - **Node tag determinism**: deterministic tagging prevents conflicts.
 - **Direct element modeling**: single OpenSees elements connect directly between grid nodes.
 - **Per‑element transforms**: unique `geomTransf` tags derived deterministically from element tags.
-- **ETABS data preservation**: rigid end data (`LENGTHOFFI`/`LENGTHOFFJ`) preserved in artifacts but not used in modeling.
+
 ### Node creation ordering (simplified)
 - Grid nodes created from ETABS points via deterministic tagging.
 - Diaphragm master nodes created during diaphragm processing.
@@ -41,7 +41,7 @@ Goal: translate ETABS `.e2k` into an OpenSeesPy model + machine-readable artifac
 ## External Interfaces
 - OpenSeesPy API: model building, constraints, analysis execution.
 - JSON artifacts in `out/` consumed by generators and visualization tools.
-- ETABS integration: direct `.e2k` processing with preserved rigid end data for future use.
+- ETABS integration: direct `.e2k` processing.
 
 ## Failure Modes to Watch
 - Diaphragm/support conflicts: diaphragm creation is skipped on stories with supports.

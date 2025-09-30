@@ -16,8 +16,6 @@ Stack: Python 3.11+, OpenSeesPy, clean architecture, reproducible pipelines.
 # Project Invariants
 - Deterministic node tags: `tag = point_id*1000 + story_index` (story_index: 0 at top, increases downward).
 - Rigid diaphragms use MPC; prefer `constraints('Transformation')` for analysis checks.
-- Rigid end zones (ETABS `LENGTHOFFI/J` with `RIGIDZONE=1`) are modeled as 3 segments (rigid-I, deformable, rigid-J) with inflated section props for rigid parts.
-- New nodes demanded by the new rigid parts must laso propagate into the nodes.json artifact.
 - Per-element `geomTransf` tags must be unique/stable.
 - Before emitting beams/columns, ALL i/j nodes must already exist in nodes.json; fail fast on any missing node.
 

@@ -1,1 +1,0 @@
-- ADR-0002: Rigid end zones modeled as 3 segments with inflated properties
