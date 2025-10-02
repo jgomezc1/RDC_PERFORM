@@ -9,10 +9,10 @@ import math
 from pathlib import Path
 
 # Add project root to path for imports
-sys.path.insert(0, str(Path(__file__).parent))
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from beams import _calculate_joint_offsets
-import e2k_parser
+from src.model_building.beams import _calculate_joint_offsets
+from src.parsing import e2k_parser
 
 def test_joint_offset_calculation():
     """Test the joint offset calculation function with our tracking elements."""

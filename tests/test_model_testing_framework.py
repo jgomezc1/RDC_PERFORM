@@ -8,12 +8,12 @@ import sys
 from pathlib import Path
 
 # Add project root to path
-sys.path.insert(0, str(Path(__file__).parent))
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 def test_framework_import():
     """Test that the testing framework can be imported."""
     try:
-        from opensees_model_tests import OpenSeesModelTester, TestResult, TestSuite
+        from validation.opensees_model_tests import OpenSeesModelTester, TestResult, TestSuite
         print("✅ Testing framework imported successfully")
         return True
     except ImportError as e:
@@ -23,7 +23,7 @@ def test_framework_import():
 def test_without_opensees():
     """Test framework behavior without an active OpenSees model."""
     try:
-        from opensees_model_tests import OpenSeesModelTester
+        from validation.opensees_model_tests import OpenSeesModelTester
 
         tester = OpenSeesModelTester()
         results = tester.run_all_tests()
@@ -46,7 +46,7 @@ def test_without_opensees():
 def test_test_result_creation():
     """Test TestResult and TestSuite creation."""
     try:
-        from opensees_model_tests import TestResult, TestSuite
+        from validation.opensees_model_tests import TestResult, TestSuite
 
         # Create a test result
         result = TestResult(
@@ -73,7 +73,7 @@ def test_test_result_creation():
 def test_artifact_loading():
     """Test artifact data loading capabilities."""
     try:
-        from opensees_model_tests import OpenSeesModelTester
+        from validation.opensees_model_tests import OpenSeesModelTester
 
         tester = OpenSeesModelTester()
 
@@ -100,7 +100,7 @@ def test_artifact_loading():
 def test_tracking_elements():
     """Test tracking element configuration."""
     try:
-        from opensees_model_tests import OpenSeesModelTester
+        from validation.opensees_model_tests import OpenSeesModelTester
 
         tester = OpenSeesModelTester()
 
@@ -117,7 +117,7 @@ def test_streamlit_integration():
     """Test Streamlit integration functions."""
     try:
         # This simulates what would happen in Streamlit
-        from opensees_model_tests import run_model_tests
+        from validation.opensees_model_tests import run_model_tests
 
         # Test with empty categories (should return empty dict)
         results = run_model_tests([])

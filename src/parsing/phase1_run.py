@@ -1,7 +1,8 @@
 """
 CLI entrypoint for Phase 1.
 Usage:
-    python phase1_run.py
+    python -m src.parsing.phase1_run
+    OR from project root: python src/parsing/phase1_run.py
 Outputs:
     out/parsed_raw.json
     out/story_graph.json
@@ -9,12 +10,16 @@ Outputs:
     out/point_matrix.csv
 """
 import json
+import sys
 from pathlib import Path
 import pandas as pd
 
+# Add project root to path
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+
 from config import E2K_PATH, OUT_DIR
-from e2k_parser import parse_e2k
-from story_builder import build_story_graph
+from src.parsing.e2k_parser import parse_e2k
+from src.parsing.story_builder import build_story_graph
 
 
 def main():

@@ -9,9 +9,9 @@ import json
 from pathlib import Path
 
 # Add project root to path for imports
-sys.path.insert(0, str(Path(__file__).parent))
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
-import e2k_parser
+from src.parsing import e2k_parser
 
 def test_column_offset_processing():
     """Test column offset processing for our tracking elements."""

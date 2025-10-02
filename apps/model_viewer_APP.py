@@ -28,10 +28,13 @@ from openseespy.opensees import (
 )
 
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(APP_DIR)
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
 if APP_DIR not in sys.path:
     sys.path.insert(0, APP_DIR)
 try:
-    os.chdir(APP_DIR)
+    os.chdir(PROJECT_ROOT)
 except Exception:
     pass
 
@@ -129,7 +132,7 @@ def filter_elements_by_orientation(nodes: Dict[int, Tuple[float, float, float]],
             out[tag] = (ni, nj)
     return out
 
-def load_story_meta(path: str = os.path.join(APP_DIR, "out", "story_graph.json")):
+def load_story_meta(path: str = "out/story_graph.json"):
     """Return (story_names_top_to_bottom, story_elev_map) if available, else ([], {})."""
     try:
         with open(path, "r", encoding="utf-8") as f:
@@ -171,7 +174,7 @@ def filter_by_story_range(nodes, elements, story_start, story_end, story_elev, t
             out[tag] = (ni, nj)
     return out
 
-def load_diaphragms_meta(path: str = os.path.join(APP_DIR, "out", "diaphragms.json")) -> List[int]:
+def load_diaphragms_meta(path: str = "out/diaphragms.json") -> List[int]:
     """Return list of diaphragm master-node tags if file exists, else []."""
     try:
         with open(path, "r", encoding="utf-8") as f:
@@ -181,7 +184,7 @@ def load_diaphragms_meta(path: str = os.path.join(APP_DIR, "out", "diaphragms.js
     except Exception:
         return []
 
-def load_supports_meta(path: str = os.path.join(APP_DIR, "out", "supports.json")) -> Dict[int, Tuple[int, int, int, int, int, int]]:
+def load_supports_meta(path: str = "out/supports.json") -> Dict[int, Tuple[int, int, int, int, int, int]]:
     """
     Return {node_tag: (UX, UY, UZ, RX, RY, RZ)} from out/supports.json if present.
     If missing/invalid, returns {}.

@@ -11,9 +11,9 @@ import sys
 from pathlib import Path
 
 # Add project root to path
-sys.path.insert(0, str(Path(__file__).parent))
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from opensees_model_validator import OpenSeesModelValidator
+from validation.opensees_model_validator import OpenSeesModelValidator
 
 def demonstrate_validation():
     """Demonstrate the key validation capabilities."""

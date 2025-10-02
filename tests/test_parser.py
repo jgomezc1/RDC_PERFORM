@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 """Test script for e2k parser material properties functionality"""
 
-import e2k_parser
+import sys
+from pathlib import Path
+
+# Add project root to path for imports
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from src.parsing import e2k_parser
 import json
 
 def test_material_parsing():

@@ -29,7 +29,7 @@ from datetime import datetime
 from typing import Dict, List, Any, Optional, Tuple
 
 # Add project root to path
-PROJECT_ROOT = Path(__file__).parent
+PROJECT_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 try:
@@ -40,7 +40,7 @@ except ImportError:
     print("ERROR: OpenSeesPy not available. Please install: pip install openseespy")
 
 try:
-    from opensees_model_tests import OpenSeesModelTester, TestSuite, TestResult
+    from validation.opensees_model_tests import OpenSeesModelTester, TestSuite, TestResult
     TESTING_FRAMEWORK_AVAILABLE = True
 except ImportError:
     TESTING_FRAMEWORK_AVAILABLE = False

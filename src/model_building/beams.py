@@ -27,7 +27,7 @@ except Exception:
 
 # Prefer project tagging helpers if available
 try:
-    from tagging import node_tag_grid, element_tag  # type: ignore
+    from src.utilities.tagging import node_tag_grid, element_tag  # type: ignore
 except Exception:
     node_tag_grid = None  # type: ignore
 
@@ -84,8 +84,8 @@ def _get_section_properties(section_name: str, parsed_data: Dict[str, Any]) -> D
     """
     # Import calculators (lazy import to avoid circular dependencies)
     try:
-        from material_property_calculator import MaterialPropertyCalculator
-        from section_property_calculator import SectionPropertyCalculator
+        from src.properties.material_property_calculator import MaterialPropertyCalculator
+        from src.properties.section_property_calculator import SectionPropertyCalculator
 
         # Initialize calculators with parsed data path
         material_calc = MaterialPropertyCalculator()

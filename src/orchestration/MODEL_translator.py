@@ -17,12 +17,12 @@ from __future__ import annotations
 
 from openseespy.opensees import wipe, model
 
-from nodes import define_nodes
-from supports import define_point_restraints_from_e2k
-from diaphragms import define_rigid_diaphragms
-from columns import define_columns
-from beams import define_beams
-from emit_nodes import emit_nodes_json
+from src.model_building.nodes import define_nodes
+from src.model_building.supports import define_point_restraints_from_e2k
+from src.model_building.diaphragms import define_rigid_diaphragms
+from src.model_building.columns import define_columns
+from src.model_building.beams import define_beams
+from src.model_building.emit_nodes import emit_nodes_json
 
 # Default artifacts directory for emit_nodes_json; fall back to "out"
 try:

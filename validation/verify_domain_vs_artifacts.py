@@ -18,7 +18,7 @@ import os
 import time
 from typing import Any, Dict, List, Tuple, Set
 
-from ops_capture import capture_session, get_capture, save_capture
+from src.utilities.ops_capture import capture_session, get_capture, save_capture
 
 
 TOL = 1e-6

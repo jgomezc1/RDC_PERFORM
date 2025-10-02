@@ -3,8 +3,8 @@
 run_pipeline.py
 
 One-shot orchestrator for MyPerform3D:
-  1) Phase-1 parsing (phase1_run.py)
-  2) Phase-2 build (MODEL_translator.build_model)
+  1) Phase-1 parsing (src/parsing/phase1_run.py)
+  2) Phase-2 build (src/orchestration/MODEL_translator.build_model)
   3) Static artifact verification (verify_model.verify_model)
   4) Runtime-vs-artifacts verification (verify_domain_vs_artifacts.py)  <-- subprocess, robust reader
 
@@ -15,6 +15,10 @@ Writes:
   - out/pipeline_summary.json
 
 All paths written to JSON are strings (avoid WindowsPath serialization issues).
+
+Usage:
+  python -m src.orchestration.run_pipeline
+  OR from project root: python src/orchestration/run_pipeline.py
 """
 from __future__ import annotations
 
@@ -24,7 +28,11 @@ import json
 import os
 import subprocess
 import sys
+from pathlib import Path
 from typing import Any, Dict
+
+# Add project root to path
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 
 def _load(path: str) -> Dict[str, Any]:
@@ -43,23 +51,21 @@ def _save(path: str, data: Dict[str, Any]) -> None:
 
 def run_phase1() -> None:
     print("[PIPELINE] Phase-1: running phase1_run.py ...")
-    subprocess.run([sys.executable, "phase1_run.py"], check=True)
+    subprocess.run([sys.executable, "src/parsing/phase1_run.py"], check=True)
     print("[PIPELINE] Phase-1: done.")
 
 
 def run_phase2(stage: str) -> None:
     print(f"[PIPELINE] Phase-2: building model with stage='{stage}' ...")
-    import importlib
-    M = importlib.import_module("MODEL_translator")
-    M.build_model(stage)
+    from src.orchestration.MODEL_translator import build_model
+    build_model(stage)
     print("[PIPELINE] Phase-2: done.")
 
 
 def run_static_verify(out_dir: str, strict: bool) -> Dict[str, Any]:
     print("[PIPELINE] Static verify: verify_model.py ...")
-    import importlib
-    vm = importlib.import_module("verify_model")
-    rep: Dict[str, Any] = vm.verify_model(artifacts_dir=str(out_dir), strict=strict)
+    from validation.verify_model import verify_model
+    rep: Dict[str, Any] = verify_model(artifacts_dir=str(out_dir), strict=strict)
     print("[PIPELINE] Static verify: done.")
     return rep
 

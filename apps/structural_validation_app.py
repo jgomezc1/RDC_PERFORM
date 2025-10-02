@@ -9,14 +9,21 @@ comprehensive structural validation tests.
 import streamlit as st
 import json
 import os
+import sys
 import pandas as pd
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 import datetime
 
+# Add project root to path
+APP_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(APP_DIR)
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
 # Import the validation module
 try:
-    from structural_validation import StructuralValidator
+    from validation.structural_validation import StructuralValidator
     VALIDATION_AVAILABLE = True
 except ImportError:
     VALIDATION_AVAILABLE = False

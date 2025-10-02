@@ -45,7 +45,7 @@ except Exception:
 
 # Prefer project tagging helpers if available
 try:
-    from tagging import element_tag  # type: ignore
+    from src.utilities.tagging import element_tag  # type: ignore
 except Exception:
     def element_tag(kind: str, name: str, story_index: int) -> int:  # type: ignore
         s = f"{kind}|{name}|{story_index}".encode("utf-8")
@@ -214,8 +214,8 @@ def _get_column_section_properties(section_name: str, parsed_data: Dict[str, Any
     """
     # Import calculators (lazy import to avoid circular dependencies)
     try:
-        from material_property_calculator import MaterialPropertyCalculator
-        from section_property_calculator import SectionPropertyCalculator
+        from src.properties.material_property_calculator import MaterialPropertyCalculator
+        from src.properties.section_property_calculator import SectionPropertyCalculator
 
         # Initialize calculators with parsed data path
         material_calc = MaterialPropertyCalculator()

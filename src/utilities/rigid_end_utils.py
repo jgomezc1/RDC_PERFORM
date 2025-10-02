@@ -44,7 +44,7 @@ except Exception:
     OUT_DIR = "out"
 
 # Uses the registrar implemented in emit_nodes.py
-from emit_nodes import register_intermediate_node, _load_json  # type: ignore
+from src.model_building.emit_nodes import register_intermediate_node, _load_json  # type: ignore
 
 
 def _story_name_from_index(idx: int) -> str:

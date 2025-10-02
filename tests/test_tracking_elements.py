@@ -8,9 +8,9 @@ import sys
 from pathlib import Path
 
 # Add project root to path for imports
-sys.path.insert(0, str(Path(__file__).parent))
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
-import e2k_parser
+from src.parsing import e2k_parser
 
 def test_tracking_elements():
     """Test that our tracking elements are found and have expected properties."""

@@ -16,7 +16,7 @@ from __future__ import annotations
 import json
 from typing import Dict, Any, Set
 from openseespy.opensees import node
-from tagging import node_tag_grid  # node_tag_free unused here
+from src.utilities.tagging import node_tag_grid  # node_tag_free unused here
 
 
 def _load_json(path: str) -> Dict[str, Any]:
