@@ -24,22 +24,18 @@ Rules implemented:
 
 Output schema:
 {
+  "stories": [
+    {"name": story_name, "elevation": z_abs, "active_points": [...], "active_lines": [...]},
+    ...
+  ],
   "story_order_top_to_bottom": [story_name_top,...,story_name_bottom],
   "story_elev": {story_name: z_abs, ...},
-  "active_points": {
-     story_name: [
-       {"id": pid, "x": x, "y": y, "z": z_abs, "explicit_z": bool, "diaphragm": ..., "springprop": ...},
-       ...
-     ],
-     ...
-  },
-  "active_lines": {
-     story_name: [
-       {"name": line_name, "type": "BEAM"|"COLUMN", "i": pid_i, "j": pid_j, "section": maybe_str},
-       ...
-     ],
-     ...
-  },
+
+  # Per story in active_points:
+  # {"point": pid, "x": x, "y": y, "z": z_abs, "explicit_z": bool, "diaphragm": name|null, "springprop": name|null}
+
+  # Per story in active_lines:
+  # {"name": line_name, "type": "BEAM"|"COLUMN", "i": pid_i, "j": pid_j, "section": maybe_str, ...}
 
   # Kept for compatibility (always empty now because explicit-Z is story-dependent):
   "free_points_xyz": []

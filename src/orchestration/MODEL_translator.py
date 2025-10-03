@@ -19,6 +19,7 @@ from openseespy.opensees import wipe, model
 
 from src.model_building.nodes import define_nodes
 from src.model_building.supports import define_point_restraints_from_e2k
+from src.model_building.springs import define_spring_supports
 from src.model_building.diaphragms import define_rigid_diaphragms
 from src.model_building.columns import define_columns
 from src.model_building.beams import define_beams
@@ -35,13 +36,14 @@ def build_model(stage: str = "all") -> None:
     """
     Build the OpenSees model according to the requested stage.
 
-    Order (supports before diaphragms, then emit nodes.json):
+    Order (supports and springs before diaphragms, then emit nodes.json):
       1) Nodes
       2) Point restraints (supports)        -> out/supports.json
-      3) Rigid diaphragms (uses supports)   -> out/diaphragms.json
-      4) Emit nodes.json (grid + masters)   -> out/nodes.json
-      5) Columns                            -> out/columns.json
-      6) Beams (if stage in {'all','beams'})-> out/beams.json
+      3) Spring supports (zeroLength elems)
+      4) Rigid diaphragms (uses supports)   -> out/diaphragms.json
+      5) Emit nodes.json (grid + masters)   -> out/nodes.json
+      6) Columns                            -> out/columns.json
+      7) Beams (if stage in {'all','beams'})-> out/beams.json
     """
     wipe()
     # 3D, 6-DOF nodes (UX, UY, UZ, RX, RY, RZ)
@@ -53,20 +55,23 @@ def build_model(stage: str = "all") -> None:
     # 2) Point restraints (from ETABS POINTASSIGN ... RESTRAINT)
     define_point_restraints_from_e2k()
 
-    # 3) Diaphragms (creates centroid masters and ties slaves; masters are fixed in UZ,RX,RY)
+    # 3) Spring supports (from ETABS POINTASSIGN ... SPRINGPROP)
+    define_spring_supports(verbose=False)
+
+    # 4) Diaphragms (creates centroid masters and ties slaves; masters are fixed in UZ,RX,RY)
     define_rigid_diaphragms()
 
-    # 4) Emit nodes.json (includes masters; requires story_graph.json + diaphragms.json)
+    # 5) Emit nodes.json (includes masters; requires story_graph.json + diaphragms.json)
     emit_nodes_json(_DEFAULT_OUT)
 
     if stage.lower() == "nodes":
-        print("[MODEL] Built NODES + RESTRAINTS + DIAPHRAGMS + NODES.JSON.")
+        print("[MODEL] Built NODES + RESTRAINTS + SPRINGS + DIAPHRAGMS + NODES.JSON.")
         return
 
-    # 5) Elements
+    # 6) Elements
     define_columns()
 
-    # 6) Beams if requested/all
+    # 7) Beams if requested/all
     if stage.lower() in ("all", "beams"):
         define_beams()
 

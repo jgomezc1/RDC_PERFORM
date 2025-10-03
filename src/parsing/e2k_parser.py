@@ -293,6 +293,90 @@ def _parse_frame_sections(text: str) -> Dict[str, Any]:
     return sections_data
 
 
+def _parse_spring_properties(text: str) -> Dict[str, Any]:
+    """
+    Parse POINT SPRING PROPERTIES section.
+
+    Returns
+    -------
+    {
+      "RES_00_75cm": {
+        "name": "RES_00_75cm",
+        "ux": 316500,
+        "uy": 316500,
+        "uz": 0,
+        "rx": 0,
+        "ry": 0,
+        "rz": 0
+      },
+      ...
+    }
+    """
+    springs_txt = _extract_section(text, r'^\s*\$ POINT SPRING PROPERTIES')
+    if not springs_txt.strip():
+        return {}
+
+    spring_lines = [ln for ln in springs_txt.splitlines() if ln.strip() and not ln.strip().startswith('$')]
+
+    # Pattern: POINTSPRING "RES_00_75cm" STIFFNESSOPTION "USERDEFINED" UX 316500 UY 316500 UZ 0
+    spring_pat = re.compile(
+        r'^\s*POINTSPRING\s+"([^"]+)"\s+(.+)$',
+        re.IGNORECASE
+    )
+
+    springs_data = {}
+
+    for ln in spring_lines:
+        m = spring_pat.match(ln)
+        if not m:
+            continue
+
+        spring_name = m.group(1)
+        props_str = m.group(2)
+
+        # Initialize spring with default zero stiffnesses
+        if spring_name not in springs_data:
+            springs_data[spring_name] = {
+                "name": spring_name,
+                "ux": 0.0,
+                "uy": 0.0,
+                "uz": 0.0,
+                "rx": 0.0,
+                "ry": 0.0,
+                "rz": 0.0
+            }
+
+        spring = springs_data[spring_name]
+
+        # Parse translational stiffnesses
+        ux_match = re.search(r'\bUX\s+([-+]?\d+(?:\.\d+)?(?:[eE][-+]?\d+)?)', props_str, re.IGNORECASE)
+        if ux_match:
+            spring["ux"] = _to_float_or_default(ux_match.group(1))
+
+        uy_match = re.search(r'\bUY\s+([-+]?\d+(?:\.\d+)?(?:[eE][-+]?\d+)?)', props_str, re.IGNORECASE)
+        if uy_match:
+            spring["uy"] = _to_float_or_default(uy_match.group(1))
+
+        uz_match = re.search(r'\bUZ\s+([-+]?\d+(?:\.\d+)?(?:[eE][-+]?\d+)?)', props_str, re.IGNORECASE)
+        if uz_match:
+            spring["uz"] = _to_float_or_default(uz_match.group(1))
+
+        # Parse rotational stiffnesses
+        rx_match = re.search(r'\bRX\s+([-+]?\d+(?:\.\d+)?(?:[eE][-+]?\d+)?)', props_str, re.IGNORECASE)
+        if rx_match:
+            spring["rx"] = _to_float_or_default(rx_match.group(1))
+
+        ry_match = re.search(r'\bRY\s+([-+]?\d+(?:\.\d+)?(?:[eE][-+]?\d+)?)', props_str, re.IGNORECASE)
+        if ry_match:
+            spring["ry"] = _to_float_or_default(ry_match.group(1))
+
+        rz_match = re.search(r'\bRZ\s+([-+]?\d+(?:\.\d+)?(?:[eE][-+]?\d+)?)', props_str, re.IGNORECASE)
+        if rz_match:
+            spring["rz"] = _to_float_or_default(rz_match.group(1))
+
+    return springs_data
+
+
 def parse_e2k(text: str) -> Dict[str, Any]:
     """
     Parse ETABS .e2k text into a normalized dict used by Phase-1.
@@ -312,7 +396,8 @@ def parse_e2k(text: str) -> Dict[str, Any]:
                             "extra"
                           }, ...
                         ],
-      "diaphragm_names":[ "D1", "D2", ... ]
+      "diaphragm_names":[ "D1", "D2", ... ],
+      "spring_properties": { "RES_00_75cm": { "name", "ux", "uy", "uz", "rx", "ry", "rz" }, ... }
     }
     """
     # STORIES
@@ -525,6 +610,9 @@ def parse_e2k(text: str) -> Dict[str, Any]:
     # FRAME SECTIONS (New in v2.0)
     frame_sections = _parse_frame_sections(text)
 
+    # SPRING PROPERTIES (New in v2.1)
+    spring_properties = _parse_spring_properties(text)
+
     return {
         "stories": stories,
         "points": points,
@@ -535,9 +623,11 @@ def parse_e2k(text: str) -> Dict[str, Any]:
         "materials": materials,
         "rebar_definitions": rebar_definitions,
         "frame_sections": frame_sections,
-        "_artifacts_version": "2.0",
+        "spring_properties": spring_properties,
+        "_artifacts_version": "2.1",
         "_materials_version": "1.0",
         "_sections_version": "1.0",
+        "_springs_version": "1.0",
     }
 
 
