@@ -18,6 +18,10 @@ Options:
     supports_dofs: Dict[str,bool]  # keys: UX, UY, UZ, RX, RY, RZ
     supports_size: float           # glyph scale
     supports_exclude: Iterable[int]  # node tags to ignore (e.g., master nodes)
+    # Spring markers overlay:
+    show_springs: bool
+    springs_by_node: Dict[int, Dict[str, Any]]  # structural_node_tag -> {ground_tag, story, kind}
+    springs_size: int                            # marker size
 
 Notes:
 - Beams vs columns separated by dominant axis (Z -> columns).
@@ -29,6 +33,10 @@ Notes:
       - UY: triangle in XZ-plane
       - UZ: triangle in XY-plane
     * Rotational (RX/RY/RZ): **'x' symbols** (two short crossing line segments) in the plane perpendicular to the rotation axis.
+- Spring markers overlay:
+    * Rendered as **diamond symbols** (symbol='diamond') in orange color
+    * Marks structural nodes that have zeroLength spring elements attached
+    * Springs model soil-structure interaction (e.g., pile p-y springs)
 - No external deps beyond Plotly.
 """
 
@@ -309,6 +317,77 @@ def _supports_traces(
     return traces
 
 
+def _springs_trace(
+    nodes: Dict[int, Vec3],
+    springs_by_node: Dict[int, Dict[str, Any]],
+    size: int = 10,
+) -> Optional[go.Scatter3d]:
+    """
+    Build a single trace for spring markers.
+    Springs are rendered as **diamond symbols** in orange to distinguish them
+    from regular nodes and boundary conditions.
+
+    Args:
+        nodes: All structural nodes
+        springs_by_node: {structural_node_tag: {ground_tag, story, kind}}
+        size: Marker size
+
+    Returns:
+        Scatter3d trace or None if no springs
+    """
+    if not nodes or not springs_by_node:
+        return None
+
+    # Collect coordinates and hover info for nodes with springs
+    xs: List[float] = []
+    ys: List[float] = []
+    zs: List[float] = []
+    texts: List[str] = []
+    hovers: List[str] = []
+
+    for node_tag, spring_info in springs_by_node.items():
+        if node_tag not in nodes:
+            continue
+
+        x, y, z = nodes[node_tag]
+        xs.append(x)
+        ys.append(y)
+        zs.append(z)
+
+        ground_tag = spring_info.get("ground_tag", "?")
+        story = spring_info.get("story", "?")
+        kind = spring_info.get("kind", "spring_ground")
+
+        texts.append(f"Spring @ {node_tag}")
+        hovers.append(
+            f"<b>Spring Node</b> {node_tag}<br>"
+            f"Ground: {ground_tag}<br>"
+            f"Story: {story}<br>"
+            f"Type: {kind}<br>"
+            f"x={x:.3f}, y={y:.3f}, z={z:.3f}"
+        )
+
+    if not xs:
+        return None
+
+    trace = go.Scatter3d(
+        x=xs, y=ys, z=zs,
+        mode="markers",
+        text=texts,
+        hovertext=hovers,
+        hoverinfo="text",
+        marker=dict(
+            size=size,
+            symbol="diamond",
+            color="yellow",
+            line=dict(width=1, color="gold")
+        ),
+        name="Springs"
+    )
+
+    return trace
+
+
 def create_interactive_plot(
     nodes: Dict[int, Vec3],
     elements: Dict[int, Tuple[int, int]],
@@ -334,6 +413,9 @@ def create_interactive_plot(
       - supports_dofs: Dict[str,bool]
       - supports_size: float
       - supports_exclude: Iterable[int]
+      - show_springs: bool
+      - springs_by_node: Dict[int, Dict[str, Any]]
+      - springs_size: int
     """
     options = options or {}
     show_axes = bool(options.get("show_axes", True))
@@ -356,6 +438,11 @@ def create_interactive_plot(
     supports_dofs = options.get("supports_dofs", {"UX": True,"UY":True,"UZ":True,"RX":True,"RY":True,"RZ":True})
     supports_size = float(options.get("supports_size", 0.25))
     supports_exclude = options.get("supports_exclude", set()) or set()
+
+    # Springs overlay options
+    show_springs = bool(options.get("show_springs", False))
+    springs_by_node = options.get("springs_by_node", {}) or {}
+    springs_size = int(options.get("springs_size", 10))
 
     data_traces = []
 
@@ -443,7 +530,19 @@ def create_interactive_plot(
         )
         data_traces.extend(bc_traces)
 
+    # Springs overlay (diamond markers)
+    if show_springs and springs_by_node:
+        springs_trace = _springs_trace(
+            nodes=nodes,
+            springs_by_node=springs_by_node,
+            size=springs_size,
+        )
+        if springs_trace is not None:
+            data_traces.append(springs_trace)
+
     xr, yr, zr = _axis_ranges(nodes)
+    print(f"[PLOT DIAGNOSTIC] Axis ranges: X={xr}, Y={yr}, Z={zr}")
+    print(f"[PLOT DIAGNOSTIC] Total nodes for range calc: {len(nodes)}")
     scene = dict(
         xaxis=dict(title="X", showgrid=show_grid, zeroline=False, range=xr),
         yaxis=dict(title="Y", showgrid=show_grid, zeroline=False, range=yr),

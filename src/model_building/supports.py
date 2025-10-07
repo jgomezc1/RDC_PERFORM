@@ -99,6 +99,9 @@ def define_point_restraints_from_e2k(
     """
     Parse ETABS RESTRAINT point-assigns and apply OpenSees 'fix' to existing nodes.
 
+    IMPORTANT: Nodes with BOTH restraints AND springs are skipped here.
+    The spring implementation will create the ground node with restraints.
+
     Returns:
         List of (node_tag, mask) actually applied.
     """
@@ -109,6 +112,20 @@ def define_point_restraints_from_e2k(
     if not order:
         raise RuntimeError("story_graph.json missing story_order_top_to_bottom.")
     story_idx = {s: i for i, s in enumerate(order)}
+
+    # Identify nodes that have springs - these will be handled by define_spring_supports()
+    nodes_with_springs = set()
+    for story_name, points in sg.get("active_points", {}).items():
+        if story_name not in story_idx:
+            continue
+        idx = story_idx[story_name]
+        for p in points:
+            if p.get("springprop"):
+                try:
+                    node_tag = int(p["id"]) * 1000 + idx
+                    nodes_with_springs.add(node_tag)
+                except (ValueError, KeyError):
+                    pass
 
     # Source 1: E2K
     path = e2k_path or E2K_PATH
@@ -126,12 +143,25 @@ def define_point_restraints_from_e2k(
 
     existing = set(int(t) for t in (_ops_getNodeTags() or []))
     applied: List[Tuple[int, Tuple[int,int,int,int,int,int]]] = []
+    deferred_to_springs: List[Tuple[int, Tuple[int,int,int,int,int,int]]] = []
     skipped = 0
+    skipped_due_to_springs = 0
     for pt, story, mask in pairs:
         if story not in story_idx:
             print(f"[supports] WARN: Story '{story}' not found in story_graph; skipping point {pt}.")
             continue
         tag = int(pt) * 1000 + story_idx[story]
+
+        # Track nodes that have springs - they will be handled by define_spring_supports()
+        # but we still need to record them for visualization purposes
+        if tag in nodes_with_springs:
+            skipped_due_to_springs += 1
+            if skipped_due_to_springs <= 3:
+                print(f"[supports] Skip: node {tag} has springs - will be handled by spring implementation")
+            # Store for visualization even though we don't apply fix() here
+            deferred_to_springs.append((tag, mask))
+            continue
+
         if tag not in existing:
             # If node doesn't exist (e.g., explicit_z or point inactive on story), skip safely.
             print(f"[supports] Skip: node tag {tag} (pt={pt}, story={story}) not in domain.")
@@ -144,14 +174,23 @@ def define_point_restraints_from_e2k(
         except Exception as e:
             print(f"[supports] ERROR applying fix({tag}, {mask}): {e}")
 
+    # Summary
+    if skipped_due_to_springs > 3:
+        print(f"[supports] ... and {skipped_due_to_springs - 3} more nodes skipped due to springs")
+    print(f"[supports] Total: {len(applied)} restraints applied, {skipped_due_to_springs} deferred to springs")
+
     # Persist a small QA artifact
+    # IMPORTANT: Include BOTH applied and deferred_to_springs for visualization
     try:
         out_dir = OUT_DIR or "out"
         os.makedirs(out_dir, exist_ok=True)
         qa = {
             "version": 1,
-            "applied": [{"node": t, "mask": m} for t, m in applied],
+            "applied": [{"node": t, "mask": m} for t, m in applied + deferred_to_springs],
+            "applied_via_fix": [{"node": t, "mask": m} for t, m in applied],
+            "applied_via_springs": [{"node": t, "mask": m} for t, m in deferred_to_springs],
             "skipped": skipped,
+            "skipped_due_to_springs": skipped_due_to_springs,
         }
         with open(os.path.join(out_dir, "supports.json"), "w", encoding="utf-8") as f:
             json.dump(qa, f, indent=2, ensure_ascii=False)

@@ -50,19 +50,35 @@ def build_model(stage: str = "all") -> None:
     model("basic", "-ndm", 3, "-ndf", 6)
 
     # 1) Nodes
+    print("[MODEL_translator] Step 1: Creating nodes...")
+    from openseespy.opensees import getNodeTags as _check_nodes
     define_nodes()
+    nodes_after_define = len(_check_nodes())
+    print(f"[MODEL_translator] After define_nodes(): {nodes_after_define} nodes in domain")
 
     # 2) Point restraints (from ETABS POINTASSIGN ... RESTRAINT)
+    print("[MODEL_translator] Step 2: Applying point restraints...")
     define_point_restraints_from_e2k()
+    nodes_after_restraints = len(_check_nodes())
+    print(f"[MODEL_translator] After restraints: {nodes_after_restraints} nodes in domain")
 
     # 3) Spring supports (from ETABS POINTASSIGN ... SPRINGPROP)
+    print("[MODEL_translator] Step 3: Defining spring supports...")
     define_spring_supports(verbose=False)
+    nodes_after_springs = len(_check_nodes())
+    print(f"[MODEL_translator] After springs: {nodes_after_springs} nodes in domain")
 
     # 4) Diaphragms (creates centroid masters and ties slaves; masters are fixed in UZ,RX,RY)
+    print("[MODEL_translator] Step 4: Defining rigid diaphragms...")
     define_rigid_diaphragms()
+    nodes_after_diaphragms = len(_check_nodes())
+    print(f"[MODEL_translator] After diaphragms: {nodes_after_diaphragms} nodes in domain")
 
     # 5) Emit nodes.json (includes masters; requires story_graph.json + diaphragms.json)
+    print("[MODEL_translator] Step 5: Emitting nodes.json...")
     emit_nodes_json(_DEFAULT_OUT)
+    nodes_after_emit = len(_check_nodes())
+    print(f"[MODEL_translator] After emit_nodes: {nodes_after_emit} nodes in domain")
 
     if stage.lower() == "nodes":
         print("[MODEL] Built NODES + RESTRAINTS + SPRINGS + DIAPHRAGMS + NODES.JSON.")

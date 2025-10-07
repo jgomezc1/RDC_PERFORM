@@ -187,21 +187,72 @@ def load_diaphragms_meta(path: str = "out/diaphragms.json") -> List[int]:
 def load_supports_meta(path: str = "out/supports.json") -> Dict[int, Tuple[int, int, int, int, int, int]]:
     """
     Return {node_tag: (UX, UY, UZ, RX, RY, RZ)} from out/supports.json if present.
+    Excludes ground nodes (tag > 9000000) which are rendered as spring markers instead.
     If missing/invalid, returns {}.
     """
     try:
+        import os
+        if not os.path.exists(path):
+            print(f"[load_supports_meta] File not found: {path} (cwd={os.getcwd()})")
+            return {}
         with open(path, "r", encoding="utf-8") as f:
             data = json.load(f)
         out: Dict[int, Tuple[int, int, int, int, int, int]] = {}
+        ground_nodes_skipped = 0
         for rec in data.get("applied", []):
             n = int(rec.get("node"))
+
+            # Skip ground nodes - they should be rendered as spring markers, not BC markers
+            if n > 9000000:
+                ground_nodes_skipped += 1
+                continue
+
             mask = tuple(int(v) for v in rec.get("mask", []))
             if len(mask) == 6:
                 out[n] = mask  # type: ignore[assignment]
+        print(f"[load_supports_meta] Loaded {len(out)} structural supports from {path}")
+        if ground_nodes_skipped > 0:
+            print(f"[load_supports_meta] Skipped {ground_nodes_skipped} ground nodes (will render as springs)")
         return out
-    except Exception:
+    except Exception as e:
+        print(f"[load_supports_meta] Error loading supports: {e}")
+        import traceback
+        traceback.print_exc()
         return {}
 
+
+def load_springs_meta(path: str = "out/spring_grounds.json") -> Dict[int, Dict[str, Any]]:
+    """
+    Return {structural_node_tag: {ground_tag, spring_type, ...}} for nodes with springs.
+    If missing/invalid, returns {}.
+    """
+    try:
+        import os
+        if not os.path.exists(path):
+            print(f"[load_springs_meta] File not found: {path}")
+            return {}
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        out: Dict[int, Dict[str, Any]] = {}
+        for ground_node in data.get("ground_nodes", []):
+            structural_tag = int(ground_node.get("structural_node"))
+            ground_tag = int(ground_node.get("tag"))
+            story = ground_node.get("story", "")
+
+            out[structural_tag] = {
+                "ground_tag": ground_tag,
+                "story": story,
+                "kind": ground_node.get("kind", "spring_ground")
+            }
+
+        print(f"[load_springs_meta] Loaded {len(out)} nodes with springs from {path}")
+        return out
+    except Exception as e:
+        print(f"[load_springs_meta] Error loading springs: {e}")
+        import traceback
+        traceback.print_exc()
+        return {}
 
 
 # -----------------------
@@ -229,11 +280,20 @@ st.write(
 with st.sidebar:
     st.header("Build Controls")
 
-    uploaded_file = st.file_uploader(
-        "1) Upload `kosmos_translated.py` (or similar)",
-        type=["py"],
-        accept_multiple_files=False
+    # Model source selection
+    model_source = st.radio(
+        "Model Source",
+        ["Use built-in MODEL_translator", "Upload custom model file"],
+        index=0
     )
+
+    uploaded_file = None
+    if model_source == "Upload custom model file":
+        uploaded_file = st.file_uploader(
+            "1) Upload `kosmos_translated.py` (or similar)",
+            type=["py"],
+            accept_multiple_files=False
+        )
 
     stage_choice = st.selectbox(
         "2) Build Stage",
@@ -283,6 +343,12 @@ with st.sidebar:
         dof_RY = st.checkbox("RY", value=True)
         dof_RZ = st.checkbox("RZ", value=True)
 
+    # Springs overlay controls
+    st.markdown("---")
+    st.subheader("Spring Markers")
+    show_springs = st.checkbox("Show spring markers (SSI nodes)", value=True)
+    spring_size = st.slider("Spring marker size", min_value=5, max_value=20, value=10, step=1)
+
     # Build Controls
     st.markdown("---")
 
@@ -294,20 +360,63 @@ with st.sidebar:
 # Build & visualize
 # -----------------------
 if build_btn:
-    if not uploaded_file:
+    # Debug: Print model source selection
+    print(f"[DEBUG] model_source = '{model_source}'")
+    print(f"[DEBUG] uploaded_file = {uploaded_file}")
+
+    # Check if we have a model source
+    if model_source == "Upload custom model file" and not uploaded_file:
         st.error("Please upload a Python model file first.")
     else:
         try:
-            with tempfile.NamedTemporaryFile(delete=False, suffix=".py") as tmp:
-                tmp.write(uploaded_file.getvalue())
-                model_script_path = tmp.name
-
             wipe()
-            user_model_module = load_module_from_path("user_model", model_script_path)
-            user_model_module.build_model(stage=stage_param)
+
+            if model_source == "Use built-in MODEL_translator":
+                # Use the built-in MODEL_translator directly
+                # Force reload to ensure we get the latest code (not cached)
+                import sys
+                import importlib
+
+                # Remove cached modules
+                modules_to_reload = [
+                    'src.orchestration.MODEL_translator',
+                    'src.model_building.nodes',
+                    'src.model_building.supports',
+                    'src.model_building.springs',
+                    'src.model_building.diaphragms',
+                    'src.model_building.columns',
+                    'src.model_building.beams',
+                    'src.model_building.emit_nodes',
+                ]
+                for mod_name in modules_to_reload:
+                    if mod_name in sys.modules:
+                        importlib.reload(sys.modules[mod_name])
+
+                from src.orchestration.MODEL_translator import build_model
+                print(f"[Viewer] ✅ Building model using built-in MODEL_translator with stage={stage_param}")
+                st.info(f"Building with built-in MODEL_translator (stage={stage_param})")
+                build_model(stage=stage_param)
+            else:
+                # Load and execute uploaded file
+                print(f"[Viewer] ⚠️ Building model from uploaded file: {uploaded_file.name if uploaded_file else 'None'}")
+                st.info(f"Building from uploaded file: {uploaded_file.name if uploaded_file else 'None'}")
+                with tempfile.NamedTemporaryFile(delete=False, suffix=".py") as tmp:
+                    tmp.write(uploaded_file.getvalue())
+                    model_script_path = tmp.name
+
+                user_model_module = load_module_from_path("user_model", model_script_path)
+                user_model_module.build_model(stage=stage_param)
 
             nodes = collect_nodes()
             all_elements = collect_elements()
+
+            # DIAGNOSTIC: Check node z-range
+            if nodes:
+                z_coords = [coord[2] for coord in nodes.values()]
+                z_min, z_max = min(z_coords), max(z_coords)
+                print(f"[DIAGNOSTIC] Collected {len(nodes)} nodes, Z range: [{z_min:.3f}, {z_max:.3f}]")
+                nodes_below_10 = sum(1 for z in z_coords if z < 10.0)
+                print(f"[DIAGNOSTIC] Nodes below z=10.00: {nodes_below_10}")
 
             elements = filter_elements_by_orientation(nodes, all_elements, view_param)
 
@@ -316,6 +425,9 @@ if build_btn:
 
             # Load BC metadata (supports) if present
             supports_by_node = load_supports_meta()
+
+            # Load spring metadata if present
+            springs_by_node = load_springs_meta()
 
             st.session_state.model_built = True
             st.session_state.nodes = nodes
@@ -340,6 +452,11 @@ if build_btn:
                 "RZ": bool(dof_RZ),
             }
 
+            # Persist springs overlay state
+            st.session_state.show_springs = show_springs
+            st.session_state.springs_by_node = springs_by_node
+            st.session_state.spring_size = spring_size
+
             # Clear any previous test results since we've moved to unified validation
             st.session_state.test_results = None
 
@@ -358,6 +475,8 @@ for key, default in [
     # supports defaults
     ("show_supports", True), ("supports_by_node", {}), ("bc_size", 0.25),
     ("bc_dofs", {"UX": True, "UY": True, "UZ": True, "RX": True, "RY": True, "RZ": True}),
+    # springs defaults
+    ("show_springs", True), ("springs_by_node", {}), ("spring_size", 10),
 ]:
     if key not in st.session_state:
         st.session_state[key] = default
@@ -436,6 +555,10 @@ if st.session_state.model_built:
         "supports_dofs": st.session_state.bc_dofs,
         "supports_size": float(st.session_state.bc_size),
         "supports_exclude": set(st.session_state.master_nodes or []),  # <-- exclude masters explicitly
+        # Springs overlay
+        "show_springs": bool(st.session_state.show_springs),
+        "springs_by_node": st.session_state.springs_by_node,
+        "springs_size": int(st.session_state.spring_size),
     }
     elems = st.session_state.elements if "elements" in st.session_state else st.session_state.elements_all
     fig = vu.create_interactive_plot(

@@ -154,24 +154,67 @@ class SectionPropertyCalculator:
             'ry': ry
         }
 
+    def _calculate_circular_properties(self, D: float) -> dict:
+        """
+        Calculate geometric properties for a circular section (e.g., piles)
+
+        Args:
+            D: Diameter (m)
+
+        Returns:
+            Dictionary with area, moments of inertia, section moduli, and radii of gyration
+        """
+        r = D / 2.0  # radius
+
+        # Area
+        area = math.pi * r**2
+
+        # Moments of Inertia (same for both axes due to circular symmetry)
+        I = math.pi * r**4 / 4.0
+        Ixx = I
+        Iyy = I
+
+        # Torsional constant J for circular sections (polar moment of inertia)
+        J = math.pi * r**4 / 2.0
+
+        # Section Moduli (same for both axes)
+        S = math.pi * r**3 / 4.0
+        Sxx = S
+        Syy = S
+
+        # Radii of Gyration (same for both axes)
+        rg = r / 2.0
+        rx = rg
+        ry = rg
+
+        return {
+            'area': area,
+            'Ixx': Ixx,
+            'Iyy': Iyy,
+            'J': J,
+            'Sxx': Sxx,
+            'Syy': Syy,
+            'rx': rx,
+            'ry': ry
+        }
+
     def _calculate_all_sections(self):
         """Calculate properties for all frame sections"""
         for section_name, section_data in self.sections_data.items():
             # Extract dimensions
             dimensions = section_data.get('dimensions', {})
-            B = dimensions.get('B', 0)  # Width
-            D = dimensions.get('D', 0)  # Depth
-
-            if B <= 0 or D <= 0:
-                print(f"Warning: Invalid dimensions for section {section_name}: B={B}, D={D}")
-                continue
-
-            # Get other properties
             shape = section_data.get('shape', 'Unknown')
             material = section_data.get('material', 'Unknown')
 
-            # Calculate geometric properties (assuming rectangular)
+            # Handle different section shapes
             if 'Rectangular' in shape:
+                B = dimensions.get('B', 0)  # Width
+                D = dimensions.get('D', 0)  # Depth
+
+                if B <= 0 or D <= 0:
+                    print(f"Warning: Invalid dimensions for rectangular section {section_name}: B={B}, D={D}")
+                    continue
+
                 props_dict = self._calculate_rectangular_properties(B, D)
 
                 # Create section properties object
@@ -188,6 +231,30 @@ class SectionPropertyCalculator:
 
                 print(f"Section {section_name}: {B:.2f}×{D:.2f}m, A={props_dict['area']:.4f}m², "
                       f"Ixx={props_dict['Ixx']:.6f}m⁴, Iyy={props_dict['Iyy']:.6f}m⁴")
+
+            elif 'Circle' in shape:
+                D = dimensions.get('D', 0)  # Diameter
+
+                if D <= 0:
+                    print(f"Warning: Invalid diameter for circular section {section_name}: D={D}")
+                    continue
+
+                props_dict = self._calculate_circular_properties(D)
+
+                # Create section properties object (use diameter for both width and depth)
+                properties = SectionProperties(
+                    name=section_name,
+                    shape=shape,
+                    material=material,
+                    depth=D,
+                    width=D,  # For circular, width = depth = diameter
+                    **props_dict
+                )
+
+                self.section_properties[section_name] = properties
+
+                print(f"Section {section_name}: Ø{D:.2f}m, A={props_dict['area']:.4f}m², "
+                      f"I={props_dict['Ixx']:.6f}m⁴, J={props_dict['J']:.6f}m⁴")
 
             else:
                 print(f"Warning: Unsupported shape '{shape}' for section {section_name}")

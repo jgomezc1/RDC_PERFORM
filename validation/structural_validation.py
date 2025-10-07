@@ -51,6 +51,13 @@ class StructuralValidator:
             self.supports = self._load_json("supports.json")
             self.diaphragms = self._load_json("diaphragms.json")
             self.parsed_raw = self._load_json("parsed_raw.json")
+
+            # Load springs artifact if it exists (optional)
+            try:
+                self.springs = self._load_json("springs.json")
+            except:
+                self.springs = {}  # Empty dict if springs.json doesn't exist
+
             return True
         except Exception as e:
             print(f"Error loading artifacts: {e}")
@@ -115,7 +122,13 @@ class StructuralValidator:
         """Check if element count matches expected"""
         artifact_beams = len(self.beams.get("beams", []))
         artifact_columns = len(self.columns.get("columns", []))
-        total_expected = artifact_beams + artifact_columns
+
+        # Include spring elements if they exist
+        artifact_springs = 0
+        if self.springs:
+            artifact_springs = len(self.springs.get("elements", []))
+
+        total_expected = artifact_beams + artifact_columns + artifact_springs
 
         if self.model_loaded:
             ops_elements = len(ops.getEleTags())
@@ -123,6 +136,7 @@ class StructuralValidator:
             details = {
                 "beams": artifact_beams,
                 "columns": artifact_columns,
+                "springs": artifact_springs,
                 "total_expected": total_expected,
                 "opensees_count": ops_elements,
                 "difference": abs(total_expected - ops_elements)
@@ -133,14 +147,20 @@ class StructuralValidator:
             details = {
                 "beams": artifact_beams,
                 "columns": artifact_columns,
+                "springs": artifact_springs,
                 "total_expected": total_expected,
                 "opensees_count": ops_elements
             }
 
+        msg_parts = [f"B:{artifact_beams}", f"C:{artifact_columns}"]
+        if artifact_springs > 0:
+            msg_parts.append(f"S:{artifact_springs}")
+        expected_str = "+".join(msg_parts)
+
         return ValidationResult(
             test_name="Element Count Validation",
             passed=match,
-            message=f"Elements: Expected={total_expected} (B:{artifact_beams}+C:{artifact_columns}), OpenSees={ops_elements}",
+            message=f"Elements: Expected={total_expected} ({expected_str}), OpenSees={ops_elements}",
             details=details,
             severity="critical" if not match else "info"
         )
@@ -400,10 +420,24 @@ class StructuralValidator:
                 severity = "info"
             else:
                 failed_directions = []
-                if not x_passed: failed_directions.append("X")
-                if not y_passed: failed_directions.append("Y")
+                error_messages = []
+                if not x_passed:
+                    failed_directions.append("X")
+                    if "opensees_error" in x_results:
+                        error_messages.append(f"X: {x_results['opensees_error']}")
+                    elif "error" in x_results:
+                        error_messages.append(f"X: {x_results['error']}")
+                if not y_passed:
+                    failed_directions.append("Y")
+                    if "opensees_error" in y_results:
+                        error_messages.append(f"Y: {y_results['opensees_error']}")
+                    elif "error" in y_results:
+                        error_messages.append(f"Y: {y_results['error']}")
 
                 message = f"❌ Load path issues in {', '.join(failed_directions)} direction(s)"
+                if error_messages:
+                    message += f"\nErrors: {'; '.join(error_messages)}"
+
                 details = {
                     "master_nodes_tested": len(master_nodes),
                     "x_direction": x_results,
@@ -434,7 +468,10 @@ class StructuralValidator:
         try:
             # Clear existing loads and analysis
             ops.wipeAnalysis()
-            ops.remove('loadPattern', 1)
+            try:
+                ops.remove('loadPattern', 1)
+            except:
+                pass  # Pattern might not exist
 
             # Create new load pattern
             ops.timeSeries('Linear', 1)
@@ -471,7 +508,8 @@ class StructuralValidator:
                 }
 
             # Set up analysis
-            ops.system('BandGen')
+            # Use SparseSYM for better stability with mixed supports (rigid + springs)
+            ops.system('SparseSYM')
             ops.numberer('RCM')
             ops.constraints('Transformation')
             ops.integrator('LoadControl', 1.0)

@@ -37,8 +37,8 @@ def generate_explicit_model_file() -> bool:
         import sys
         import os
 
-        # Check if generate_explicit_model.py exists
-        generator_script = "generate_explicit_model.py"
+        # Check if generate_explicit_model.py exists (in experimental/ after refactoring)
+        generator_script = "experimental/generate_explicit_model.py"
         if not os.path.exists(generator_script):
             return False
 

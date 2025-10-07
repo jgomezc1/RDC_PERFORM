@@ -386,51 +386,136 @@ def define_columns(
         sidx = story_index[sname]
         per_story = _dedupe_last_section_wins(lines)
 
-        # For each COLUMN line at this story, find the next lower story that also contains both points.
+        # For each COLUMN line at this story, handle two methods:
+        # Method 1: pid_i == pid_j → same point ID, find next lower story with same points
+        # Method 2: pid_i != pid_j → different points, both exist at current story only
         for ln in per_story:
             if str(ln.get("type", "")).upper() != "COLUMN":
                 continue
 
-            pid_i: str = str(ln["i"])  # ETABS i is upper
-            pid_j: str = str(ln["j"])  # ETABS j is lower (on that story)
+            pid_i: str = str(ln["i"])  # ETABS i node
+            pid_j: str = str(ln["j"])  # ETABS j node
 
-            # Find next lower story where BOTH points exist
-            k_found: Optional[int] = None
-            sK: Optional[str] = None
-            for k in range(sidx + 1, len(story_names)):
-                sK_candidate = story_names[k]
-                if _point_exists(pid_i, sK_candidate, act_pt_map) and _point_exists(pid_j, sK_candidate, act_pt_map):
-                    k_found = k
-                    sK = sK_candidate
-                    break
-            if k_found is None or sK is None:
-                skips.append(f"{ln.get('name','?')} @ '{sname}' skipped — no lower story with both endpoints")
-                continue
+            # METHOD 2: Explicit multi-point columns (i != j)
+            # Points may exist at different stories - need to find the correct story for each
+            if pid_i != pid_j:
+                # Find which story each point exists at (they might be at different stories!)
+                # For points that exist at multiple stories, use the one with LOWEST Z (bottom-most)
+                # to create the full column segment
+                story_i = None
+                story_j = None
+                sidx_i = None
+                sidx_j = None
+                min_z_i = 999999.0
+                min_z_j = 999999.0
 
-            # Build (nTop, nBot) and their coords
-            nTop = _ensure_node_for(pid_i, sname, sidx, act_pt_map, existing_nodes)   # upper
-            nBot = _ensure_node_for(pid_j, sK, k_found, act_pt_map, existing_nodes)   # lower
-            if nTop is None or nBot is None:
-                skips.append(f"{ln.get('name','?')} @ '{sname}' skipped — endpoint nodes missing")
-                continue
+                # Search for pid_i across all stories from current downward, take lowest Z
+                for k in range(sidx, len(story_names)):
+                    if _point_exists(pid_i, story_names[k], act_pt_map):
+                        coord = act_pt_map.get((pid_i, story_names[k]))
+                        if coord and coord[2] < min_z_i:
+                            story_i = story_names[k]
+                            sidx_i = k
+                            min_z_i = coord[2]
 
-            # Orientation enforcement (i=bottom, j=top) if requested
-            nI, nJ = (nBot, nTop)
-            line_name = str(ln.get("name", "?"))
-            LoffI = float(ln.get("length_off_i", 0.0) or 0.0)  # preserved for artifact
-            LoffJ = float(ln.get("length_off_j", 0.0) or 0.0)  # preserved for artifact
+                # Search for pid_j across all stories from current downward, take lowest Z
+                for k in range(sidx, len(story_names)):
+                    if _point_exists(pid_j, story_names[k], act_pt_map):
+                        coord = act_pt_map.get((pid_j, story_names[k]))
+                        if coord and coord[2] < min_z_j:
+                            story_j = story_names[k]
+                            sidx_j = k
+                            min_z_j = coord[2]
 
-            # Get coordinates for joint offset calculation (before orientation change)
-            pBot = act_pt_map.get((pid_j, sK), (0.0, 0.0, 0.0))  # bottom node coords
-            pTop = act_pt_map.get((pid_i, sname), (0.0, 0.0, 0.0))  # top node coords
+                if story_i is None or story_j is None:
+                    skips.append(f"{ln.get('name','?')} @ '{sname}' skipped — Method 2 column: could not locate endpoint stories (i:{story_i}, j:{story_j})")
+                    continue
 
-            if not ENFORCE_COLUMN_I_AT_BOTTOM:
-                # Keep ETABS i->j direction (i at S (top), j at K (bottom)):
-                nI, nJ = (nTop, nBot)
-                pI, pJ = pTop, pBot  # coordinates follow node order
+                # Create nodes at their respective stories
+                node_i = _ensure_node_for(pid_i, story_i, sidx_i, act_pt_map, existing_nodes)
+                node_j = _ensure_node_for(pid_j, story_j, sidx_j, act_pt_map, existing_nodes)
+
+                if node_i is None or node_j is None:
+                    skips.append(f"{ln.get('name','?')} @ '{sname}' skipped — Method 2 column nodes missing")
+                    continue
+
+                # Get coordinates from correct stories
+                coord_i = act_pt_map.get((pid_i, story_i), (0.0, 0.0, 0.0))
+                coord_j = act_pt_map.get((pid_j, story_j), (0.0, 0.0, 0.0))
+
+                # Determine which is bottom/top based on Z coordinate
+                z_i = coord_i[2]
+                z_j = coord_j[2]
+
+                # Check for zero-length columns before creating
+                dx = coord_i[0] - coord_j[0]
+                dy = coord_i[1] - coord_j[1]
+                dz = coord_i[2] - coord_j[2]
+                length = (dx**2 + dy**2 + dz**2)**0.5
+
+                if length < 1e-6:
+                    skips.append(f"{ln.get('name','?')} @ '{sname}' skipped — Method 2 zero length: pt{pid_i}@{story_i}({coord_i[0]:.2f},{coord_i[1]:.2f},{coord_i[2]:.2f}) to pt{pid_j}@{story_j}({coord_j[0]:.2f},{coord_j[1]:.2f},{coord_j[2]:.2f})")
+                    continue
+
+                if z_i < z_j:
+                    nBot, nTop = node_i, node_j
+                    pBot, pTop = coord_i, coord_j
+                else:
+                    nBot, nTop = node_j, node_i
+                    pBot, pTop = coord_j, coord_i
+
+                # Apply orientation preference
+                if ENFORCE_COLUMN_I_AT_BOTTOM:
+                    nI, nJ = (nBot, nTop)
+                    pI, pJ = pBot, pTop
+                else:
+                    nI, nJ = (nTop, nBot)
+                    pI, pJ = pTop, pBot
+
+                line_name = str(ln.get("name", "?"))
+                LoffI = float(ln.get("length_off_i", 0.0) or 0.0)
+                LoffJ = float(ln.get("length_off_j", 0.0) or 0.0)
+
+            # METHOD 1: Single-point vertical columns (i == j)
+            # Point appears at multiple stories, connect to next lower story
             else:
-                # Use bottom->top orientation
-                pI, pJ = pBot, pTop  # coordinates follow node order
+                # Find next lower story where BOTH points exist
+                k_found: Optional[int] = None
+                sK: Optional[str] = None
+                for k in range(sidx + 1, len(story_names)):
+                    sK_candidate = story_names[k]
+                    if _point_exists(pid_i, sK_candidate, act_pt_map) and _point_exists(pid_j, sK_candidate, act_pt_map):
+                        k_found = k
+                        sK = sK_candidate
+                        break
+                if k_found is None or sK is None:
+                    skips.append(f"{ln.get('name','?')} @ '{sname}' skipped — Method 1 column: no lower story with both endpoints")
+                    continue
+
+                # Build (nTop, nBot) and their coords
+                nTop = _ensure_node_for(pid_i, sname, sidx, act_pt_map, existing_nodes)   # upper
+                nBot = _ensure_node_for(pid_j, sK, k_found, act_pt_map, existing_nodes)   # lower
+                if nTop is None or nBot is None:
+                    skips.append(f"{ln.get('name','?')} @ '{sname}' skipped — Method 1 column: endpoint nodes missing")
+                    continue
+
+                # Orientation enforcement (i=bottom, j=top) if requested
+                line_name = str(ln.get("name", "?"))
+                LoffI = float(ln.get("length_off_i", 0.0) or 0.0)  # preserved for artifact
+                LoffJ = float(ln.get("length_off_j", 0.0) or 0.0)  # preserved for artifact
+
+                # Get coordinates for joint offset calculation (before orientation change)
+                pBot = act_pt_map.get((pid_j, sK), (0.0, 0.0, 0.0))  # bottom node coords
+                pTop = act_pt_map.get((pid_i, sname), (0.0, 0.0, 0.0))  # top node coords
+
+                if not ENFORCE_COLUMN_I_AT_BOTTOM:
+                    # Keep ETABS i->j direction (i at S (top), j at K (bottom)):
+                    nI, nJ = (nTop, nBot)
+                    pI, pJ = pTop, pBot  # coordinates follow node order
+                else:
+                    # Use bottom->top orientation
+                    nI, nJ = (nBot, nTop)
+                    pI, pJ = pBot, pTop  # coordinates follow node order
 
             # Extract offsets from line assigns (columns may have offsets per modeling convention)
             offsets_i = ln.get("offsets_i")

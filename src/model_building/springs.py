@@ -51,9 +51,17 @@ def _load_json(path: str) -> Dict[str, Any]:
         return json.load(f)
 
 
+def _save_json(path: str, data: Dict[str, Any]) -> None:
+    """Save JSON file."""
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+
+
 def define_spring_supports(
     story_graph_path: str = None,
     parsed_raw_path: str = None,
+    supports_path: str = None,
     verbose: bool = True,
 ) -> Dict[str, Any]:
     """
@@ -65,6 +73,8 @@ def define_spring_supports(
         Path to story_graph.json (default: "out/story_graph.json")
     parsed_raw_path : str, optional
         Path to parsed_raw.json (default: "out/parsed_raw.json")
+    supports_path : str, optional
+        Path to supports.json to check for restraints (default: "out/supports.json")
     verbose : bool, optional
         Print progress messages (default: True)
 
@@ -84,6 +94,8 @@ def define_spring_supports(
         story_graph_path = os.path.join(OUT_DIR, "story_graph.json")
     if parsed_raw_path is None:
         parsed_raw_path = os.path.join(OUT_DIR, "parsed_raw.json")
+    if supports_path is None:
+        supports_path = os.path.join(OUT_DIR, "supports.json")
 
     # Check files exist
     if not os.path.exists(story_graph_path):
@@ -94,6 +106,16 @@ def define_spring_supports(
     # Load data
     story_graph = _load_json(story_graph_path)
     parsed_raw = _load_json(parsed_raw_path)
+
+    # Load restraints (supports.json) to avoid creating springs on fixed DOFs
+    restraints = {}  # {node_tag: (ux, uy, uz, rx, ry, rz) mask}
+    if os.path.exists(supports_path):
+        supports_data = _load_json(supports_path)
+        for rec in supports_data.get("applied", []):
+            node_tag = rec.get("node")
+            mask = tuple(rec.get("mask", [0,0,0,0,0,0]))
+            if len(mask) == 6:
+                restraints[node_tag] = mask
 
     # Get spring property definitions
     spring_properties = parsed_raw.get("spring_properties", {})
@@ -114,6 +136,10 @@ def define_spring_supports(
     springs_created = 0
     nodes_with_springs = []
     spring_types_used: Dict[str, int] = {}
+    ground_nodes_data: List[Dict[str, Any]] = []  # Track ground nodes for export
+    spring_elements_data: List[Dict[str, Any]] = []  # Track spring elements for export
+    spring_materials_data: List[Dict[str, Any]] = []  # Track materials for export
+    ground_node_fixities: List[Dict[str, Any]] = []  # Track ground node fixities for supports.json
 
     # Material tag offset for spring materials
     # Start at 900000 to avoid conflicts with structural materials
@@ -175,13 +201,45 @@ def define_spring_supports(
             if all(v == 0.0 for v in stiffnesses.values()):
                 continue
 
-            # Create ground node for this spring
+            # Create ground node for this spring at same coordinates as structural node
             ground_tag = node_tag + 9000000
 
-            # Get coordinates of the original node (we'll create ground node at same location)
-            # For simplicity, create at origin since it's fixed
-            _ops_node(ground_tag, 0.0, 0.0, 0.0)
-            _ops_fix(ground_tag, 1, 1, 1, 1, 1, 1)  # Fix all DOFs
+            # Get coordinates from story_graph
+            coords = (point_data.get("x", 0.0), point_data.get("y", 0.0), point_data.get("z", 0.0))
+            _ops_node(ground_tag, *coords)
+
+            # Record ground node data for export
+            ground_nodes_data.append({
+                "tag": ground_tag,
+                "x": coords[0],
+                "y": coords[1],
+                "z": coords[2],
+                "story": story_name,
+                "story_index": story_index,
+                "structural_node": node_tag,
+                "kind": "spring_ground"
+            })
+
+            # Apply restraints to GROUND node (not the structural node!)
+            # If this node has RESTRAINT in ETABS, apply it to the ground node
+            if node_tag in restraints:
+                restraint_mask = restraints[node_tag]
+                _ops_fix(ground_tag, *restraint_mask)
+                ground_node_fixities.append({
+                    "node": ground_tag,
+                    "mask": list(restraint_mask),
+                    "source": "ETABS_restraint"
+                })
+                if verbose and springs_created < 3:
+                    print(f"  Ground node {ground_tag}: Applied restraint mask {restraint_mask}")
+            else:
+                # No explicit restraint - fix all DOFs (standard spring-to-ground)
+                _ops_fix(ground_tag, 1, 1, 1, 1, 1, 1)
+                ground_node_fixities.append({
+                    "node": ground_tag,
+                    "mask": [1, 1, 1, 1, 1, 1],
+                    "source": "spring_ground"
+                })
 
             # Create or reuse uniaxial materials for this spring property
             if springprop not in material_tags:
@@ -196,6 +254,15 @@ def define_spring_supports(
                         # Use Elastic material for linear spring
                         _ops_uniaxial_material("Elastic", mat_tag, stiffness)
                         material_tags[springprop][dof_name] = mat_tag
+
+                        # Record material for export
+                        spring_materials_data.append({
+                            "tag": mat_tag,
+                            "type": "Elastic",
+                            "E": stiffness,
+                            "spring_property": springprop,
+                            "dof": dof_name
+                        })
 
             # Get material tags for this spring
             spring_mats = material_tags[springprop]
@@ -217,28 +284,45 @@ def define_spring_supports(
             if mat_list and dir_list:
                 element_tag = 8000000 + node_tag
 
-                # zeroLength element connects ground_tag to node_tag
-                _ops_element(
-                    "zeroLength",
-                    element_tag,
-                    ground_tag,
-                    node_tag,
-                    "-mat", *mat_list,
-                    "-dir", *dir_list,
-                )
+                try:
+                    # zeroLength element connects ground_tag to node_tag
+                    _ops_element(
+                        "zeroLength",
+                        element_tag,
+                        ground_tag,
+                        node_tag,
+                        "-mat", *mat_list,
+                        "-dir", *dir_list,
+                    )
 
-                springs_created += 1
-                nodes_with_springs.append(node_tag)
+                    springs_created += 1
+                    nodes_with_springs.append(node_tag)
 
-                # Track usage
-                spring_types_used[springprop] = spring_types_used.get(springprop, 0) + 1
+                    # Track usage
+                    spring_types_used[springprop] = spring_types_used.get(springprop, 0) + 1
 
-                if verbose and springs_created <= 5:
-                    # Print first few for debugging
-                    dof_str = ", ".join([f"{d}={stiffnesses[list(dof_map.keys())[d-1]]:,.0f}"
-                                        for d in dir_list])
-                    print(f"  Spring {springs_created}: Node {node_tag} (pt {point_id} @ {story_name})")
-                    print(f"    Type: {springprop}, Stiffnesses: {dof_str}")
+                    # Record element for export
+                    spring_elements_data.append({
+                        "tag": element_tag,
+                        "type": "zeroLength",
+                        "ground_node": ground_tag,
+                        "structural_node": node_tag,
+                        "materials": mat_list,
+                        "directions": dir_list,
+                        "spring_property": springprop,
+                        "story": story_name
+                    })
+
+                    if verbose and springs_created <= 5:
+                        # Print first few for debugging
+                        dof_str = ", ".join([f"{list(dof_map.keys())[d-1].upper()}={stiffnesses[list(dof_map.keys())[d-1]]:,.0f}"
+                                            for d in dir_list])
+                        print(f"  Spring {springs_created}: Structural node {node_tag} ↔ Ground node {ground_tag}")
+                        print(f"    Location: ({coords[0]:.2f}, {coords[1]:.2f}, {coords[2]:.2f})")
+                        print(f"    Type: {springprop}, Active DOFs: {dof_str}")
+                except Exception as e:
+                    print(f"  ERROR: Failed to create spring element {element_tag} for node {node_tag}: {e}")
+                    continue
 
     if verbose:
         print(f"\n✅ Created {springs_created} spring supports")
@@ -247,11 +331,54 @@ def define_spring_supports(
             print(f"   Most common: {max(spring_types_used, key=spring_types_used.get)} "
                   f"({spring_types_used[max(spring_types_used, key=spring_types_used.get)]} uses)")
 
+    # Save comprehensive spring data to artifact
+    springs_artifact = {
+        "version": 2,  # Incremented version for new structure
+        "ground_nodes": ground_nodes_data,
+        "materials": spring_materials_data,
+        "elements": spring_elements_data,
+        "counts": {
+            "ground_nodes": len(ground_nodes_data),
+            "materials": len(spring_materials_data),
+            "elements": len(spring_elements_data)
+        }
+    }
+    springs_path = os.path.join(OUT_DIR, "springs.json")
+    _save_json(springs_path, springs_artifact)
+    if verbose:
+        print(f"   Saved springs artifact: {len(ground_nodes_data)} nodes, "
+              f"{len(spring_materials_data)} materials, {len(spring_elements_data)} elements")
+
+    # Also save legacy format for backward compatibility
+    ground_nodes_artifact = {
+        "version": 1,
+        "ground_nodes": ground_nodes_data,
+        "count": len(ground_nodes_data)
+    }
+    ground_nodes_path = os.path.join(OUT_DIR, "spring_grounds.json")
+    _save_json(ground_nodes_path, ground_nodes_artifact)
+
+    # Append ground node fixities to supports.json
+    if ground_node_fixities:
+        supports_path = os.path.join(OUT_DIR, "supports.json")
+        try:
+            supports_data = _load_json(supports_path)
+            # Append to the 'applied' list
+            if 'applied' not in supports_data:
+                supports_data['applied'] = []
+            supports_data['applied'].extend(ground_node_fixities)
+            _save_json(supports_path, supports_data)
+            if verbose:
+                print(f"   Appended {len(ground_node_fixities)} ground node fixities to supports.json")
+        except Exception as e:
+            print(f"   Warning: Could not update supports.json: {e}")
+
     return {
         "springs_defined": springs_created,
         "unique_spring_types": len(spring_types_used),
         "nodes_with_springs": nodes_with_springs,
         "spring_types_used": spring_types_used,
+        "ground_nodes_count": len(ground_nodes_data),
     }
 
 

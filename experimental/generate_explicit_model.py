@@ -18,6 +18,7 @@ Contracts (artifacts consumed):
   - out/diaphragms.json
   - out/columns.json
   - out/beams.json
+  - out/springs.json (optional)
 
 What this file guarantees
 -------------------------
@@ -452,6 +453,50 @@ def _emit_beams(lines: List[str], beams_json: Dict[str, Any],
     lines.append("")
 
 
+def _emit_springs(lines: List[str], springs_json: Dict[str, Any]) -> None:
+    """
+    Emit spring materials and zeroLength elements from springs.json artifact.
+
+    Springs model soil-structure interaction with:
+    - Uniaxial elastic materials for each DOF stiffness
+    - ZeroLength elements connecting ground nodes to structural nodes
+    """
+    materials = springs_json.get("materials") or []
+    elements = springs_json.get("elements") or []
+
+    if not materials and not elements:
+        return
+
+    # Emit materials first
+    if materials:
+        lines.append("    # --- Spring Materials (SSI) ---")
+        for mat in materials:
+            tag = _to_int(mat.get("tag"))
+            mat_type = str(mat.get("type", "Elastic"))
+            E = _to_float(mat.get("E"))
+            lines.append(f"    uniaxialMaterial('{mat_type}', {tag}, {E:.9g})")
+        lines.append(f"    # [springs] Created {len(materials)} spring material(s).")
+        lines.append("")
+
+    # Emit zeroLength elements
+    if elements:
+        lines.append("    # --- Spring Elements (zeroLength) ---")
+        for elem in elements:
+            tag = _to_int(elem.get("tag"))
+            ground_node = _to_int(elem.get("ground_node"))
+            struct_node = _to_int(elem.get("structural_node"))
+            mat_list = [_to_int(m) for m in (elem.get("materials") or [])]
+            dir_list = [_to_int(d) for d in (elem.get("directions") or [])]
+
+            if mat_list and dir_list:
+                mat_str = ", ".join(str(m) for m in mat_list)
+                dir_str = ", ".join(str(d) for d in dir_list)
+                lines.append(f"    element('zeroLength', {tag}, {ground_node}, {struct_node}, "
+                           f"'-mat', {mat_str}, '-dir', {dir_str})")
+        lines.append(f"    # [springs] Created {len(elements)} spring element(s).")
+        lines.append("")
+
+
 def _emit_header_and_defs(lines: List[str], ndm: int, ndf: int, ov: NLOverrides, has_rigid_diaphragms: bool = False) -> None:
     _emit_header(lines, ndm, ndf, has_rigid_diaphragms)
     # Nonlinear sets that need emission
@@ -473,7 +518,7 @@ def _emit_footer(lines: List[str], counters: Dict[str, int], diag: List[str]) ->
 def _build_explicit(ndm: int, ndf: int,
                     out_path: str,
                     nodes_path: str, supports_path: str, diaph_path: str,
-                    cols_path: str, beams_path: str,
+                    cols_path: str, beams_path: str, springs_path: str,
                     ov: NLOverrides) -> None:
     lines: List[str] = []
 
@@ -487,6 +532,7 @@ def _build_explicit(ndm: int, ndf: int,
     sup_json   = _read_json(supports_path)
     cols_json  = _read_json(cols_path)
     beams_json = _read_json(beams_path)
+    springs_json = _read_json(springs_path)
 
     # Nodes / supports / diaphragms first
     _emit_nodes(lines, nodes_json)
@@ -498,6 +544,9 @@ def _build_explicit(ndm: int, ndf: int,
 
     # Counters
     counters = {"nl_beams": 0, "nl_columns": 0, "el_beams": 0, "el_columns": 0}
+
+    # Spring materials and elements (before frame elements)
+    _emit_springs(lines, springs_json)
 
     # Elements (with per-tag transforms)
     _emit_columns(lines, cols_json, ov, tr_emitted, counters)
@@ -532,11 +581,12 @@ def main() -> None:
     diaph_path    = os.path.join(OUT_DIR, "diaphragms.json")
     cols_path     = os.path.join(OUT_DIR, "columns.json")
     beams_path    = os.path.join(OUT_DIR, "beams.json")
+    springs_path  = os.path.join(OUT_DIR, "springs.json")
 
     ov = NLOverrides.load(args.nonlinear)
     _build_explicit(args.ndm, args.ndf, out_path,
                     nodes_path, supports_path, diaph_path,
-                    cols_path, beams_path,
+                    cols_path, beams_path, springs_path,
                     ov)
 
 

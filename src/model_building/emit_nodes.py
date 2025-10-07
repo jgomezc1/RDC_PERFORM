@@ -129,6 +129,19 @@ def _build_coord_map(nodes: List[Dict[str, Any]]) -> Dict[int, Tuple[float, floa
     return m
 
 
+def _spring_ground_nodes_from_artifact(out_dir: str) -> List[Dict[str, Any]]:
+    """
+    Load spring ground nodes from spring_grounds.json artifact.
+    These are created by define_spring_supports() during model building.
+    """
+    spring_grounds_path = os.path.join(out_dir, "spring_grounds.json")
+    if not os.path.exists(spring_grounds_path):
+        return []
+
+    data = _load_json(spring_grounds_path)
+    return data.get("ground_nodes", [])
+
+
 def _master_nodes_from_diaphragms(
     diaphragms: Dict[str, Any],
     story_graph: Dict[str, Any],
@@ -337,17 +350,20 @@ def register_intermediate_node(
 def emit_nodes_json(out_dir: str = "out") -> str:
     """
     Build and save nodes.json to 'out_dir'. Returns the output path.
-    Merges grid + master nodes only (no more intermediate nodes).
+    Merges grid + master + spring ground nodes.
     """
     sg = _load_json(os.path.join(out_dir, "story_graph.json"))
     dg = _load_json(os.path.join(out_dir, "diaphragms.json"))
 
     grid_nodes = _grid_nodes_from_story_graph(sg)
     master_nodes = _master_nodes_from_diaphragms(dg, sg, grid_nodes)
+    spring_ground_nodes = _spring_ground_nodes_from_artifact(out_dir)
 
     all_nodes: Dict[int, Dict[str, Any]] = {int(n["tag"]): n for n in grid_nodes}
     for m in master_nodes:
         all_nodes[int(m["tag"])] = m  # overwrite if collision (shouldn't happen)
+    for g in spring_ground_nodes:
+        all_nodes[int(g["tag"])] = g  # add spring ground nodes
 
     nodes_list = [all_nodes[k] for k in sorted(all_nodes.keys())]
     out = {
@@ -356,6 +372,7 @@ def emit_nodes_json(out_dir: str = "out") -> str:
             "total": len(nodes_list),
             "grid": len(grid_nodes),
             "master": len(master_nodes),
+            "spring_ground": len(spring_ground_nodes),
         },
         "version": 1,
     }
@@ -365,7 +382,7 @@ def emit_nodes_json(out_dir: str = "out") -> str:
     print(
         "[ARTIFACTS] Wrote nodes.json with "
         f"{out['counts']['total']} nodes ({out['counts']['grid']} grid, "
-        f"{out['counts']['master']} masters) at: {out_path}"
+        f"{out['counts']['master']} masters, {out['counts']['spring_ground']} spring grounds) at: {out_path}"
     )
     return out_path
 

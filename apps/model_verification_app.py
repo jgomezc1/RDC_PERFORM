@@ -367,10 +367,26 @@ def run_modal_analysis(num_modes: int = 6) -> Dict[str, Any]:
     }
 
     try:
-        # First, check if model has any mass
+        # Load diaphragm data once for both mass check and constraint setup
+        has_rigid_diaphragms = False
+        diaphragm_master_nodes = []
+        diaphragm_file = os.path.join("out", "diaphragms.json")
+        if os.path.exists(diaphragm_file):
+            try:
+                with open(diaphragm_file, 'r') as f:
+                    diaphragm_data = json.load(f)
+                    diaphragms = diaphragm_data.get('diaphragms', [])
+                    has_rigid_diaphragms = len(diaphragms) > 0
+                    diaphragm_master_nodes = [d.get('master') for d in diaphragms]
+            except:
+                pass
+
+        # Check if model has any mass
         node_tags = ops.getNodeTags()
         has_mass = False
-        for tag in node_tags[:10]:  # Check first 10 nodes for efficiency
+
+        # Check diaphragm master nodes first (they typically have mass)
+        for tag in diaphragm_master_nodes:
             try:
                 mass_vals = ops.nodeMass(tag)
                 if any(m > 0 for m in mass_vals):
@@ -379,19 +395,25 @@ def run_modal_analysis(num_modes: int = 6) -> Dict[str, Any]:
             except:
                 continue
 
+        # If no mass found in master nodes, check sample of all nodes
+        if not has_mass:
+            # Check every 100th node for efficiency, plus first 20
+            check_tags = list(node_tags[:20]) + list(node_tags[::100])
+            for tag in check_tags:
+                try:
+                    mass_vals = ops.nodeMass(tag)
+                    if any(m > 0 for m in mass_vals):
+                        has_mass = True
+                        break
+                except:
+                    continue
+
         if not has_mass:
             results["error"] = "No mass detected in model - eigen analysis requires mass assignment"
             return results
 
         # Set up eigen solver with FORCED constraint reset
         try:
-            # Check if model has rigid diaphragms
-            has_rigid_diaphragms = False
-            diaphragm_file = os.path.join("out", "diaphragms.json")
-            if os.path.exists(diaphragm_file):
-                with open(diaphragm_file, 'r') as f:
-                    diaphragm_data = json.load(f)
-                    has_rigid_diaphragms = len(diaphragm_data.get("diaphragms", [])) > 0
 
             # CRITICAL: Force wipe and rebuild analysis with correct constraints
             # This ensures we don't use cached analysis settings from Streamlit

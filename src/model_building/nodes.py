@@ -35,14 +35,35 @@ def define_nodes(story_path: str = "out/story_graph.json",
 
     created: Set[int] = set()
 
+    # DIAGNOSTIC: Count nodes per story
+    nodes_by_story = {}
+
     # Create nodes for all active points at each story (Z is already resolved in story_graph)
     for sname, pts in story["active_points"].items():
         idx = story_index[sname]
+        story_count = 0
         for p in pts:
             pid, x, y, z = p["id"], p["x"], p["y"], p["z"]
             tag = node_tag_grid(pid, idx)
             if tag not in created:
                 node(tag, x, y, z)
                 created.add(tag)
+                story_count += 1
+        nodes_by_story[sname] = story_count
+
+    # DIAGNOSTIC OUTPUT
+    print(f"[define_nodes] Created {len(created)} nodes from {story_path}")
+    z_coords = []
+    for sname, pts in story["active_points"].items():
+        for p in pts:
+            z_coords.append(p["z"])
+    if z_coords:
+        print(f"[define_nodes] Z range: [{min(z_coords):.3f}, {max(z_coords):.3f}]")
+        below_10 = sum(1 for z in z_coords if z < 10.0)
+        print(f"[define_nodes] Points below z=10.00: {below_10}")
+    # Show nodes per story for lower stories
+    for sname in ["00_CimS1_m150", "Base"]:
+        if sname in nodes_by_story:
+            print(f"[define_nodes]   {sname}: {nodes_by_story[sname]} nodes")
 
     return created

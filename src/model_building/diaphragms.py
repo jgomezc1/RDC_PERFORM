@@ -185,7 +185,9 @@ def define_rigid_diaphragms(
     supports_path: str = os.path.join(OUT_DIR, "supports.json"),
 ) -> List[Tuple[str, int, List[int]]]:
     """Identify and create rigid diaphragms per story (single group per story)."""
-    _ensure_ops_model()
+    # NOTE: Do NOT call _ensure_ops_model() here! It wipes the domain and deletes all existing nodes.
+    # The model should already be initialized by the caller (MODEL_translator.py)
+    # _ensure_ops_model()  # REMOVED - this was deleting all nodes!
 
     # Inputs
     try:
