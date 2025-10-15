@@ -78,11 +78,12 @@ streamlit run model_viewer_APP.py
 
 ### Generated Artifacts
 - `out/story_graph.json` — Stories, elevations, grid points
-- `out/nodes.json` — All node definitions including intermediate nodes
+- `out/nodes.json` — All node definitions (grid nodes + diaphragm masters)
 - `out/supports.json` — Boundary conditions
 - `out/diaphragms.json` — Rigid diaphragm constraints
-- `out/columns.json` — Column elements with segment classification
-- `out/beams.json` — Beam elements with segment classification
+- `out/springs.json` — Spring support elements (if present)
+- `out/columns.json` — Column elements (one per ETABS line)
+- `out/beams.json` — Beam elements (one per ETABS line)
 - `out/explicit_model.py` — Complete OpenSees model
 
 ### Verification Reports
@@ -92,15 +93,18 @@ streamlit run model_viewer_APP.py
 
 ## Troubleshooting Common Issues
 
-### Missing Intermediate Nodes
+### Missing Nodes
 If you see errors about missing nodes, ensure proper execution order:
 ```bash
-# Always run complete pipeline to ensure node registration
+# Always run complete pipeline to ensure all nodes are created
 python run_pipeline.py
 ```
 
-### Rigid End Zone Issues
-The system automatically handles ETABS rigid end zones through 3-segment splitting. Check `beams.json`/`columns.json` for the `segment` field values: `"rigid_i"`, `"deformable"`, `"rigid_j"`.
+### Rigid End Zone and Offset Handling
+The system automatically handles ETABS rigid end zones (`LENGTHOFFI/J`) and nodal offsets (`OFFSETX/Y/Z`) using OpenSees `-jntOffset` in `geomTransf`. Check `beams.json`/`columns.json` for:
+- `has_joint_offsets`: Boolean flag indicating if `-jntOffset` was used
+- `joint_offset_i` / `joint_offset_j`: Calculated 3D offset vectors
+- `length_off_i` / `length_off_j`: Original ETABS rigid end lengths (preserved)
 
-### Nonlinear Override Problems
-Ensure rigid segments are excluded from nonlinear overrides. The system should automatically filter based on segment classification.
+### Element-to-Line Correspondence
+Each ETABS beam/column line produces exactly **one** OpenSees element. There is no element splitting or intermediate node creation for offsets.

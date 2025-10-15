@@ -388,6 +388,11 @@ def _emit_columns(lines: List[str], cols_json: Dict[str, Any],
         joint_offset_i = c.get("joint_offset_i")
         joint_offset_j = c.get("joint_offset_j")
 
+        # Extract end releases from JSON
+        relI = _to_int(c.get("relI", 0))
+        relJ = _to_int(c.get("relJ", 0))
+        has_releases = (relI != 0 or relJ != 0)
+
         # Use 'line' from simplified columns.json (fallback to 'parent_line' for backward compatibility)
         line_name = str(c.get("line") or c.get("parent_line") or "?")
         seg = str(c.get("segment") or "").lower()
@@ -408,8 +413,13 @@ def _emit_columns(lines: List[str], cols_json: Dict[str, Any],
             counters["nl_columns"] += 1
         else:
             _emit_geom_if_needed(lines, tr, "COLUMN", tr_emitted, joint_offset_i, joint_offset_j)
-            lines.append(f"    element('elasticBeamColumn', {tag}, {i_node}, {j_node}, "
-                         f"{A:.9g}, {E:.9g}, {G:.9g}, {J:.9g}, {Iy:.9g}, {Iz:.9g}, {tr})")
+            if has_releases:
+                lines.append(f"    element('elasticBeamColumn', {tag}, {i_node}, {j_node}, "
+                             f"{A:.9g}, {E:.9g}, {G:.9g}, {J:.9g}, {Iy:.9g}, {Iz:.9g}, {tr}, "
+                             f"'-release', {relI}, {relJ})")
+            else:
+                lines.append(f"    element('elasticBeamColumn', {tag}, {i_node}, {j_node}, "
+                             f"{A:.9g}, {E:.9g}, {G:.9g}, {J:.9g}, {Iy:.9g}, {Iz:.9g}, {tr})")
             counters["el_columns"] += 1
     lines.append(f"    # [columns] Created {len(cols)} columns.")
     lines.append("")
@@ -435,6 +445,11 @@ def _emit_beams(lines: List[str], beams_json: Dict[str, Any],
         joint_offset_i = b.get("joint_offset_i")
         joint_offset_j = b.get("joint_offset_j")
 
+        # Extract end releases from JSON
+        relI = _to_int(b.get("relI", 0))
+        relJ = _to_int(b.get("relJ", 0))
+        has_releases = (relI != 0 or relJ != 0)
+
         picked = ov.find("BEAM", tag, line_name)
         if picked:
             hs, tgt = picked
@@ -446,8 +461,13 @@ def _emit_beams(lines: List[str], beams_json: Dict[str, Any],
             counters["nl_beams"] += 1
         else:
             _emit_geom_if_needed(lines, tr, "BEAM", tr_emitted, joint_offset_i, joint_offset_j)
-            lines.append(f"    element('elasticBeamColumn', {tag}, {i_node}, {j_node}, "
-                         f"{A:.9g}, {E:.9g}, {G:.9g}, {J:.9g}, {Iy:.9g}, {Iz:.9g}, {tr})")
+            if has_releases:
+                lines.append(f"    element('elasticBeamColumn', {tag}, {i_node}, {j_node}, "
+                             f"{A:.9g}, {E:.9g}, {G:.9g}, {J:.9g}, {Iy:.9g}, {Iz:.9g}, {tr}, "
+                             f"'-release', {relI}, {relJ})")
+            else:
+                lines.append(f"    element('elasticBeamColumn', {tag}, {i_node}, {j_node}, "
+                             f"{A:.9g}, {E:.9g}, {G:.9g}, {J:.9g}, {Iy:.9g}, {Iz:.9g}, {tr})")
             counters["el_beams"] += 1
     lines.append(f"    # [beams] Created {len(bs)} beams.")
     lines.append("")

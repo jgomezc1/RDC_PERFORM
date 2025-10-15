@@ -35,6 +35,14 @@ except Exception:
         s = f"{kind}|{name}|{story_index}".encode("utf-8")
         return int.from_bytes(hashlib.md5(s).digest()[:4], "big") & 0x7FFFFF
 
+# Import release parser
+try:
+    from src.utilities.release_utils import parse_etabs_release  # type: ignore
+except Exception:
+    # Fallback if release_utils not available
+    def parse_etabs_release(release_str: str):  # type: ignore
+        return (0, 0, {"warnings": ["release_utils not available"]})
+
 # Rigid end scale (A, Iy, Iz, J are multiplied by this for rigid segments)
 try:
     from config import RIGID_END_SCALE  # type: ignore
@@ -405,6 +413,10 @@ def define_beams(
                 pI, pJ, LoffI, LoffJ, offsets_i, offsets_j
             )
 
+            # Parse end releases if present
+            release_str = ln.get("release", "")
+            relI, relJ, release_meta = parse_etabs_release(release_str) if release_str else (0, 0, {})
+
             # Create single element connecting directly between grid nodes
             etag = element_tag("BEAM", line_name, int(sidx))
             transf_tag = 1000000000 + etag  # avoid collisions with columns (unchanged)
@@ -416,7 +428,11 @@ def define_beams(
             else:
                 ops.geomTransf('Linear', transf_tag, 0, 0, 1)  # no offsets
 
-            ops.element('elasticBeamColumn', etag, nI, nJ, A_beam, E_beam, G_beam, J_beam, Iy_beam, Iz_beam, transf_tag)
+            # Create element with or without releases
+            if relI != 0 or relJ != 0:
+                ops.element('elasticBeamColumn', etag, nI, nJ, A_beam, E_beam, G_beam, J_beam, Iy_beam, Iz_beam, transf_tag, '-release', relI, relJ)
+            else:
+                ops.element('elasticBeamColumn', etag, nI, nJ, A_beam, E_beam, G_beam, J_beam, Iy_beam, Iz_beam, transf_tag)
             created.append(etag)
 
             emitted.append({
@@ -431,7 +447,11 @@ def define_beams(
                 "length_off_i": LoffI, "length_off_j": LoffJ,
                 "offsets_i": offsets_i, "offsets_j": offsets_j,  # lateral offsets from ETABS
                 "joint_offset_i": list(dI), "joint_offset_j": list(dJ),  # calculated joint offsets
-                "has_joint_offsets": any(abs(x) > 1e-12 for x in (*dI, *dJ))  # flag for verification
+                "has_joint_offsets": any(abs(x) > 1e-12 for x in (*dI, *dJ)),  # flag for verification
+                "release": release_str if release_str else None,  # ETABS release string
+                "relI": relI, "relJ": relJ,  # OpenSees release codes
+                "has_releases": (relI != 0 or relJ != 0),  # flag for visualization
+                "release_warnings": release_meta.get("warnings", []) if release_str else []
             })
 
     if skips:

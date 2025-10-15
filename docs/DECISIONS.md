@@ -1,1 +1,1 @@
-- ADR-0002: Rigid end zones modeled as 3 segments with inflated properties
+- ADR-0002: Rigid end zones handled via OpenSees geomTransf -jntOffset (superseded 3-segment approach)

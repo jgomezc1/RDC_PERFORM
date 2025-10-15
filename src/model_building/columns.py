@@ -51,6 +51,14 @@ except Exception:
         s = f"{kind}|{name}|{story_index}".encode("utf-8")
         return int.from_bytes(hashlib.md5(s).digest()[:4], "big") & 0x7FFFFFFF
 
+# Import release parser
+try:
+    from src.utilities.release_utils import parse_etabs_release  # type: ignore
+except Exception:
+    # Fallback if release_utils not available
+    def parse_etabs_release(release_str: str):  # type: ignore
+        return (0, 0, {"warnings": ["release_utils not available"]})
+
 # Removed rigid end splitting - rigid_end_utils no longer used
 
 
@@ -526,6 +534,10 @@ def define_columns(
                 pI, pJ, LoffI, LoffJ, offsets_i, offsets_j
             )
 
+            # Parse end releases if present
+            release_str = ln.get("release", "")
+            relI, relJ, release_meta = parse_etabs_release(release_str) if release_str else (0, 0, {})
+
             # Get section-specific properties from ETABS data
             section_name = str(ln.get("section", ""))
             props = _get_column_section_properties(section_name, _raw)
@@ -548,7 +560,11 @@ def define_columns(
             else:
                 ops.geomTransf('Linear', transf_tag, 1, 0, 0)  # no offsets
 
-            ops.element('elasticBeamColumn', etag, nI, nJ, A_col, E_col, G_col, J_col, Iy_col, Iz_col, transf_tag)
+            # Create element with or without releases
+            if relI != 0 or relJ != 0:
+                ops.element('elasticBeamColumn', etag, nI, nJ, A_col, E_col, G_col, J_col, Iy_col, Iz_col, transf_tag, '-release', relI, relJ)
+            else:
+                ops.element('elasticBeamColumn', etag, nI, nJ, A_col, E_col, G_col, J_col, Iy_col, Iz_col, transf_tag)
             created.append(etag)
 
             emitted.append({
@@ -563,7 +579,11 @@ def define_columns(
                 "length_off_i": LoffI, "length_off_j": LoffJ,
                 "offsets_i": offsets_i, "offsets_j": offsets_j,  # lateral offsets from ETABS
                 "joint_offset_i": list(dI), "joint_offset_j": list(dJ),  # calculated joint offsets
-                "has_joint_offsets": any(abs(x) > 1e-12 for x in (*dI, *dJ))  # flag for verification
+                "has_joint_offsets": any(abs(x) > 1e-12 for x in (*dI, *dJ)),  # flag for verification
+                "release": release_str if release_str else None,  # ETABS release string
+                "relI": relI, "relJ": relJ,  # OpenSees release codes
+                "has_releases": (relI != 0 or relJ != 0),  # flag for visualization
+                "release_warnings": release_meta.get("warnings", []) if release_str else []
             })
 
     if skips:

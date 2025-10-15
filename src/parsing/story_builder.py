@@ -150,6 +150,9 @@ def build_story_graph(raw: Dict[str, Any]) -> Dict[str, Any]:
                     per_line[key]["offsets_i"] = la["offsets_i"]
                 if "offsets_j" in la:
                     per_line[key]["offsets_j"] = la["offsets_j"]
+                # Propagate end releases if present
+                if "extra" in la and "RELEASE" in la["extra"]:
+                    per_line[key]["release"] = la["extra"]["RELEASE"]
             else:
                 if la.get("section") is not None:
                     per_line[key]["section"] = la["section"]
@@ -157,6 +160,9 @@ def build_story_graph(raw: Dict[str, Any]) -> Dict[str, Any]:
                 for fld in ("length_off_i", "length_off_j", "offsets_i", "offsets_j"):
                     if fld in la:
                         per_line[key][fld] = la[fld]
+                # Update release info if present
+                if "extra" in la and "RELEASE" in la["extra"]:
+                    per_line[key]["release"] = la["extra"]["RELEASE"]
         active_lines[sname] = list(per_line.values())
 
     return {

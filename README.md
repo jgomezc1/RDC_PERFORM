@@ -7,7 +7,8 @@ This version has the following modeling capabilities:
 * forceBeamColumn elements
 * Nonlinear material properties through section aggregators
 * Rigid Diaphragms
-* Direct element connections (rigid end data preserved for future use)
+* Rigid end zones and offsets (via geomTransf -jntOffset)
+* Spring supports (zeroLength elements)
 
 
 
