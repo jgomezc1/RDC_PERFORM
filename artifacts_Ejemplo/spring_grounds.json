@@ -1,0 +1,196 @@
+{
+  "version": 1,
+  "ground_nodes": [
+    {
+      "tag": 9786007,
+      "x": 68.8,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "structural_node": 786007,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9792007,
+      "x": 68.8,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "structural_node": 792007,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9041007,
+      "x": 61.0,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "structural_node": 41007,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9015007,
+      "x": 57.25,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "structural_node": 15007,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 10384007,
+      "x": 65.2,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "structural_node": 1384007,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9020008,
+      "x": 61.0,
+      "y": 11.0,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "structural_node": 20008,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9659008,
+      "x": 68.8,
+      "y": 11.0,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "structural_node": 659008,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9036009,
+      "x": 45.55,
+      "y": 20.75,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 36009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9795009,
+      "x": 53.3,
+      "y": 20.75,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 795009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9034009,
+      "x": 45.55,
+      "y": 27.45,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 34009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9827009,
+      "x": 53.05,
+      "y": 27.45,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 827009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9791009,
+      "x": 53.3,
+      "y": 11.0,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 791009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9015009,
+      "x": 57.25,
+      "y": 27.45,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 15009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 10384009,
+      "x": 65.2,
+      "y": 27.45,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 1384009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9792009,
+      "x": 68.8,
+      "y": 27.45,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 792009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9041009,
+      "x": 61.0,
+      "y": 20.75,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 41009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9786009,
+      "x": 68.8,
+      "y": 20.75,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 786009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9020009,
+      "x": 61.0,
+      "y": 11.0,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 20009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9659009,
+      "x": 68.8,
+      "y": 11.0,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 659009,
+      "kind": "spring_ground"
+    }
+  ],
+  "count": 19
+}

@@ -1,0 +1,109 @@
+================================================================================
+DIAGNOSTIC: Modal Analysis Failure in Ejemplo.e2k
+================================================================================
+
+❌ OpenSeesPy not available - can only check artifacts
+
+================================================================================
+STEP 1: Comparing Artifacts
+================================================================================
+
+Ejemplo vs EjemploNew:
+  ✓ nodes.json          : IDENTICAL
+  ✓ beams.json          : IDENTICAL
+  ✓ columns.json        : IDENTICAL
+  ✓ supports.json       : IDENTICAL
+  ✓ diaphragms.json     : IDENTICAL
+  ✓ springs.json        : IDENTICAL
+
+⚠️  CRITICAL: Both models produce IDENTICAL artifacts!
+    → The problem is NOT in the structural model itself
+    → Look for issues in analysis setup, solver, or runtime state
+
+================================================================================
+STEP 2: Model Statistics
+================================================================================
+
+Ejemplo (FAILING):
+  Nodes: 737
+  Supports: 37 nodes with boundary conditions
+  Springs: 19 elastic foundations
+  Beams: 529
+  Columns: 85
+  Diaphragms: 9
+  Total DOFs: 4422 = 737 nodes × 6 DOF/node
+  Elements with releases: 220
+  Constraint breakdown:
+    - ETABS restraints: 30
+    - Spring grounds: 7
+    - Diaphragm constraints: 691
+
+EjemploNew (WORKING):
+  Nodes: 737
+  Supports: 37 nodes with boundary conditions
+  Springs: 19 elastic foundations
+  Beams: 529
+  Columns: 85
+  Diaphragms: 9
+  Total DOFs: 4422 = 737 nodes × 6 DOF/node
+  Elements with releases: 220
+  Constraint breakdown:
+    - ETABS restraints: 30
+    - Spring grounds: 7
+    - Diaphragm constraints: 691
+
+================================================================================
+STEP 3: Checking for Known Issues
+================================================================================
+
+⚠️  DOF 702 Error Analysis:
+  Error: 'ProfileSPDLinDirectSolver::solve() - aii < minDiagTol (i, aii): (702, -3.90579e-28)'
+  → This indicates near-zero diagonal in stiffness matrix at DOF index 702
+  → DOF 702 ÷ 6 ≈ Node index 117
+
+  Potential problem node (index 117):
+    Tag: 233001
+    Location: (50.05, 27.45, 13.30)
+
+================================================================================
+STEP 4: Diagnostic Recommendations
+================================================================================
+
+🔍 Since artifacts are IDENTICAL, the issue is in ANALYSIS EXECUTION:
+
+1. Check analysis script setup:
+   ❌ NOT calling ops.wipe() before build_model()
+   ❌ Different solver settings between tests
+   ❌ Stale model from previous run
+   ❌ Different OpenSeesPy versions
+
+2. REQUIRED analysis setup:
+   ```python
+   import openseespy.opensees as ops
+   
+   # CRITICAL: Wipe everything first!
+   ops.wipe()
+   
+   # Build your model
+   from out.explicit_model import build_model
+   build_model()
+   
+   # Setup analysis
+   ops.wipeAnalysis()
+   ops.system('FullGeneral')  # More robust than ProfileSPD
+   ops.numberer('RCM')
+   ops.constraints('Transformation')  # Required for rigid diaphragms
+   ops.algorithm('Linear')
+   
+   # Try eigen with more robust solver
+   eigenValues = ops.eigen('-fullGenLapack', 5)
+   ```
+
+3. Verify you're using LATEST artifacts:
+   → Both models were just rebuilt (today)
+   → Check timestamps on your explicit_model.py
+   → Ensure you're importing from correct output directory
+
+================================================================================
+END OF DIAGNOSTIC
+================================================================================

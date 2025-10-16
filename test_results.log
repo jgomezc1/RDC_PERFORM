@@ -1,0 +1,46 @@
+Traceback (most recent call last):
+  File "/mnt/c/Users/jgomez/Desktop/opensees/RDC_PERFORM/temp_modal_test.py", line 4, in <module>
+    from explicit_model import build_model
+  File "/mnt/c/Users/jgomez/Desktop/opensees/RDC_PERFORM/out/explicit_model.py", line 3, in <module>
+    from openseespy.opensees import *  # noqa
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'openseespy'
+Traceback (most recent call last):
+  File "/mnt/c/Users/jgomez/Desktop/opensees/RDC_PERFORM/temp_modal_test.py", line 4, in <module>
+    from explicit_model import build_model
+  File "/mnt/c/Users/jgomez/Desktop/opensees/RDC_PERFORM/out/explicit_model.py", line 3, in <module>
+    from openseespy.opensees import *  # noqa
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'openseespy'
+
+================================================================================
+TESTING MODEL: Ejemplo
+================================================================================
+
+✓ Config updated to use models/Ejemplo.e2k
+
+📦 Generating explicit model for Ejemplo...
+✓ Explicit model generated
+
+🧪 Running modal analysis test for Ejemplo...
+
+
+================================================================================
+TESTING MODEL: EjemploNew
+================================================================================
+
+✓ Config updated to use models/EjemploNew.e2k
+
+📦 Generating explicit model for EjemploNew...
+✓ Explicit model generated
+
+🧪 Running modal analysis test for EjemploNew...
+
+
+================================================================================
+SUMMARY
+================================================================================
+
+❌ Ejemplo        : MODAL_FAILED
+❌ EjemploNew     : MODAL_FAILED
+

@@ -12,6 +12,8 @@ Change log:
 - 2025-08-25: Build order updated to define supports BEFORE diaphragms so that
   diaphragms.py can read out/supports.json and skip stories with supports.
 - 2025-08-25: Emit nodes.json after diaphragms creation (includes grid + masters).
+- 2025-10-16: Re-emit nodes.json after columns and beams to include COORDINATES
+  fallback nodes (intersection nodes created by ETABS mesh partitioning).
 """
 from __future__ import annotations
 
@@ -42,8 +44,10 @@ def build_model(stage: str = "all") -> None:
       3) Spring supports (zeroLength elems)
       4) Rigid diaphragms (uses supports)   -> out/diaphragms.json
       5) Emit nodes.json (grid + masters)   -> out/nodes.json
-      6) Columns                            -> out/columns.json
-      7) Beams (if stage in {'all','beams'})-> out/beams.json
+      6) Columns                            -> out/columns.json + fallback_nodes.json
+      7) Re-emit nodes.json                 -> out/nodes.json (includes column fallback nodes)
+      8) Beams (if stage in {'all','beams'})-> out/beams.json + fallback_nodes.json
+      9) Re-emit nodes.json                 -> out/nodes.json (includes all fallback nodes)
     """
     wipe()
     # 3D, 6-DOF nodes (UX, UY, UZ, RX, RY, RZ)
@@ -87,11 +91,19 @@ def build_model(stage: str = "all") -> None:
     # 6) Elements
     define_columns()
 
+    # Re-emit nodes.json to include fallback nodes from columns
+    if stage.lower() in ("columns", "all", "beams"):
+        print("[MODEL_translator] Re-emitting nodes.json to include column fallback nodes...")
+        emit_nodes_json(_DEFAULT_OUT)
+
     # 7) Beams if requested/all
     if stage.lower() in ("all", "beams"):
         define_beams()
+        # Re-emit nodes.json to include fallback nodes from beams
+        print("[MODEL_translator] Re-emitting nodes.json to include beam fallback nodes...")
+        emit_nodes_json(_DEFAULT_OUT)
 
-    print(f"[MODEL] Model built with stage={stage} (nodes.json emitted).")
+    print(f"[MODEL] Model built with stage={stage} (nodes.json emitted with fallback nodes).")
 
 
 if __name__ == "__main__":

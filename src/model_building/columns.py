@@ -182,17 +182,60 @@ def _point_exists(pid: str, sname: str, act_pt_map: Dict[Tuple[str, str], Tuple[
 
 def _ensure_node_for(
     pid: str, sname: str, sidx: int, act_pt_map: Dict[Tuple[str, str], Tuple[float, float, float]],
-    existing_nodes: Set[int]
+    existing_nodes: Set[int],
+    point_coords_fallback: Optional[Dict[str, Tuple[float, float]]] = None,
+    story_elevations: Optional[Dict[str, float]] = None,
+    fallback_nodes_list: Optional[List[Dict[str, Any]]] = None,
 ) -> Optional[int]:
+    """
+    Ensure a node for (pid, sname) exists; create it if missing using active_points coords.
+
+    Falls back to POINT COORDINATES + story elevation if point not in POINT ASSIGNS.
+    This handles intersection nodes created by ETABS mesh partitioning.
+
+    Returns the node tag, or None if the point cannot be created.
+    """
+    # Priority 1: Try active_points map (from POINT ASSIGNS)
     key = (str(pid), sname)
-    if key not in act_pt_map:
-        return None
-    tag = int(pid) * 1000 + int(sidx)
-    if tag not in existing_nodes:
-        x, y, z = act_pt_map[key]
-        ops.node(tag, x, y, z)
-        existing_nodes.add(tag)
-    return tag
+    if key in act_pt_map:
+        tag = int(pid) * 1000 + int(sidx)
+        if tag not in existing_nodes:
+            x, y, z = act_pt_map[key]
+            ops.node(tag, x, y, z)
+            existing_nodes.add(tag)
+        return tag
+
+    # Priority 2: Fallback to POINT COORDINATES + story elevation
+    if point_coords_fallback and pid in point_coords_fallback:
+        if story_elevations and sname in story_elevations:
+            # Get X, Y from COORDINATES section
+            x, y = point_coords_fallback[pid]
+            # Get Z from story elevation
+            z = story_elevations[sname]
+
+            # Create node
+            tag = int(pid) * 1000 + int(sidx)
+            if tag not in existing_nodes:
+                ops.node(tag, x, y, z)
+                existing_nodes.add(tag)
+                print(f"  [COORDINATES FALLBACK] Node {tag} for point {pid} at story {sname}: ({x:.2f}, {y:.2f}, {z:.2f})")
+
+                # Track fallback node for persistence
+                if fallback_nodes_list is not None:
+                    fallback_nodes_list.append({
+                        "tag": tag,
+                        "x": x,
+                        "y": y,
+                        "z": z,
+                        "story": sname,
+                        "story_index": sidx,
+                        "kind": "fallback_intersection",
+                        "source_point_id": pid
+                    })
+            return tag
+
+    # Point doesn't exist anywhere
+    return None
 
 
 def _dedupe_last_section_wins(lines_for_story: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
@@ -379,9 +422,22 @@ def define_columns(
     story_index = {name: i for i, name in enumerate(story_names)}
     act_pt_map = _active_points_map(story)
 
+    # Load POINT COORDINATES for fallback (handles ETABS mesh intersection nodes)
+    point_coords_fallback: Dict[str, Tuple[float, float]] = {}
+    raw_points = _raw.get("points", {})
+    for pid, pdata in raw_points.items():
+        point_coords_fallback[pid] = (pdata["x"], pdata["y"])
+
+    # Build story elevations map for fallback Z coordinates
+    # story_elev dict maps story_name -> elevation
+    story_elevations: Dict[str, float] = {
+        k: float(v) for k, v in story.get("story_elev", {}).items()
+    }
+
     created: List[int] = []
     skips: List[str] = []
     emitted: List[Dict[str, Any]] = []
+    fallback_nodes_list: List[Dict[str, Any]] = []  # Track nodes created via COORDINATES fallback
 
     try:
         existing_nodes: Set[int] = set(ops.getNodeTags())
@@ -440,8 +496,10 @@ def define_columns(
                     continue
 
                 # Create nodes at their respective stories
-                node_i = _ensure_node_for(pid_i, story_i, sidx_i, act_pt_map, existing_nodes)
-                node_j = _ensure_node_for(pid_j, story_j, sidx_j, act_pt_map, existing_nodes)
+                node_i = _ensure_node_for(pid_i, story_i, sidx_i, act_pt_map, existing_nodes,
+                                         point_coords_fallback, story_elevations, fallback_nodes_list)
+                node_j = _ensure_node_for(pid_j, story_j, sidx_j, act_pt_map, existing_nodes,
+                                         point_coords_fallback, story_elevations, fallback_nodes_list)
 
                 if node_i is None or node_j is None:
                     skips.append(f"{ln.get('name','?')} @ '{sname}' skipped — Method 2 column nodes missing")
@@ -501,8 +559,10 @@ def define_columns(
                     continue
 
                 # Build (nTop, nBot) and their coords
-                nTop = _ensure_node_for(pid_i, sname, sidx, act_pt_map, existing_nodes)   # upper
-                nBot = _ensure_node_for(pid_j, sK, k_found, act_pt_map, existing_nodes)   # lower
+                nTop = _ensure_node_for(pid_i, sname, sidx, act_pt_map, existing_nodes,
+                                       point_coords_fallback, story_elevations, fallback_nodes_list)   # upper
+                nBot = _ensure_node_for(pid_j, sK, k_found, act_pt_map, existing_nodes,
+                                       point_coords_fallback, story_elevations, fallback_nodes_list)   # lower
                 if nTop is None or nBot is None:
                     skips.append(f"{ln.get('name','?')} @ '{sname}' skipped — Method 1 column: endpoint nodes missing")
                     continue
@@ -599,5 +659,24 @@ def define_columns(
         print(f"[columns] Wrote {OUT_DIR}/columns.json")
     except Exception as e:
         print(f"[columns] WARN: failed to write columns.json: {e}")
+
+    # Write fallback nodes for merging into nodes.json
+    # Merge with existing fallback nodes (in case other builders ran first)
+    if fallback_nodes_list:
+        try:
+            fallback_path = os.path.join(OUT_DIR, "fallback_nodes.json")
+            existing_fallback = {}
+            if os.path.exists(fallback_path):
+                with open(fallback_path, "r", encoding="utf-8") as f:
+                    existing_fallback = json.load(f)
+
+            # Merge: combine existing and new fallback nodes
+            all_fallback = existing_fallback.get("nodes", []) + fallback_nodes_list
+
+            with open(fallback_path, "w", encoding="utf-8") as f:
+                json.dump({"nodes": all_fallback, "counts": {"fallback": len(all_fallback)}, "version": 1}, f, indent=2)
+            print(f"[columns] Wrote {len(fallback_nodes_list)} fallback nodes (total {len(all_fallback)}) to {OUT_DIR}/fallback_nodes.json")
+        except Exception as e:
+            print(f"[columns] WARN: failed to write fallback_nodes.json: {e}")
 
     return created

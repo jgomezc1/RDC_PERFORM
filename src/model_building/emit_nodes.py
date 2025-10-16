@@ -350,7 +350,7 @@ def register_intermediate_node(
 def emit_nodes_json(out_dir: str = "out") -> str:
     """
     Build and save nodes.json to 'out_dir'. Returns the output path.
-    Merges grid + master + spring ground nodes.
+    Merges grid + master + spring ground + fallback nodes.
     """
     sg = _load_json(os.path.join(out_dir, "story_graph.json"))
     dg = _load_json(os.path.join(out_dir, "diaphragms.json"))
@@ -359,11 +359,17 @@ def emit_nodes_json(out_dir: str = "out") -> str:
     master_nodes = _master_nodes_from_diaphragms(dg, sg, grid_nodes)
     spring_ground_nodes = _spring_ground_nodes_from_artifact(out_dir)
 
+    # Load fallback nodes (created during beam/column building via COORDINATES fallback)
+    fallback_data = _load_json(os.path.join(out_dir, "fallback_nodes.json"))
+    fallback_nodes = fallback_data.get("nodes", [])
+
     all_nodes: Dict[int, Dict[str, Any]] = {int(n["tag"]): n for n in grid_nodes}
     for m in master_nodes:
         all_nodes[int(m["tag"])] = m  # overwrite if collision (shouldn't happen)
     for g in spring_ground_nodes:
         all_nodes[int(g["tag"])] = g  # add spring ground nodes
+    for f in fallback_nodes:
+        all_nodes[int(f["tag"])] = f  # add fallback intersection nodes
 
     nodes_list = [all_nodes[k] for k in sorted(all_nodes.keys())]
     out = {
@@ -373,6 +379,7 @@ def emit_nodes_json(out_dir: str = "out") -> str:
             "grid": len(grid_nodes),
             "master": len(master_nodes),
             "spring_ground": len(spring_ground_nodes),
+            "fallback": len(fallback_nodes),
         },
         "version": 1,
     }
@@ -382,7 +389,8 @@ def emit_nodes_json(out_dir: str = "out") -> str:
     print(
         "[ARTIFACTS] Wrote nodes.json with "
         f"{out['counts']['total']} nodes ({out['counts']['grid']} grid, "
-        f"{out['counts']['master']} masters, {out['counts']['spring_ground']} spring grounds) at: {out_path}"
+        f"{out['counts']['master']} masters, {out['counts']['spring_ground']} spring grounds, "
+        f"{out['counts']['fallback']} fallback) at: {out_path}"
     )
     return out_path
 

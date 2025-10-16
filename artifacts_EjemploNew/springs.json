@@ -1,0 +1,550 @@
+{
+  "version": 2,
+  "ground_nodes": [
+    {
+      "tag": 9786007,
+      "x": 68.8,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "structural_node": 786007,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9792007,
+      "x": 68.8,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "structural_node": 792007,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9041007,
+      "x": 61.0,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "structural_node": 41007,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9015007,
+      "x": 57.25,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "structural_node": 15007,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 10384007,
+      "x": 65.2,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "structural_node": 1384007,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9020008,
+      "x": 61.0,
+      "y": 11.0,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "structural_node": 20008,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9659008,
+      "x": 68.8,
+      "y": 11.0,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "structural_node": 659008,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9036009,
+      "x": 45.55,
+      "y": 20.75,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 36009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9795009,
+      "x": 53.3,
+      "y": 20.75,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 795009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9034009,
+      "x": 45.55,
+      "y": 27.45,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 34009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9827009,
+      "x": 53.05,
+      "y": 27.45,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 827009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9791009,
+      "x": 53.3,
+      "y": 11.0,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 791009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9015009,
+      "x": 57.25,
+      "y": 27.45,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 15009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 10384009,
+      "x": 65.2,
+      "y": 27.45,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 1384009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9792009,
+      "x": 68.8,
+      "y": 27.45,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 792009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9041009,
+      "x": 61.0,
+      "y": 20.75,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 41009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9786009,
+      "x": 68.8,
+      "y": 20.75,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 786009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9020009,
+      "x": 61.0,
+      "y": 11.0,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 20009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9659009,
+      "x": 68.8,
+      "y": 11.0,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 659009,
+      "kind": "spring_ground"
+    }
+  ],
+  "materials": [
+    {
+      "tag": 900000,
+      "type": "Elastic",
+      "E": 316500.0,
+      "spring_property": "RES_00_75cm",
+      "dof": "ux"
+    },
+    {
+      "tag": 900001,
+      "type": "Elastic",
+      "E": 316500.0,
+      "spring_property": "RES_00_75cm",
+      "dof": "uy"
+    },
+    {
+      "tag": 900002,
+      "type": "Elastic",
+      "E": 211000.0,
+      "spring_property": "RES_00",
+      "dof": "ux"
+    },
+    {
+      "tag": 900003,
+      "type": "Elastic",
+      "E": 211000.0,
+      "spring_property": "RES_00",
+      "dof": "uy"
+    },
+    {
+      "tag": 900004,
+      "type": "Elastic",
+      "E": 1189900.0,
+      "spring_property": "RES_03_150cm",
+      "dof": "ux"
+    },
+    {
+      "tag": 900005,
+      "type": "Elastic",
+      "E": 1189600.0,
+      "spring_property": "RES_03_150cm",
+      "dof": "uy"
+    }
+  ],
+  "elements": [
+    {
+      "tag": 8786007,
+      "type": "zeroLength",
+      "ground_node": 9786007,
+      "structural_node": 786007,
+      "materials": [
+        900000,
+        900001
+      ],
+      "directions": [
+        1,
+        2
+      ],
+      "spring_property": "RES_00_75cm",
+      "story": "02_P2"
+    },
+    {
+      "tag": 8792007,
+      "type": "zeroLength",
+      "ground_node": 9792007,
+      "structural_node": 792007,
+      "materials": [
+        900000,
+        900001
+      ],
+      "directions": [
+        1,
+        2
+      ],
+      "spring_property": "RES_00_75cm",
+      "story": "02_P2"
+    },
+    {
+      "tag": 8041007,
+      "type": "zeroLength",
+      "ground_node": 9041007,
+      "structural_node": 41007,
+      "materials": [
+        900000,
+        900001
+      ],
+      "directions": [
+        1,
+        2
+      ],
+      "spring_property": "RES_00_75cm",
+      "story": "02_P2"
+    },
+    {
+      "tag": 8015007,
+      "type": "zeroLength",
+      "ground_node": 9015007,
+      "structural_node": 15007,
+      "materials": [
+        900000,
+        900001
+      ],
+      "directions": [
+        1,
+        2
+      ],
+      "spring_property": "RES_00_75cm",
+      "story": "02_P2"
+    },
+    {
+      "tag": 9384007,
+      "type": "zeroLength",
+      "ground_node": 10384007,
+      "structural_node": 1384007,
+      "materials": [
+        900000,
+        900001
+      ],
+      "directions": [
+        1,
+        2
+      ],
+      "spring_property": "RES_00_75cm",
+      "story": "02_P2"
+    },
+    {
+      "tag": 8020008,
+      "type": "zeroLength",
+      "ground_node": 9020008,
+      "structural_node": 20008,
+      "materials": [
+        900002,
+        900003
+      ],
+      "directions": [
+        1,
+        2
+      ],
+      "spring_property": "RES_00",
+      "story": "01_P2_m170"
+    },
+    {
+      "tag": 8659008,
+      "type": "zeroLength",
+      "ground_node": 9659008,
+      "structural_node": 659008,
+      "materials": [
+        900002,
+        900003
+      ],
+      "directions": [
+        1,
+        2
+      ],
+      "spring_property": "RES_00",
+      "story": "01_P2_m170"
+    },
+    {
+      "tag": 8036009,
+      "type": "zeroLength",
+      "ground_node": 9036009,
+      "structural_node": 36009,
+      "materials": [
+        900000,
+        900001
+      ],
+      "directions": [
+        1,
+        2
+      ],
+      "spring_property": "RES_00_75cm",
+      "story": "Base"
+    },
+    {
+      "tag": 8795009,
+      "type": "zeroLength",
+      "ground_node": 9795009,
+      "structural_node": 795009,
+      "materials": [
+        900000,
+        900001
+      ],
+      "directions": [
+        1,
+        2
+      ],
+      "spring_property": "RES_00_75cm",
+      "story": "Base"
+    },
+    {
+      "tag": 8034009,
+      "type": "zeroLength",
+      "ground_node": 9034009,
+      "structural_node": 34009,
+      "materials": [
+        900000,
+        900001
+      ],
+      "directions": [
+        1,
+        2
+      ],
+      "spring_property": "RES_00_75cm",
+      "story": "Base"
+    },
+    {
+      "tag": 8827009,
+      "type": "zeroLength",
+      "ground_node": 9827009,
+      "structural_node": 827009,
+      "materials": [
+        900000,
+        900001
+      ],
+      "directions": [
+        1,
+        2
+      ],
+      "spring_property": "RES_00_75cm",
+      "story": "Base"
+    },
+    {
+      "tag": 8791009,
+      "type": "zeroLength",
+      "ground_node": 9791009,
+      "structural_node": 791009,
+      "materials": [
+        900002,
+        900003
+      ],
+      "directions": [
+        1,
+        2
+      ],
+      "spring_property": "RES_00",
+      "story": "Base"
+    },
+    {
+      "tag": 8015009,
+      "type": "zeroLength",
+      "ground_node": 9015009,
+      "structural_node": 15009,
+      "materials": [
+        900004,
+        900005
+      ],
+      "directions": [
+        1,
+        2
+      ],
+      "spring_property": "RES_03_150cm",
+      "story": "Base"
+    },
+    {
+      "tag": 9384009,
+      "type": "zeroLength",
+      "ground_node": 10384009,
+      "structural_node": 1384009,
+      "materials": [
+        900004,
+        900005
+      ],
+      "directions": [
+        1,
+        2
+      ],
+      "spring_property": "RES_03_150cm",
+      "story": "Base"
+    },
+    {
+      "tag": 8792009,
+      "type": "zeroLength",
+      "ground_node": 9792009,
+      "structural_node": 792009,
+      "materials": [
+        900004,
+        900005
+      ],
+      "directions": [
+        1,
+        2
+      ],
+      "spring_property": "RES_03_150cm",
+      "story": "Base"
+    },
+    {
+      "tag": 8041009,
+      "type": "zeroLength",
+      "ground_node": 9041009,
+      "structural_node": 41009,
+      "materials": [
+        900004,
+        900005
+      ],
+      "directions": [
+        1,
+        2
+      ],
+      "spring_property": "RES_03_150cm",
+      "story": "Base"
+    },
+    {
+      "tag": 8786009,
+      "type": "zeroLength",
+      "ground_node": 9786009,
+      "structural_node": 786009,
+      "materials": [
+        900004,
+        900005
+      ],
+      "directions": [
+        1,
+        2
+      ],
+      "spring_property": "RES_03_150cm",
+      "story": "Base"
+    },
+    {
+      "tag": 8020009,
+      "type": "zeroLength",
+      "ground_node": 9020009,
+      "structural_node": 20009,
+      "materials": [
+        900004,
+        900005
+      ],
+      "directions": [
+        1,
+        2
+      ],
+      "spring_property": "RES_03_150cm",
+      "story": "Base"
+    },
+    {
+      "tag": 8659009,
+      "type": "zeroLength",
+      "ground_node": 9659009,
+      "structural_node": 659009,
+      "materials": [
+        900004,
+        900005
+      ],
+      "directions": [
+        1,
+        2
+      ],
+      "spring_property": "RES_03_150cm",
+      "story": "Base"
+    }
+  ],
+  "counts": {
+    "ground_nodes": 19,
+    "materials": 6,
+    "elements": 19
+  }
+}

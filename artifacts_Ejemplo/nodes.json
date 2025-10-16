@@ -1,0 +1,7372 @@
+{
+  "nodes": [
+    {
+      "tag": 12000,
+      "x": 53.09851,
+      "y": 26.15,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "12"
+    },
+    {
+      "tag": 12001,
+      "x": 53.09851,
+      "y": 26.15,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "12"
+    },
+    {
+      "tag": 12003,
+      "x": 53.09851,
+      "y": 26.15,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "12"
+    },
+    {
+      "tag": 12005,
+      "x": 53.09851,
+      "y": 26.15,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "12"
+    },
+    {
+      "tag": 12007,
+      "x": 53.09851,
+      "y": 26.15,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "12"
+    },
+    {
+      "tag": 14000,
+      "x": 53.13769,
+      "y": 25.1,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "14"
+    },
+    {
+      "tag": 14001,
+      "x": 53.13769,
+      "y": 25.1,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "14"
+    },
+    {
+      "tag": 14003,
+      "x": 53.13769,
+      "y": 25.1,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "14"
+    },
+    {
+      "tag": 14005,
+      "x": 53.13769,
+      "y": 25.1,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "14"
+    },
+    {
+      "tag": 14007,
+      "x": 53.13769,
+      "y": 25.1,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "14"
+    },
+    {
+      "tag": 15000,
+      "x": 57.25,
+      "y": 27.45,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "15"
+    },
+    {
+      "tag": 15001,
+      "x": 57.25,
+      "y": 27.45,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "15"
+    },
+    {
+      "tag": 15003,
+      "x": 57.25,
+      "y": 27.45,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "15"
+    },
+    {
+      "tag": 15005,
+      "x": 57.25,
+      "y": 27.45,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "15"
+    },
+    {
+      "tag": 15007,
+      "x": 57.25,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "15"
+    },
+    {
+      "tag": 15009,
+      "x": 57.25,
+      "y": 27.45,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "kind": "grid",
+      "source_point_id": "15"
+    },
+    {
+      "tag": 16000,
+      "x": 53.17686,
+      "y": 24.05,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "16"
+    },
+    {
+      "tag": 16001,
+      "x": 53.17686,
+      "y": 24.05,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "16"
+    },
+    {
+      "tag": 16003,
+      "x": 53.17686,
+      "y": 24.05,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "16"
+    },
+    {
+      "tag": 16005,
+      "x": 53.17686,
+      "y": 24.05,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "16"
+    },
+    {
+      "tag": 16007,
+      "x": 53.17686,
+      "y": 24.05,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "16"
+    },
+    {
+      "tag": 17000,
+      "x": 53.21605,
+      "y": 23.0,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "17"
+    },
+    {
+      "tag": 17001,
+      "x": 53.21605,
+      "y": 23.0,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "17"
+    },
+    {
+      "tag": 17003,
+      "x": 53.21605,
+      "y": 23.0,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "17"
+    },
+    {
+      "tag": 17005,
+      "x": 53.21605,
+      "y": 23.0,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "17"
+    },
+    {
+      "tag": 17007,
+      "x": 53.21605,
+      "y": 23.0,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "17"
+    },
+    {
+      "tag": 18000,
+      "x": 53.25522,
+      "y": 21.95,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "18"
+    },
+    {
+      "tag": 18001,
+      "x": 53.25522,
+      "y": 21.95,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "18"
+    },
+    {
+      "tag": 18003,
+      "x": 53.25522,
+      "y": 21.95,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "18"
+    },
+    {
+      "tag": 18005,
+      "x": 53.25522,
+      "y": 21.95,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "18"
+    },
+    {
+      "tag": 18007,
+      "x": 53.25522,
+      "y": 21.95,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "18"
+    },
+    {
+      "tag": 20000,
+      "x": 61.0,
+      "y": 11.0,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "20"
+    },
+    {
+      "tag": 20002,
+      "x": 61.0,
+      "y": 11.0,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "20"
+    },
+    {
+      "tag": 20004,
+      "x": 61.0,
+      "y": 11.0,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "20"
+    },
+    {
+      "tag": 20006,
+      "x": 61.0,
+      "y": 11.0,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "20"
+    },
+    {
+      "tag": 20008,
+      "x": 61.0,
+      "y": 11.0,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "20"
+    },
+    {
+      "tag": 20009,
+      "x": 61.0,
+      "y": 11.0,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "kind": "grid",
+      "source_point_id": "20"
+    },
+    {
+      "tag": 34000,
+      "x": 45.55,
+      "y": 27.45,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "34"
+    },
+    {
+      "tag": 34001,
+      "x": 45.55,
+      "y": 27.45,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "34"
+    },
+    {
+      "tag": 34003,
+      "x": 45.55,
+      "y": 27.45,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "34"
+    },
+    {
+      "tag": 34005,
+      "x": 45.55,
+      "y": 27.45,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "34"
+    },
+    {
+      "tag": 34007,
+      "x": 45.55,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "34"
+    },
+    {
+      "tag": 34009,
+      "x": 45.55,
+      "y": 27.45,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "kind": "grid",
+      "source_point_id": "34"
+    },
+    {
+      "tag": 36000,
+      "x": 45.55,
+      "y": 20.75,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "36"
+    },
+    {
+      "tag": 36001,
+      "x": 45.55,
+      "y": 20.75,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "36"
+    },
+    {
+      "tag": 36003,
+      "x": 45.55,
+      "y": 20.75,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "36"
+    },
+    {
+      "tag": 36005,
+      "x": 45.55,
+      "y": 20.75,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "36"
+    },
+    {
+      "tag": 36007,
+      "x": 45.55,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "36"
+    },
+    {
+      "tag": 36009,
+      "x": 45.55,
+      "y": 20.75,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "kind": "grid",
+      "source_point_id": "36"
+    },
+    {
+      "tag": 37000,
+      "x": 45.55,
+      "y": 25.1,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "37"
+    },
+    {
+      "tag": 37001,
+      "x": 45.55,
+      "y": 25.1,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "37"
+    },
+    {
+      "tag": 37003,
+      "x": 45.55,
+      "y": 25.1,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "37"
+    },
+    {
+      "tag": 37005,
+      "x": 45.55,
+      "y": 25.1,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "37"
+    },
+    {
+      "tag": 37007,
+      "x": 45.55,
+      "y": 25.1,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "37"
+    },
+    {
+      "tag": 38000,
+      "x": 45.55,
+      "y": 26.15,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "38"
+    },
+    {
+      "tag": 38001,
+      "x": 45.55,
+      "y": 26.15,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "38"
+    },
+    {
+      "tag": 38003,
+      "x": 45.55,
+      "y": 26.15,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "38"
+    },
+    {
+      "tag": 38005,
+      "x": 45.55,
+      "y": 26.15,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "38"
+    },
+    {
+      "tag": 38007,
+      "x": 45.55,
+      "y": 26.15,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "38"
+    },
+    {
+      "tag": 39000,
+      "x": 45.55,
+      "y": 24.05,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "39"
+    },
+    {
+      "tag": 39001,
+      "x": 45.55,
+      "y": 24.05,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "39"
+    },
+    {
+      "tag": 39003,
+      "x": 45.55,
+      "y": 24.05,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "39"
+    },
+    {
+      "tag": 39005,
+      "x": 45.55,
+      "y": 24.05,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "39"
+    },
+    {
+      "tag": 39007,
+      "x": 45.55,
+      "y": 24.05,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "39"
+    },
+    {
+      "tag": 40000,
+      "x": 61.0,
+      "y": 16.175,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "40"
+    },
+    {
+      "tag": 40001,
+      "x": 61.0,
+      "y": 16.175,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "40"
+    },
+    {
+      "tag": 40003,
+      "x": 61.0,
+      "y": 16.175,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "40"
+    },
+    {
+      "tag": 40005,
+      "x": 61.0,
+      "y": 16.175,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "40"
+    },
+    {
+      "tag": 40007,
+      "x": 61.0,
+      "y": 16.175,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "40"
+    },
+    {
+      "tag": 40009,
+      "x": 61.0,
+      "y": 16.175,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "kind": "grid",
+      "source_point_id": "40"
+    },
+    {
+      "tag": 41000,
+      "x": 61.0,
+      "y": 20.75,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "41"
+    },
+    {
+      "tag": 41001,
+      "x": 61.0,
+      "y": 20.75,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "41"
+    },
+    {
+      "tag": 41003,
+      "x": 61.0,
+      "y": 20.75,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "41"
+    },
+    {
+      "tag": 41005,
+      "x": 61.0,
+      "y": 20.75,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "41"
+    },
+    {
+      "tag": 41007,
+      "x": 61.0,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "41"
+    },
+    {
+      "tag": 41009,
+      "x": 61.0,
+      "y": 20.75,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "kind": "grid",
+      "source_point_id": "41"
+    },
+    {
+      "tag": 42000,
+      "x": 61.0,
+      "y": 27.45,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "42"
+    },
+    {
+      "tag": 42001,
+      "x": 61.0,
+      "y": 27.45,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "42"
+    },
+    {
+      "tag": 42003,
+      "x": 61.0,
+      "y": 27.45,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "42"
+    },
+    {
+      "tag": 42005,
+      "x": 61.0,
+      "y": 27.45,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "42"
+    },
+    {
+      "tag": 42007,
+      "x": 61.0,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "42"
+    },
+    {
+      "tag": 44000,
+      "x": 61.0,
+      "y": 25.1,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "44"
+    },
+    {
+      "tag": 44001,
+      "x": 61.0,
+      "y": 25.1,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "44"
+    },
+    {
+      "tag": 44003,
+      "x": 61.0,
+      "y": 25.1,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "44"
+    },
+    {
+      "tag": 44005,
+      "x": 61.0,
+      "y": 25.1,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "44"
+    },
+    {
+      "tag": 44007,
+      "x": 61.0,
+      "y": 25.1,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "44"
+    },
+    {
+      "tag": 56002,
+      "x": 53.3,
+      "y": 15.575,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "56"
+    },
+    {
+      "tag": 56004,
+      "x": 53.3,
+      "y": 15.575,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "56"
+    },
+    {
+      "tag": 56006,
+      "x": 53.3,
+      "y": 15.575,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "56"
+    },
+    {
+      "tag": 56008,
+      "x": 53.3,
+      "y": 15.575,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "56"
+    },
+    {
+      "tag": 56009,
+      "x": 53.3,
+      "y": 15.575,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "kind": "grid",
+      "source_point_id": "56"
+    },
+    {
+      "tag": 57002,
+      "x": 61.0,
+      "y": 15.575,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "57"
+    },
+    {
+      "tag": 57004,
+      "x": 61.0,
+      "y": 15.575,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "57"
+    },
+    {
+      "tag": 57006,
+      "x": 61.0,
+      "y": 15.575,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "57"
+    },
+    {
+      "tag": 57008,
+      "x": 61.0,
+      "y": 15.575,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "57"
+    },
+    {
+      "tag": 57009,
+      "x": 61.0,
+      "y": 15.575,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "kind": "grid",
+      "source_point_id": "57"
+    },
+    {
+      "tag": 59002,
+      "x": 68.8,
+      "y": 15.575,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "59"
+    },
+    {
+      "tag": 59004,
+      "x": 68.8,
+      "y": 15.575,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "59"
+    },
+    {
+      "tag": 59006,
+      "x": 68.8,
+      "y": 15.575,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "59"
+    },
+    {
+      "tag": 59008,
+      "x": 68.8,
+      "y": 15.575,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "59"
+    },
+    {
+      "tag": 59009,
+      "x": 68.8,
+      "y": 15.575,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "kind": "grid",
+      "source_point_id": "59"
+    },
+    {
+      "tag": 221000,
+      "x": 46.9,
+      "y": 27.45,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "221"
+    },
+    {
+      "tag": 221001,
+      "x": 46.9,
+      "y": 27.45,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "221"
+    },
+    {
+      "tag": 221003,
+      "x": 46.9,
+      "y": 27.45,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "221"
+    },
+    {
+      "tag": 221005,
+      "x": 46.9,
+      "y": 27.45,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "221"
+    },
+    {
+      "tag": 221007,
+      "x": 46.9,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "221"
+    },
+    {
+      "tag": 225000,
+      "x": 47.95,
+      "y": 27.45,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "225"
+    },
+    {
+      "tag": 225001,
+      "x": 47.95,
+      "y": 27.45,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "225"
+    },
+    {
+      "tag": 225003,
+      "x": 47.95,
+      "y": 27.45,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "225"
+    },
+    {
+      "tag": 225005,
+      "x": 47.95,
+      "y": 27.45,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "225"
+    },
+    {
+      "tag": 225007,
+      "x": 47.95,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "225"
+    },
+    {
+      "tag": 229000,
+      "x": 49.0,
+      "y": 27.45,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "229"
+    },
+    {
+      "tag": 229001,
+      "x": 49.0,
+      "y": 27.45,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "229"
+    },
+    {
+      "tag": 229003,
+      "x": 49.0,
+      "y": 27.45,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "229"
+    },
+    {
+      "tag": 229005,
+      "x": 49.0,
+      "y": 27.45,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "229"
+    },
+    {
+      "tag": 229007,
+      "x": 49.0,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "229"
+    },
+    {
+      "tag": 233000,
+      "x": 50.05,
+      "y": 27.45,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "233"
+    },
+    {
+      "tag": 233001,
+      "x": 50.05,
+      "y": 27.45,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "233"
+    },
+    {
+      "tag": 233003,
+      "x": 50.05,
+      "y": 27.45,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "233"
+    },
+    {
+      "tag": 233005,
+      "x": 50.05,
+      "y": 27.45,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "233"
+    },
+    {
+      "tag": 233007,
+      "x": 50.05,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "233"
+    },
+    {
+      "tag": 237000,
+      "x": 51.1,
+      "y": 27.45,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "237"
+    },
+    {
+      "tag": 237001,
+      "x": 51.1,
+      "y": 27.45,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "237"
+    },
+    {
+      "tag": 237003,
+      "x": 51.1,
+      "y": 27.45,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "237"
+    },
+    {
+      "tag": 237005,
+      "x": 51.1,
+      "y": 27.45,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "237"
+    },
+    {
+      "tag": 237007,
+      "x": 51.1,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "237"
+    },
+    {
+      "tag": 241000,
+      "x": 52.15,
+      "y": 27.45,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "241"
+    },
+    {
+      "tag": 241001,
+      "x": 52.15,
+      "y": 27.45,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "241"
+    },
+    {
+      "tag": 241003,
+      "x": 52.15,
+      "y": 27.45,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "241"
+    },
+    {
+      "tag": 241005,
+      "x": 52.15,
+      "y": 27.45,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "241"
+    },
+    {
+      "tag": 241007,
+      "x": 52.15,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "241"
+    },
+    {
+      "tag": 247000,
+      "x": 45.55,
+      "y": 23.0,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "247"
+    },
+    {
+      "tag": 247001,
+      "x": 45.55,
+      "y": 23.0,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "247"
+    },
+    {
+      "tag": 247003,
+      "x": 45.55,
+      "y": 23.0,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "247"
+    },
+    {
+      "tag": 247005,
+      "x": 45.55,
+      "y": 23.0,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "247"
+    },
+    {
+      "tag": 247007,
+      "x": 45.55,
+      "y": 23.0,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "247"
+    },
+    {
+      "tag": 249000,
+      "x": 45.55,
+      "y": 21.95,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "249"
+    },
+    {
+      "tag": 249001,
+      "x": 45.55,
+      "y": 21.95,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "249"
+    },
+    {
+      "tag": 249003,
+      "x": 45.55,
+      "y": 21.95,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "249"
+    },
+    {
+      "tag": 249005,
+      "x": 45.55,
+      "y": 21.95,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "249"
+    },
+    {
+      "tag": 249007,
+      "x": 45.55,
+      "y": 21.95,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "249"
+    },
+    {
+      "tag": 253000,
+      "x": 61.0,
+      "y": 26.15,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "253"
+    },
+    {
+      "tag": 253001,
+      "x": 61.0,
+      "y": 26.15,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "253"
+    },
+    {
+      "tag": 253003,
+      "x": 61.0,
+      "y": 26.15,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "253"
+    },
+    {
+      "tag": 253005,
+      "x": 61.0,
+      "y": 26.15,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "253"
+    },
+    {
+      "tag": 253007,
+      "x": 61.0,
+      "y": 26.15,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "253"
+    },
+    {
+      "tag": 255000,
+      "x": 61.0,
+      "y": 24.05,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "255"
+    },
+    {
+      "tag": 255001,
+      "x": 61.0,
+      "y": 24.05,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "255"
+    },
+    {
+      "tag": 255003,
+      "x": 61.0,
+      "y": 24.05,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "255"
+    },
+    {
+      "tag": 255005,
+      "x": 61.0,
+      "y": 24.05,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "255"
+    },
+    {
+      "tag": 255007,
+      "x": 61.0,
+      "y": 24.05,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "255"
+    },
+    {
+      "tag": 257000,
+      "x": 61.0,
+      "y": 23.0,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "257"
+    },
+    {
+      "tag": 257001,
+      "x": 61.0,
+      "y": 23.0,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "257"
+    },
+    {
+      "tag": 257003,
+      "x": 61.0,
+      "y": 23.0,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "257"
+    },
+    {
+      "tag": 257005,
+      "x": 61.0,
+      "y": 23.0,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "257"
+    },
+    {
+      "tag": 257007,
+      "x": 61.0,
+      "y": 23.0,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "257"
+    },
+    {
+      "tag": 259000,
+      "x": 61.0,
+      "y": 21.95,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "259"
+    },
+    {
+      "tag": 259001,
+      "x": 61.0,
+      "y": 21.95,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "259"
+    },
+    {
+      "tag": 259003,
+      "x": 61.0,
+      "y": 21.95,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "259"
+    },
+    {
+      "tag": 259005,
+      "x": 61.0,
+      "y": 21.95,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "259"
+    },
+    {
+      "tag": 259007,
+      "x": 61.0,
+      "y": 21.95,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "259"
+    },
+    {
+      "tag": 261000,
+      "x": 61.0,
+      "y": 19.475,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "261"
+    },
+    {
+      "tag": 261001,
+      "x": 61.0,
+      "y": 19.475,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "261"
+    },
+    {
+      "tag": 261003,
+      "x": 61.0,
+      "y": 19.475,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "261"
+    },
+    {
+      "tag": 261005,
+      "x": 61.0,
+      "y": 19.475,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "261"
+    },
+    {
+      "tag": 261007,
+      "x": 61.0,
+      "y": 19.475,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "261"
+    },
+    {
+      "tag": 269000,
+      "x": 61.0,
+      "y": 18.425,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "269"
+    },
+    {
+      "tag": 269001,
+      "x": 61.0,
+      "y": 18.425,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "269"
+    },
+    {
+      "tag": 269003,
+      "x": 61.0,
+      "y": 18.425,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "269"
+    },
+    {
+      "tag": 269005,
+      "x": 61.0,
+      "y": 18.425,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "269"
+    },
+    {
+      "tag": 269007,
+      "x": 61.0,
+      "y": 18.425,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "269"
+    },
+    {
+      "tag": 277000,
+      "x": 61.0,
+      "y": 17.375,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "277"
+    },
+    {
+      "tag": 277001,
+      "x": 61.0,
+      "y": 17.375,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "277"
+    },
+    {
+      "tag": 277003,
+      "x": 61.0,
+      "y": 17.375,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "277"
+    },
+    {
+      "tag": 277005,
+      "x": 61.0,
+      "y": 17.375,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "277"
+    },
+    {
+      "tag": 277007,
+      "x": 61.0,
+      "y": 17.375,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "277"
+    },
+    {
+      "tag": 285000,
+      "x": 61.0,
+      "y": 15.425,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "285"
+    },
+    {
+      "tag": 293000,
+      "x": 61.0,
+      "y": 14.375,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "293"
+    },
+    {
+      "tag": 293002,
+      "x": 61.0,
+      "y": 14.375,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "293"
+    },
+    {
+      "tag": 293004,
+      "x": 61.0,
+      "y": 14.375,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "293"
+    },
+    {
+      "tag": 293006,
+      "x": 61.0,
+      "y": 14.375,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "293"
+    },
+    {
+      "tag": 293008,
+      "x": 61.0,
+      "y": 14.375,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "293"
+    },
+    {
+      "tag": 301000,
+      "x": 61.0,
+      "y": 13.325,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "301"
+    },
+    {
+      "tag": 301002,
+      "x": 61.0,
+      "y": 13.325,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "301"
+    },
+    {
+      "tag": 301004,
+      "x": 61.0,
+      "y": 13.325,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "301"
+    },
+    {
+      "tag": 301006,
+      "x": 61.0,
+      "y": 13.325,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "301"
+    },
+    {
+      "tag": 301008,
+      "x": 61.0,
+      "y": 13.325,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "301"
+    },
+    {
+      "tag": 309000,
+      "x": 61.0,
+      "y": 12.275,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "309"
+    },
+    {
+      "tag": 309002,
+      "x": 61.0,
+      "y": 12.275,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "309"
+    },
+    {
+      "tag": 309004,
+      "x": 61.0,
+      "y": 12.275,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "309"
+    },
+    {
+      "tag": 309006,
+      "x": 61.0,
+      "y": 12.275,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "309"
+    },
+    {
+      "tag": 309008,
+      "x": 61.0,
+      "y": 12.275,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "309"
+    },
+    {
+      "tag": 349002,
+      "x": 54.65,
+      "y": 15.575,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "349"
+    },
+    {
+      "tag": 349004,
+      "x": 54.65,
+      "y": 15.575,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "349"
+    },
+    {
+      "tag": 349006,
+      "x": 54.65,
+      "y": 15.575,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "349"
+    },
+    {
+      "tag": 349008,
+      "x": 54.65,
+      "y": 15.575,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "349"
+    },
+    {
+      "tag": 351002,
+      "x": 55.7,
+      "y": 15.575,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "351"
+    },
+    {
+      "tag": 351004,
+      "x": 55.7,
+      "y": 15.575,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "351"
+    },
+    {
+      "tag": 351006,
+      "x": 55.7,
+      "y": 15.575,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "351"
+    },
+    {
+      "tag": 351008,
+      "x": 55.7,
+      "y": 15.575,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "351"
+    },
+    {
+      "tag": 353002,
+      "x": 57.8,
+      "y": 15.575,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "353"
+    },
+    {
+      "tag": 353004,
+      "x": 57.8,
+      "y": 15.575,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "353"
+    },
+    {
+      "tag": 353006,
+      "x": 57.8,
+      "y": 15.575,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "353"
+    },
+    {
+      "tag": 353008,
+      "x": 57.8,
+      "y": 15.575,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "353"
+    },
+    {
+      "tag": 355002,
+      "x": 58.85,
+      "y": 15.575,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "355"
+    },
+    {
+      "tag": 355004,
+      "x": 58.85,
+      "y": 15.575,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "355"
+    },
+    {
+      "tag": 355006,
+      "x": 58.85,
+      "y": 15.575,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "355"
+    },
+    {
+      "tag": 355008,
+      "x": 58.85,
+      "y": 15.575,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "355"
+    },
+    {
+      "tag": 357002,
+      "x": 59.9,
+      "y": 15.575,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "357"
+    },
+    {
+      "tag": 357004,
+      "x": 59.9,
+      "y": 15.575,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "357"
+    },
+    {
+      "tag": 357006,
+      "x": 59.9,
+      "y": 15.575,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "357"
+    },
+    {
+      "tag": 357008,
+      "x": 59.9,
+      "y": 15.575,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "357"
+    },
+    {
+      "tag": 359002,
+      "x": 56.75,
+      "y": 15.575,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "359"
+    },
+    {
+      "tag": 359004,
+      "x": 56.75,
+      "y": 15.575,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "359"
+    },
+    {
+      "tag": 359006,
+      "x": 56.75,
+      "y": 15.575,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "359"
+    },
+    {
+      "tag": 359008,
+      "x": 56.75,
+      "y": 15.575,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "359"
+    },
+    {
+      "tag": 374001,
+      "x": 54.65,
+      "y": 16.175,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "374"
+    },
+    {
+      "tag": 374003,
+      "x": 54.65,
+      "y": 16.175,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "374"
+    },
+    {
+      "tag": 374005,
+      "x": 54.65,
+      "y": 16.175,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "374"
+    },
+    {
+      "tag": 374007,
+      "x": 54.65,
+      "y": 16.175,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "374"
+    },
+    {
+      "tag": 375000,
+      "x": 54.65,
+      "y": 27.45,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "375"
+    },
+    {
+      "tag": 375001,
+      "x": 54.65,
+      "y": 27.45,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "375"
+    },
+    {
+      "tag": 375003,
+      "x": 54.65,
+      "y": 27.45,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "375"
+    },
+    {
+      "tag": 375005,
+      "x": 54.65,
+      "y": 27.45,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "375"
+    },
+    {
+      "tag": 375007,
+      "x": 54.65,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "375"
+    },
+    {
+      "tag": 376001,
+      "x": 55.7,
+      "y": 16.175,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "376"
+    },
+    {
+      "tag": 376003,
+      "x": 55.7,
+      "y": 16.175,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "376"
+    },
+    {
+      "tag": 376005,
+      "x": 55.7,
+      "y": 16.175,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "376"
+    },
+    {
+      "tag": 376007,
+      "x": 55.7,
+      "y": 16.175,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "376"
+    },
+    {
+      "tag": 377000,
+      "x": 55.7,
+      "y": 27.45,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "377"
+    },
+    {
+      "tag": 377001,
+      "x": 55.7,
+      "y": 27.45,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "377"
+    },
+    {
+      "tag": 377003,
+      "x": 55.7,
+      "y": 27.45,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "377"
+    },
+    {
+      "tag": 377005,
+      "x": 55.7,
+      "y": 27.45,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "377"
+    },
+    {
+      "tag": 377007,
+      "x": 55.7,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "377"
+    },
+    {
+      "tag": 378001,
+      "x": 56.75,
+      "y": 16.175,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "378"
+    },
+    {
+      "tag": 378003,
+      "x": 56.75,
+      "y": 16.175,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "378"
+    },
+    {
+      "tag": 378005,
+      "x": 56.75,
+      "y": 16.175,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "378"
+    },
+    {
+      "tag": 378007,
+      "x": 56.75,
+      "y": 16.175,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "378"
+    },
+    {
+      "tag": 379000,
+      "x": 56.75,
+      "y": 27.45,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "379"
+    },
+    {
+      "tag": 379001,
+      "x": 56.75,
+      "y": 27.45,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "379"
+    },
+    {
+      "tag": 379003,
+      "x": 56.75,
+      "y": 27.45,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "379"
+    },
+    {
+      "tag": 379005,
+      "x": 56.75,
+      "y": 27.45,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "379"
+    },
+    {
+      "tag": 379007,
+      "x": 56.75,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "379"
+    },
+    {
+      "tag": 380001,
+      "x": 57.8,
+      "y": 16.175,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "380"
+    },
+    {
+      "tag": 380003,
+      "x": 57.8,
+      "y": 16.175,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "380"
+    },
+    {
+      "tag": 380005,
+      "x": 57.8,
+      "y": 16.175,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "380"
+    },
+    {
+      "tag": 380007,
+      "x": 57.8,
+      "y": 16.175,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "380"
+    },
+    {
+      "tag": 381000,
+      "x": 57.8,
+      "y": 27.45,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "381"
+    },
+    {
+      "tag": 381001,
+      "x": 57.8,
+      "y": 27.45,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "381"
+    },
+    {
+      "tag": 381003,
+      "x": 57.8,
+      "y": 27.45,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "381"
+    },
+    {
+      "tag": 381005,
+      "x": 57.8,
+      "y": 27.45,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "381"
+    },
+    {
+      "tag": 381007,
+      "x": 57.8,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "381"
+    },
+    {
+      "tag": 382001,
+      "x": 58.85,
+      "y": 16.175,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "382"
+    },
+    {
+      "tag": 382003,
+      "x": 58.85,
+      "y": 16.175,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "382"
+    },
+    {
+      "tag": 382005,
+      "x": 58.85,
+      "y": 16.175,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "382"
+    },
+    {
+      "tag": 382007,
+      "x": 58.85,
+      "y": 16.175,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "382"
+    },
+    {
+      "tag": 383000,
+      "x": 58.85,
+      "y": 27.45,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "383"
+    },
+    {
+      "tag": 383001,
+      "x": 58.85,
+      "y": 27.45,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "383"
+    },
+    {
+      "tag": 383003,
+      "x": 58.85,
+      "y": 27.45,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "383"
+    },
+    {
+      "tag": 383005,
+      "x": 58.85,
+      "y": 27.45,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "383"
+    },
+    {
+      "tag": 383007,
+      "x": 58.85,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "383"
+    },
+    {
+      "tag": 384001,
+      "x": 59.9,
+      "y": 16.175,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "384"
+    },
+    {
+      "tag": 384003,
+      "x": 59.9,
+      "y": 16.175,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "384"
+    },
+    {
+      "tag": 384005,
+      "x": 59.9,
+      "y": 16.175,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "384"
+    },
+    {
+      "tag": 384007,
+      "x": 59.9,
+      "y": 16.175,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "384"
+    },
+    {
+      "tag": 385000,
+      "x": 59.9,
+      "y": 27.45,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "385"
+    },
+    {
+      "tag": 385001,
+      "x": 59.9,
+      "y": 27.45,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "385"
+    },
+    {
+      "tag": 385003,
+      "x": 59.9,
+      "y": 27.45,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "385"
+    },
+    {
+      "tag": 385005,
+      "x": 59.9,
+      "y": 27.45,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "385"
+    },
+    {
+      "tag": 385007,
+      "x": 59.9,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "385"
+    },
+    {
+      "tag": 400000,
+      "x": 53.6,
+      "y": 20.75,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "400"
+    },
+    {
+      "tag": 400001,
+      "x": 53.6,
+      "y": 20.75,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "400"
+    },
+    {
+      "tag": 400003,
+      "x": 53.6,
+      "y": 20.75,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "400"
+    },
+    {
+      "tag": 400005,
+      "x": 53.6,
+      "y": 20.75,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "400"
+    },
+    {
+      "tag": 400007,
+      "x": 53.6,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "400"
+    },
+    {
+      "tag": 401000,
+      "x": 53.6,
+      "y": 27.45,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "401"
+    },
+    {
+      "tag": 401001,
+      "x": 53.6,
+      "y": 27.45,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "401"
+    },
+    {
+      "tag": 401003,
+      "x": 53.6,
+      "y": 27.45,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "401"
+    },
+    {
+      "tag": 401005,
+      "x": 53.6,
+      "y": 27.45,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "401"
+    },
+    {
+      "tag": 401007,
+      "x": 53.6,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "401"
+    },
+    {
+      "tag": 536000,
+      "x": 69.95,
+      "y": 26.15,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "536"
+    },
+    {
+      "tag": 536001,
+      "x": 69.95,
+      "y": 26.15,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "536"
+    },
+    {
+      "tag": 536003,
+      "x": 69.95,
+      "y": 26.15,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "536"
+    },
+    {
+      "tag": 536005,
+      "x": 69.95,
+      "y": 26.15,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "536"
+    },
+    {
+      "tag": 537000,
+      "x": 69.95,
+      "y": 25.1,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "537"
+    },
+    {
+      "tag": 537001,
+      "x": 69.95,
+      "y": 25.1,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "537"
+    },
+    {
+      "tag": 537003,
+      "x": 69.95,
+      "y": 25.1,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "537"
+    },
+    {
+      "tag": 537005,
+      "x": 69.95,
+      "y": 25.1,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "537"
+    },
+    {
+      "tag": 538000,
+      "x": 69.95,
+      "y": 24.05,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "538"
+    },
+    {
+      "tag": 538001,
+      "x": 69.95,
+      "y": 24.05,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "538"
+    },
+    {
+      "tag": 538003,
+      "x": 69.95,
+      "y": 24.05,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "538"
+    },
+    {
+      "tag": 538005,
+      "x": 69.95,
+      "y": 24.05,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "538"
+    },
+    {
+      "tag": 539000,
+      "x": 69.95,
+      "y": 23.0,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "539"
+    },
+    {
+      "tag": 539001,
+      "x": 69.95,
+      "y": 23.0,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "539"
+    },
+    {
+      "tag": 539003,
+      "x": 69.95,
+      "y": 23.0,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "539"
+    },
+    {
+      "tag": 539005,
+      "x": 69.95,
+      "y": 23.0,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "539"
+    },
+    {
+      "tag": 540000,
+      "x": 69.95,
+      "y": 21.95,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "540"
+    },
+    {
+      "tag": 540001,
+      "x": 69.95,
+      "y": 21.95,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "540"
+    },
+    {
+      "tag": 540003,
+      "x": 69.95,
+      "y": 21.95,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "540"
+    },
+    {
+      "tag": 540005,
+      "x": 69.95,
+      "y": 21.95,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "540"
+    },
+    {
+      "tag": 541000,
+      "x": 69.95,
+      "y": 19.475,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "541"
+    },
+    {
+      "tag": 541001,
+      "x": 69.95,
+      "y": 19.475,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "541"
+    },
+    {
+      "tag": 541003,
+      "x": 69.95,
+      "y": 19.475,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "541"
+    },
+    {
+      "tag": 541005,
+      "x": 69.95,
+      "y": 19.475,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "541"
+    },
+    {
+      "tag": 542000,
+      "x": 69.95,
+      "y": 18.425,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "542"
+    },
+    {
+      "tag": 542001,
+      "x": 69.95,
+      "y": 18.425,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "542"
+    },
+    {
+      "tag": 542003,
+      "x": 69.95,
+      "y": 18.425,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "542"
+    },
+    {
+      "tag": 542005,
+      "x": 69.95,
+      "y": 18.425,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "542"
+    },
+    {
+      "tag": 543000,
+      "x": 69.95,
+      "y": 17.375,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "543"
+    },
+    {
+      "tag": 543001,
+      "x": 69.95,
+      "y": 17.375,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "543"
+    },
+    {
+      "tag": 543003,
+      "x": 69.95,
+      "y": 17.375,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "543"
+    },
+    {
+      "tag": 543005,
+      "x": 69.95,
+      "y": 17.375,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "543"
+    },
+    {
+      "tag": 544000,
+      "x": 69.95,
+      "y": 15.425,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "544"
+    },
+    {
+      "tag": 545000,
+      "x": 69.95,
+      "y": 14.375,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "545"
+    },
+    {
+      "tag": 545002,
+      "x": 69.95,
+      "y": 14.375,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "545"
+    },
+    {
+      "tag": 545004,
+      "x": 69.95,
+      "y": 14.375,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "545"
+    },
+    {
+      "tag": 545006,
+      "x": 69.95,
+      "y": 14.375,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "545"
+    },
+    {
+      "tag": 545008,
+      "x": 69.95,
+      "y": 14.375,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "545"
+    },
+    {
+      "tag": 546000,
+      "x": 69.95,
+      "y": 13.325,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "546"
+    },
+    {
+      "tag": 546002,
+      "x": 69.95,
+      "y": 13.325,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "546"
+    },
+    {
+      "tag": 546004,
+      "x": 69.95,
+      "y": 13.325,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "546"
+    },
+    {
+      "tag": 546006,
+      "x": 69.95,
+      "y": 13.325,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "546"
+    },
+    {
+      "tag": 546008,
+      "x": 69.95,
+      "y": 13.325,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "546"
+    },
+    {
+      "tag": 547000,
+      "x": 69.95,
+      "y": 12.275,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "547"
+    },
+    {
+      "tag": 547002,
+      "x": 69.95,
+      "y": 12.275,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "547"
+    },
+    {
+      "tag": 547004,
+      "x": 69.95,
+      "y": 12.275,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "547"
+    },
+    {
+      "tag": 547006,
+      "x": 69.95,
+      "y": 12.275,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "547"
+    },
+    {
+      "tag": 547008,
+      "x": 69.95,
+      "y": 12.275,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "547"
+    },
+    {
+      "tag": 553002,
+      "x": 69.95,
+      "y": 15.575,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "553"
+    },
+    {
+      "tag": 553004,
+      "x": 69.95,
+      "y": 15.575,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "553"
+    },
+    {
+      "tag": 553006,
+      "x": 69.95,
+      "y": 15.575,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "553"
+    },
+    {
+      "tag": 553008,
+      "x": 69.95,
+      "y": 15.575,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "553"
+    },
+    {
+      "tag": 597000,
+      "x": 62.15,
+      "y": 11.0,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "597"
+    },
+    {
+      "tag": 597002,
+      "x": 62.15,
+      "y": 11.0,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "597"
+    },
+    {
+      "tag": 597004,
+      "x": 62.15,
+      "y": 11.0,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "597"
+    },
+    {
+      "tag": 597006,
+      "x": 62.15,
+      "y": 11.0,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "597"
+    },
+    {
+      "tag": 597008,
+      "x": 62.15,
+      "y": 11.0,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "597"
+    },
+    {
+      "tag": 598000,
+      "x": 62.15,
+      "y": 16.175,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "598"
+    },
+    {
+      "tag": 598001,
+      "x": 62.15,
+      "y": 16.175,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "598"
+    },
+    {
+      "tag": 598003,
+      "x": 62.15,
+      "y": 16.175,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "598"
+    },
+    {
+      "tag": 598005,
+      "x": 62.15,
+      "y": 16.175,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "598"
+    },
+    {
+      "tag": 598007,
+      "x": 62.15,
+      "y": 16.175,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "598"
+    },
+    {
+      "tag": 599000,
+      "x": 62.15,
+      "y": 20.75,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "599"
+    },
+    {
+      "tag": 599001,
+      "x": 62.15,
+      "y": 20.75,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "599"
+    },
+    {
+      "tag": 599003,
+      "x": 62.15,
+      "y": 20.75,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "599"
+    },
+    {
+      "tag": 599005,
+      "x": 62.15,
+      "y": 20.75,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "599"
+    },
+    {
+      "tag": 599007,
+      "x": 62.15,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "599"
+    },
+    {
+      "tag": 600000,
+      "x": 62.15,
+      "y": 27.45,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "600"
+    },
+    {
+      "tag": 600001,
+      "x": 62.15,
+      "y": 27.45,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "600"
+    },
+    {
+      "tag": 600003,
+      "x": 62.15,
+      "y": 27.45,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "600"
+    },
+    {
+      "tag": 600005,
+      "x": 62.15,
+      "y": 27.45,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "600"
+    },
+    {
+      "tag": 600007,
+      "x": 62.15,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "600"
+    },
+    {
+      "tag": 602000,
+      "x": 63.2,
+      "y": 11.0,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "602"
+    },
+    {
+      "tag": 602002,
+      "x": 63.2,
+      "y": 11.0,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "602"
+    },
+    {
+      "tag": 602004,
+      "x": 63.2,
+      "y": 11.0,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "602"
+    },
+    {
+      "tag": 602006,
+      "x": 63.2,
+      "y": 11.0,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "602"
+    },
+    {
+      "tag": 602008,
+      "x": 63.2,
+      "y": 11.0,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "602"
+    },
+    {
+      "tag": 603000,
+      "x": 63.2,
+      "y": 16.175,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "603"
+    },
+    {
+      "tag": 603001,
+      "x": 63.2,
+      "y": 16.175,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "603"
+    },
+    {
+      "tag": 603003,
+      "x": 63.2,
+      "y": 16.175,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "603"
+    },
+    {
+      "tag": 603005,
+      "x": 63.2,
+      "y": 16.175,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "603"
+    },
+    {
+      "tag": 603007,
+      "x": 63.2,
+      "y": 16.175,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "603"
+    },
+    {
+      "tag": 604000,
+      "x": 63.2,
+      "y": 20.75,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "604"
+    },
+    {
+      "tag": 604001,
+      "x": 63.2,
+      "y": 20.75,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "604"
+    },
+    {
+      "tag": 604003,
+      "x": 63.2,
+      "y": 20.75,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "604"
+    },
+    {
+      "tag": 604005,
+      "x": 63.2,
+      "y": 20.75,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "604"
+    },
+    {
+      "tag": 604007,
+      "x": 63.2,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "604"
+    },
+    {
+      "tag": 605000,
+      "x": 63.2,
+      "y": 27.45,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "605"
+    },
+    {
+      "tag": 605001,
+      "x": 63.2,
+      "y": 27.45,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "605"
+    },
+    {
+      "tag": 605003,
+      "x": 63.2,
+      "y": 27.45,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "605"
+    },
+    {
+      "tag": 605005,
+      "x": 63.2,
+      "y": 27.45,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "605"
+    },
+    {
+      "tag": 605007,
+      "x": 63.2,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "605"
+    },
+    {
+      "tag": 607000,
+      "x": 64.25,
+      "y": 11.0,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "607"
+    },
+    {
+      "tag": 607002,
+      "x": 64.25,
+      "y": 11.0,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "607"
+    },
+    {
+      "tag": 607004,
+      "x": 64.25,
+      "y": 11.0,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "607"
+    },
+    {
+      "tag": 607006,
+      "x": 64.25,
+      "y": 11.0,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "607"
+    },
+    {
+      "tag": 607008,
+      "x": 64.25,
+      "y": 11.0,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "607"
+    },
+    {
+      "tag": 613000,
+      "x": 64.25,
+      "y": 16.175,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "613"
+    },
+    {
+      "tag": 613001,
+      "x": 64.25,
+      "y": 16.175,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "613"
+    },
+    {
+      "tag": 613003,
+      "x": 64.25,
+      "y": 16.175,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "613"
+    },
+    {
+      "tag": 613005,
+      "x": 64.25,
+      "y": 16.175,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "613"
+    },
+    {
+      "tag": 613007,
+      "x": 64.25,
+      "y": 16.175,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "613"
+    },
+    {
+      "tag": 614000,
+      "x": 64.25,
+      "y": 20.75,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "614"
+    },
+    {
+      "tag": 614001,
+      "x": 64.25,
+      "y": 20.75,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "614"
+    },
+    {
+      "tag": 614003,
+      "x": 64.25,
+      "y": 20.75,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "614"
+    },
+    {
+      "tag": 614005,
+      "x": 64.25,
+      "y": 20.75,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "614"
+    },
+    {
+      "tag": 614007,
+      "x": 64.25,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "614"
+    },
+    {
+      "tag": 615000,
+      "x": 64.25,
+      "y": 27.45,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "615"
+    },
+    {
+      "tag": 615001,
+      "x": 64.25,
+      "y": 27.45,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "615"
+    },
+    {
+      "tag": 615003,
+      "x": 64.25,
+      "y": 27.45,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "615"
+    },
+    {
+      "tag": 615005,
+      "x": 64.25,
+      "y": 27.45,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "615"
+    },
+    {
+      "tag": 615007,
+      "x": 64.25,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "615"
+    },
+    {
+      "tag": 617000,
+      "x": 65.3,
+      "y": 11.0,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "617"
+    },
+    {
+      "tag": 617002,
+      "x": 65.3,
+      "y": 11.0,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "617"
+    },
+    {
+      "tag": 617004,
+      "x": 65.3,
+      "y": 11.0,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "617"
+    },
+    {
+      "tag": 617006,
+      "x": 65.3,
+      "y": 11.0,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "617"
+    },
+    {
+      "tag": 617008,
+      "x": 65.3,
+      "y": 11.0,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "617"
+    },
+    {
+      "tag": 618000,
+      "x": 65.3,
+      "y": 16.175,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "618"
+    },
+    {
+      "tag": 618001,
+      "x": 65.3,
+      "y": 16.175,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "618"
+    },
+    {
+      "tag": 618003,
+      "x": 65.3,
+      "y": 16.175,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "618"
+    },
+    {
+      "tag": 618005,
+      "x": 65.3,
+      "y": 16.175,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "618"
+    },
+    {
+      "tag": 618007,
+      "x": 65.3,
+      "y": 16.175,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "618"
+    },
+    {
+      "tag": 619000,
+      "x": 65.3,
+      "y": 20.75,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "619"
+    },
+    {
+      "tag": 619001,
+      "x": 65.3,
+      "y": 20.75,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "619"
+    },
+    {
+      "tag": 619003,
+      "x": 65.3,
+      "y": 20.75,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "619"
+    },
+    {
+      "tag": 619005,
+      "x": 65.3,
+      "y": 20.75,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "619"
+    },
+    {
+      "tag": 619007,
+      "x": 65.3,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "619"
+    },
+    {
+      "tag": 620000,
+      "x": 65.3,
+      "y": 27.45,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "620"
+    },
+    {
+      "tag": 620001,
+      "x": 65.3,
+      "y": 27.45,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "620"
+    },
+    {
+      "tag": 620003,
+      "x": 65.3,
+      "y": 27.45,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "620"
+    },
+    {
+      "tag": 620005,
+      "x": 65.3,
+      "y": 27.45,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "620"
+    },
+    {
+      "tag": 620007,
+      "x": 65.3,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "620"
+    },
+    {
+      "tag": 622000,
+      "x": 66.35,
+      "y": 11.0,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "622"
+    },
+    {
+      "tag": 622002,
+      "x": 66.35,
+      "y": 11.0,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "622"
+    },
+    {
+      "tag": 622004,
+      "x": 66.35,
+      "y": 11.0,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "622"
+    },
+    {
+      "tag": 622006,
+      "x": 66.35,
+      "y": 11.0,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "622"
+    },
+    {
+      "tag": 622008,
+      "x": 66.35,
+      "y": 11.0,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "622"
+    },
+    {
+      "tag": 623000,
+      "x": 66.35,
+      "y": 16.175,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "623"
+    },
+    {
+      "tag": 623001,
+      "x": 66.35,
+      "y": 16.175,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "623"
+    },
+    {
+      "tag": 623003,
+      "x": 66.35,
+      "y": 16.175,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "623"
+    },
+    {
+      "tag": 623005,
+      "x": 66.35,
+      "y": 16.175,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "623"
+    },
+    {
+      "tag": 623007,
+      "x": 66.35,
+      "y": 16.175,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "623"
+    },
+    {
+      "tag": 624000,
+      "x": 66.35,
+      "y": 20.75,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "624"
+    },
+    {
+      "tag": 624001,
+      "x": 66.35,
+      "y": 20.75,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "624"
+    },
+    {
+      "tag": 624003,
+      "x": 66.35,
+      "y": 20.75,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "624"
+    },
+    {
+      "tag": 624005,
+      "x": 66.35,
+      "y": 20.75,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "624"
+    },
+    {
+      "tag": 624007,
+      "x": 66.35,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "624"
+    },
+    {
+      "tag": 625000,
+      "x": 66.35,
+      "y": 27.45,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "625"
+    },
+    {
+      "tag": 625001,
+      "x": 66.35,
+      "y": 27.45,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "625"
+    },
+    {
+      "tag": 625003,
+      "x": 66.35,
+      "y": 27.45,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "625"
+    },
+    {
+      "tag": 625005,
+      "x": 66.35,
+      "y": 27.45,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "625"
+    },
+    {
+      "tag": 625007,
+      "x": 66.35,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "625"
+    },
+    {
+      "tag": 627000,
+      "x": 67.4,
+      "y": 11.0,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "627"
+    },
+    {
+      "tag": 627002,
+      "x": 67.4,
+      "y": 11.0,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "627"
+    },
+    {
+      "tag": 627004,
+      "x": 67.4,
+      "y": 11.0,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "627"
+    },
+    {
+      "tag": 627006,
+      "x": 67.4,
+      "y": 11.0,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "627"
+    },
+    {
+      "tag": 627008,
+      "x": 67.4,
+      "y": 11.0,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "627"
+    },
+    {
+      "tag": 628000,
+      "x": 67.4,
+      "y": 16.175,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "628"
+    },
+    {
+      "tag": 628001,
+      "x": 67.4,
+      "y": 16.175,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "628"
+    },
+    {
+      "tag": 628003,
+      "x": 67.4,
+      "y": 16.175,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "628"
+    },
+    {
+      "tag": 628005,
+      "x": 67.4,
+      "y": 16.175,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "628"
+    },
+    {
+      "tag": 628007,
+      "x": 67.4,
+      "y": 16.175,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "628"
+    },
+    {
+      "tag": 629000,
+      "x": 67.4,
+      "y": 20.75,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "629"
+    },
+    {
+      "tag": 629001,
+      "x": 67.4,
+      "y": 20.75,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "629"
+    },
+    {
+      "tag": 629003,
+      "x": 67.4,
+      "y": 20.75,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "629"
+    },
+    {
+      "tag": 629005,
+      "x": 67.4,
+      "y": 20.75,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "629"
+    },
+    {
+      "tag": 629007,
+      "x": 67.4,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "629"
+    },
+    {
+      "tag": 630000,
+      "x": 67.4,
+      "y": 27.45,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "630"
+    },
+    {
+      "tag": 630001,
+      "x": 67.4,
+      "y": 27.45,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "630"
+    },
+    {
+      "tag": 630003,
+      "x": 67.4,
+      "y": 27.45,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "630"
+    },
+    {
+      "tag": 630005,
+      "x": 67.4,
+      "y": 27.45,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "630"
+    },
+    {
+      "tag": 630007,
+      "x": 67.4,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "630"
+    },
+    {
+      "tag": 633002,
+      "x": 62.15,
+      "y": 15.575,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "633"
+    },
+    {
+      "tag": 633004,
+      "x": 62.15,
+      "y": 15.575,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "633"
+    },
+    {
+      "tag": 633006,
+      "x": 62.15,
+      "y": 15.575,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "633"
+    },
+    {
+      "tag": 633008,
+      "x": 62.15,
+      "y": 15.575,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "633"
+    },
+    {
+      "tag": 634002,
+      "x": 63.2,
+      "y": 15.575,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "634"
+    },
+    {
+      "tag": 634004,
+      "x": 63.2,
+      "y": 15.575,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "634"
+    },
+    {
+      "tag": 634006,
+      "x": 63.2,
+      "y": 15.575,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "634"
+    },
+    {
+      "tag": 634008,
+      "x": 63.2,
+      "y": 15.575,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "634"
+    },
+    {
+      "tag": 638002,
+      "x": 64.25,
+      "y": 15.575,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "638"
+    },
+    {
+      "tag": 638004,
+      "x": 64.25,
+      "y": 15.575,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "638"
+    },
+    {
+      "tag": 638006,
+      "x": 64.25,
+      "y": 15.575,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "638"
+    },
+    {
+      "tag": 638008,
+      "x": 64.25,
+      "y": 15.575,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "638"
+    },
+    {
+      "tag": 659000,
+      "x": 68.8,
+      "y": 11.0,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "659"
+    },
+    {
+      "tag": 659002,
+      "x": 68.8,
+      "y": 11.0,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "659"
+    },
+    {
+      "tag": 659004,
+      "x": 68.8,
+      "y": 11.0,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "659"
+    },
+    {
+      "tag": 659006,
+      "x": 68.8,
+      "y": 11.0,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "659"
+    },
+    {
+      "tag": 659008,
+      "x": 68.8,
+      "y": 11.0,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "659"
+    },
+    {
+      "tag": 659009,
+      "x": 68.8,
+      "y": 11.0,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "kind": "grid",
+      "source_point_id": "659"
+    },
+    {
+      "tag": 667002,
+      "x": 65.3,
+      "y": 15.575,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "667"
+    },
+    {
+      "tag": 667004,
+      "x": 65.3,
+      "y": 15.575,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "667"
+    },
+    {
+      "tag": 667006,
+      "x": 65.3,
+      "y": 15.575,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "667"
+    },
+    {
+      "tag": 667008,
+      "x": 65.3,
+      "y": 15.575,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "667"
+    },
+    {
+      "tag": 752000,
+      "x": 46.9,
+      "y": 20.75,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "752"
+    },
+    {
+      "tag": 752001,
+      "x": 46.9,
+      "y": 20.75,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "752"
+    },
+    {
+      "tag": 752003,
+      "x": 46.9,
+      "y": 20.75,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "752"
+    },
+    {
+      "tag": 752005,
+      "x": 46.9,
+      "y": 20.75,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "752"
+    },
+    {
+      "tag": 752007,
+      "x": 46.9,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "752"
+    },
+    {
+      "tag": 754000,
+      "x": 47.95,
+      "y": 20.75,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "754"
+    },
+    {
+      "tag": 754001,
+      "x": 47.95,
+      "y": 20.75,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "754"
+    },
+    {
+      "tag": 754003,
+      "x": 47.95,
+      "y": 20.75,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "754"
+    },
+    {
+      "tag": 754005,
+      "x": 47.95,
+      "y": 20.75,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "754"
+    },
+    {
+      "tag": 754007,
+      "x": 47.95,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "754"
+    },
+    {
+      "tag": 756000,
+      "x": 49.0,
+      "y": 20.75,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "756"
+    },
+    {
+      "tag": 756001,
+      "x": 49.0,
+      "y": 20.75,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "756"
+    },
+    {
+      "tag": 756003,
+      "x": 49.0,
+      "y": 20.75,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "756"
+    },
+    {
+      "tag": 756005,
+      "x": 49.0,
+      "y": 20.75,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "756"
+    },
+    {
+      "tag": 756007,
+      "x": 49.0,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "756"
+    },
+    {
+      "tag": 758000,
+      "x": 50.05,
+      "y": 20.75,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "758"
+    },
+    {
+      "tag": 758001,
+      "x": 50.05,
+      "y": 20.75,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "758"
+    },
+    {
+      "tag": 758003,
+      "x": 50.05,
+      "y": 20.75,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "758"
+    },
+    {
+      "tag": 758005,
+      "x": 50.05,
+      "y": 20.75,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "758"
+    },
+    {
+      "tag": 758007,
+      "x": 50.05,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "758"
+    },
+    {
+      "tag": 760000,
+      "x": 51.1,
+      "y": 20.75,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "760"
+    },
+    {
+      "tag": 760001,
+      "x": 51.1,
+      "y": 20.75,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "760"
+    },
+    {
+      "tag": 760003,
+      "x": 51.1,
+      "y": 20.75,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "760"
+    },
+    {
+      "tag": 760005,
+      "x": 51.1,
+      "y": 20.75,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "760"
+    },
+    {
+      "tag": 760007,
+      "x": 51.1,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "760"
+    },
+    {
+      "tag": 762000,
+      "x": 52.15,
+      "y": 20.75,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "762"
+    },
+    {
+      "tag": 762001,
+      "x": 52.15,
+      "y": 20.75,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "762"
+    },
+    {
+      "tag": 762003,
+      "x": 52.15,
+      "y": 20.75,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "762"
+    },
+    {
+      "tag": 762005,
+      "x": 52.15,
+      "y": 20.75,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "762"
+    },
+    {
+      "tag": 762007,
+      "x": 52.15,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "762"
+    },
+    {
+      "tag": 763002,
+      "x": 54.65,
+      "y": 11.0,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "763"
+    },
+    {
+      "tag": 763004,
+      "x": 54.65,
+      "y": 11.0,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "763"
+    },
+    {
+      "tag": 763006,
+      "x": 54.65,
+      "y": 11.0,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "763"
+    },
+    {
+      "tag": 763008,
+      "x": 54.65,
+      "y": 11.0,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "763"
+    },
+    {
+      "tag": 764000,
+      "x": 54.65,
+      "y": 20.75,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "764"
+    },
+    {
+      "tag": 764001,
+      "x": 54.65,
+      "y": 20.75,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "764"
+    },
+    {
+      "tag": 764003,
+      "x": 54.65,
+      "y": 20.75,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "764"
+    },
+    {
+      "tag": 764005,
+      "x": 54.65,
+      "y": 20.75,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "764"
+    },
+    {
+      "tag": 764007,
+      "x": 54.65,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "764"
+    },
+    {
+      "tag": 765002,
+      "x": 55.7,
+      "y": 11.0,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "765"
+    },
+    {
+      "tag": 765004,
+      "x": 55.7,
+      "y": 11.0,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "765"
+    },
+    {
+      "tag": 765006,
+      "x": 55.7,
+      "y": 11.0,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "765"
+    },
+    {
+      "tag": 765008,
+      "x": 55.7,
+      "y": 11.0,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "765"
+    },
+    {
+      "tag": 766000,
+      "x": 55.7,
+      "y": 20.75,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "766"
+    },
+    {
+      "tag": 766001,
+      "x": 55.7,
+      "y": 20.75,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "766"
+    },
+    {
+      "tag": 766003,
+      "x": 55.7,
+      "y": 20.75,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "766"
+    },
+    {
+      "tag": 766005,
+      "x": 55.7,
+      "y": 20.75,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "766"
+    },
+    {
+      "tag": 766007,
+      "x": 55.7,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "766"
+    },
+    {
+      "tag": 767002,
+      "x": 56.75,
+      "y": 11.0,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "767"
+    },
+    {
+      "tag": 767004,
+      "x": 56.75,
+      "y": 11.0,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "767"
+    },
+    {
+      "tag": 767006,
+      "x": 56.75,
+      "y": 11.0,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "767"
+    },
+    {
+      "tag": 767008,
+      "x": 56.75,
+      "y": 11.0,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "767"
+    },
+    {
+      "tag": 768000,
+      "x": 56.75,
+      "y": 20.75,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "768"
+    },
+    {
+      "tag": 768001,
+      "x": 56.75,
+      "y": 20.75,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "768"
+    },
+    {
+      "tag": 768003,
+      "x": 56.75,
+      "y": 20.75,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "768"
+    },
+    {
+      "tag": 768005,
+      "x": 56.75,
+      "y": 20.75,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "768"
+    },
+    {
+      "tag": 768007,
+      "x": 56.75,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "768"
+    },
+    {
+      "tag": 769002,
+      "x": 57.8,
+      "y": 11.0,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "769"
+    },
+    {
+      "tag": 769004,
+      "x": 57.8,
+      "y": 11.0,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "769"
+    },
+    {
+      "tag": 769006,
+      "x": 57.8,
+      "y": 11.0,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "769"
+    },
+    {
+      "tag": 769008,
+      "x": 57.8,
+      "y": 11.0,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "769"
+    },
+    {
+      "tag": 770000,
+      "x": 57.8,
+      "y": 20.75,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "770"
+    },
+    {
+      "tag": 770001,
+      "x": 57.8,
+      "y": 20.75,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "770"
+    },
+    {
+      "tag": 770003,
+      "x": 57.8,
+      "y": 20.75,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "770"
+    },
+    {
+      "tag": 770005,
+      "x": 57.8,
+      "y": 20.75,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "770"
+    },
+    {
+      "tag": 770007,
+      "x": 57.8,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "770"
+    },
+    {
+      "tag": 771002,
+      "x": 58.85,
+      "y": 11.0,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "771"
+    },
+    {
+      "tag": 771004,
+      "x": 58.85,
+      "y": 11.0,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "771"
+    },
+    {
+      "tag": 771006,
+      "x": 58.85,
+      "y": 11.0,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "771"
+    },
+    {
+      "tag": 771008,
+      "x": 58.85,
+      "y": 11.0,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "771"
+    },
+    {
+      "tag": 772000,
+      "x": 58.85,
+      "y": 20.75,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "772"
+    },
+    {
+      "tag": 772001,
+      "x": 58.85,
+      "y": 20.75,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "772"
+    },
+    {
+      "tag": 772003,
+      "x": 58.85,
+      "y": 20.75,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "772"
+    },
+    {
+      "tag": 772005,
+      "x": 58.85,
+      "y": 20.75,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "772"
+    },
+    {
+      "tag": 772007,
+      "x": 58.85,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "772"
+    },
+    {
+      "tag": 773002,
+      "x": 59.9,
+      "y": 11.0,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "773"
+    },
+    {
+      "tag": 773004,
+      "x": 59.9,
+      "y": 11.0,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "773"
+    },
+    {
+      "tag": 773006,
+      "x": 59.9,
+      "y": 11.0,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "773"
+    },
+    {
+      "tag": 773008,
+      "x": 59.9,
+      "y": 11.0,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "773"
+    },
+    {
+      "tag": 774000,
+      "x": 59.9,
+      "y": 20.75,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "774"
+    },
+    {
+      "tag": 774001,
+      "x": 59.9,
+      "y": 20.75,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "774"
+    },
+    {
+      "tag": 774003,
+      "x": 59.9,
+      "y": 20.75,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "774"
+    },
+    {
+      "tag": 774005,
+      "x": 59.9,
+      "y": 20.75,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "774"
+    },
+    {
+      "tag": 774007,
+      "x": 59.9,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "774"
+    },
+    {
+      "tag": 780000,
+      "x": 68.8,
+      "y": 16.175,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "780"
+    },
+    {
+      "tag": 780001,
+      "x": 68.8,
+      "y": 16.175,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "780"
+    },
+    {
+      "tag": 780003,
+      "x": 68.8,
+      "y": 16.175,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "780"
+    },
+    {
+      "tag": 780005,
+      "x": 68.8,
+      "y": 16.175,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "780"
+    },
+    {
+      "tag": 780007,
+      "x": 68.8,
+      "y": 16.175,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "780"
+    },
+    {
+      "tag": 780009,
+      "x": 68.8,
+      "y": 16.175,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "kind": "grid",
+      "source_point_id": "780"
+    },
+    {
+      "tag": 786000,
+      "x": 68.8,
+      "y": 20.75,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "786"
+    },
+    {
+      "tag": 786001,
+      "x": 68.8,
+      "y": 20.75,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "786"
+    },
+    {
+      "tag": 786003,
+      "x": 68.8,
+      "y": 20.75,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "786"
+    },
+    {
+      "tag": 786005,
+      "x": 68.8,
+      "y": 20.75,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "786"
+    },
+    {
+      "tag": 786007,
+      "x": 68.8,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "786"
+    },
+    {
+      "tag": 786009,
+      "x": 68.8,
+      "y": 20.75,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "kind": "grid",
+      "source_point_id": "786"
+    },
+    {
+      "tag": 791002,
+      "x": 53.3,
+      "y": 11.0,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "791"
+    },
+    {
+      "tag": 791004,
+      "x": 53.3,
+      "y": 11.0,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "791"
+    },
+    {
+      "tag": 791006,
+      "x": 53.3,
+      "y": 11.0,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "791"
+    },
+    {
+      "tag": 791008,
+      "x": 53.3,
+      "y": 11.0,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "791"
+    },
+    {
+      "tag": 791009,
+      "x": 53.3,
+      "y": 11.0,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "kind": "grid",
+      "source_point_id": "791"
+    },
+    {
+      "tag": 792000,
+      "x": 68.8,
+      "y": 27.45,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "792"
+    },
+    {
+      "tag": 792001,
+      "x": 68.8,
+      "y": 27.45,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "792"
+    },
+    {
+      "tag": 792003,
+      "x": 68.8,
+      "y": 27.45,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "792"
+    },
+    {
+      "tag": 792005,
+      "x": 68.8,
+      "y": 27.45,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "792"
+    },
+    {
+      "tag": 792007,
+      "x": 68.8,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "792"
+    },
+    {
+      "tag": 792009,
+      "x": 68.8,
+      "y": 27.45,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "kind": "grid",
+      "source_point_id": "792"
+    },
+    {
+      "tag": 794001,
+      "x": 53.3,
+      "y": 16.175,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "794"
+    },
+    {
+      "tag": 794003,
+      "x": 53.3,
+      "y": 16.175,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "794"
+    },
+    {
+      "tag": 794005,
+      "x": 53.3,
+      "y": 16.175,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "794"
+    },
+    {
+      "tag": 794007,
+      "x": 53.3,
+      "y": 16.175,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "794"
+    },
+    {
+      "tag": 794009,
+      "x": 53.3,
+      "y": 16.175,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "kind": "grid",
+      "source_point_id": "794"
+    },
+    {
+      "tag": 795000,
+      "x": 53.3,
+      "y": 20.75,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "795"
+    },
+    {
+      "tag": 795001,
+      "x": 53.3,
+      "y": 20.75,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "795"
+    },
+    {
+      "tag": 795003,
+      "x": 53.3,
+      "y": 20.75,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "795"
+    },
+    {
+      "tag": 795005,
+      "x": 53.3,
+      "y": 20.75,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "795"
+    },
+    {
+      "tag": 795007,
+      "x": 53.3,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "795"
+    },
+    {
+      "tag": 795009,
+      "x": 53.3,
+      "y": 20.75,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "kind": "grid",
+      "source_point_id": "795"
+    },
+    {
+      "tag": 809002,
+      "x": 53.3,
+      "y": 12.275,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "809"
+    },
+    {
+      "tag": 809004,
+      "x": 53.3,
+      "y": 12.275,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "809"
+    },
+    {
+      "tag": 809006,
+      "x": 53.3,
+      "y": 12.275,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "809"
+    },
+    {
+      "tag": 809008,
+      "x": 53.3,
+      "y": 12.275,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "809"
+    },
+    {
+      "tag": 813002,
+      "x": 53.3,
+      "y": 13.325,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "813"
+    },
+    {
+      "tag": 813004,
+      "x": 53.3,
+      "y": 13.325,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "813"
+    },
+    {
+      "tag": 813006,
+      "x": 53.3,
+      "y": 13.325,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "813"
+    },
+    {
+      "tag": 813008,
+      "x": 53.3,
+      "y": 13.325,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "813"
+    },
+    {
+      "tag": 814002,
+      "x": 53.3,
+      "y": 14.375,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "814"
+    },
+    {
+      "tag": 814004,
+      "x": 53.3,
+      "y": 14.375,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "814"
+    },
+    {
+      "tag": 814006,
+      "x": 53.3,
+      "y": 14.375,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "814"
+    },
+    {
+      "tag": 814008,
+      "x": 53.3,
+      "y": 14.375,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "814"
+    },
+    {
+      "tag": 815000,
+      "x": 68.8,
+      "y": 12.275,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "815"
+    },
+    {
+      "tag": 815002,
+      "x": 68.8,
+      "y": 12.275,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "815"
+    },
+    {
+      "tag": 815004,
+      "x": 68.8,
+      "y": 12.275,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "815"
+    },
+    {
+      "tag": 815006,
+      "x": 68.8,
+      "y": 12.275,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "815"
+    },
+    {
+      "tag": 815008,
+      "x": 68.8,
+      "y": 12.275,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "815"
+    },
+    {
+      "tag": 817001,
+      "x": 53.3,
+      "y": 17.375,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "817"
+    },
+    {
+      "tag": 817003,
+      "x": 53.3,
+      "y": 17.375,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "817"
+    },
+    {
+      "tag": 817005,
+      "x": 53.3,
+      "y": 17.375,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "817"
+    },
+    {
+      "tag": 817007,
+      "x": 53.3,
+      "y": 17.375,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "817"
+    },
+    {
+      "tag": 818001,
+      "x": 53.3,
+      "y": 18.425,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "818"
+    },
+    {
+      "tag": 818003,
+      "x": 53.3,
+      "y": 18.425,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "818"
+    },
+    {
+      "tag": 818005,
+      "x": 53.3,
+      "y": 18.425,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "818"
+    },
+    {
+      "tag": 818007,
+      "x": 53.3,
+      "y": 18.425,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "818"
+    },
+    {
+      "tag": 819000,
+      "x": 68.8,
+      "y": 13.325,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "819"
+    },
+    {
+      "tag": 819002,
+      "x": 68.8,
+      "y": 13.325,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "819"
+    },
+    {
+      "tag": 819004,
+      "x": 68.8,
+      "y": 13.325,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "819"
+    },
+    {
+      "tag": 819006,
+      "x": 68.8,
+      "y": 13.325,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "819"
+    },
+    {
+      "tag": 819008,
+      "x": 68.8,
+      "y": 13.325,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "819"
+    },
+    {
+      "tag": 821001,
+      "x": 53.3,
+      "y": 19.475,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "821"
+    },
+    {
+      "tag": 821003,
+      "x": 53.3,
+      "y": 19.475,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "821"
+    },
+    {
+      "tag": 821005,
+      "x": 53.3,
+      "y": 19.475,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "821"
+    },
+    {
+      "tag": 821007,
+      "x": 53.3,
+      "y": 19.475,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "821"
+    },
+    {
+      "tag": 823000,
+      "x": 68.8,
+      "y": 14.375,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "823"
+    },
+    {
+      "tag": 823002,
+      "x": 68.8,
+      "y": 14.375,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "823"
+    },
+    {
+      "tag": 823004,
+      "x": 68.8,
+      "y": 14.375,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "823"
+    },
+    {
+      "tag": 823006,
+      "x": 68.8,
+      "y": 14.375,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "823"
+    },
+    {
+      "tag": 823008,
+      "x": 68.8,
+      "y": 14.375,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "823"
+    },
+    {
+      "tag": 827000,
+      "x": 53.05,
+      "y": 27.45,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "827"
+    },
+    {
+      "tag": 827001,
+      "x": 53.05,
+      "y": 27.45,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "827"
+    },
+    {
+      "tag": 827003,
+      "x": 53.05,
+      "y": 27.45,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "827"
+    },
+    {
+      "tag": 827005,
+      "x": 53.05,
+      "y": 27.45,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "827"
+    },
+    {
+      "tag": 827007,
+      "x": 53.05,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "827"
+    },
+    {
+      "tag": 827009,
+      "x": 53.05,
+      "y": 27.45,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "kind": "grid",
+      "source_point_id": "827"
+    },
+    {
+      "tag": 828000,
+      "x": 68.8,
+      "y": 17.375,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "828"
+    },
+    {
+      "tag": 828001,
+      "x": 68.8,
+      "y": 17.375,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "828"
+    },
+    {
+      "tag": 828003,
+      "x": 68.8,
+      "y": 17.375,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "828"
+    },
+    {
+      "tag": 828005,
+      "x": 68.8,
+      "y": 17.375,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "828"
+    },
+    {
+      "tag": 828007,
+      "x": 68.8,
+      "y": 17.375,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "828"
+    },
+    {
+      "tag": 829000,
+      "x": 68.8,
+      "y": 18.425,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "829"
+    },
+    {
+      "tag": 829001,
+      "x": 68.8,
+      "y": 18.425,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "829"
+    },
+    {
+      "tag": 829003,
+      "x": 68.8,
+      "y": 18.425,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "829"
+    },
+    {
+      "tag": 829005,
+      "x": 68.8,
+      "y": 18.425,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "829"
+    },
+    {
+      "tag": 829007,
+      "x": 68.8,
+      "y": 18.425,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "829"
+    },
+    {
+      "tag": 833000,
+      "x": 68.8,
+      "y": 19.475,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "833"
+    },
+    {
+      "tag": 833001,
+      "x": 68.8,
+      "y": 19.475,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "833"
+    },
+    {
+      "tag": 833003,
+      "x": 68.8,
+      "y": 19.475,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "833"
+    },
+    {
+      "tag": 833005,
+      "x": 68.8,
+      "y": 19.475,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "833"
+    },
+    {
+      "tag": 833007,
+      "x": 68.8,
+      "y": 19.475,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "833"
+    },
+    {
+      "tag": 834000,
+      "x": 68.8,
+      "y": 21.95,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "834"
+    },
+    {
+      "tag": 834001,
+      "x": 68.8,
+      "y": 21.95,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "834"
+    },
+    {
+      "tag": 834003,
+      "x": 68.8,
+      "y": 21.95,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "834"
+    },
+    {
+      "tag": 834005,
+      "x": 68.8,
+      "y": 21.95,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "834"
+    },
+    {
+      "tag": 834007,
+      "x": 68.8,
+      "y": 21.95,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "834"
+    },
+    {
+      "tag": 835000,
+      "x": 68.8,
+      "y": 23.0,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "835"
+    },
+    {
+      "tag": 835001,
+      "x": 68.8,
+      "y": 23.0,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "835"
+    },
+    {
+      "tag": 835003,
+      "x": 68.8,
+      "y": 23.0,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "835"
+    },
+    {
+      "tag": 835005,
+      "x": 68.8,
+      "y": 23.0,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "835"
+    },
+    {
+      "tag": 835007,
+      "x": 68.8,
+      "y": 23.0,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "835"
+    },
+    {
+      "tag": 839000,
+      "x": 68.8,
+      "y": 24.05,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "839"
+    },
+    {
+      "tag": 839001,
+      "x": 68.8,
+      "y": 24.05,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "839"
+    },
+    {
+      "tag": 839003,
+      "x": 68.8,
+      "y": 24.05,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "839"
+    },
+    {
+      "tag": 839005,
+      "x": 68.8,
+      "y": 24.05,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "839"
+    },
+    {
+      "tag": 839007,
+      "x": 68.8,
+      "y": 24.05,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "839"
+    },
+    {
+      "tag": 840000,
+      "x": 68.8,
+      "y": 25.1,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "840"
+    },
+    {
+      "tag": 840001,
+      "x": 68.8,
+      "y": 25.1,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "840"
+    },
+    {
+      "tag": 840003,
+      "x": 68.8,
+      "y": 25.1,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "840"
+    },
+    {
+      "tag": 840005,
+      "x": 68.8,
+      "y": 25.1,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "840"
+    },
+    {
+      "tag": 840007,
+      "x": 68.8,
+      "y": 25.1,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "840"
+    },
+    {
+      "tag": 841000,
+      "x": 68.8,
+      "y": 26.15,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "841"
+    },
+    {
+      "tag": 841001,
+      "x": 68.8,
+      "y": 26.15,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "841"
+    },
+    {
+      "tag": 841003,
+      "x": 68.8,
+      "y": 26.15,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "841"
+    },
+    {
+      "tag": 841005,
+      "x": 68.8,
+      "y": 26.15,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "841"
+    },
+    {
+      "tag": 841007,
+      "x": 68.8,
+      "y": 26.15,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "841"
+    },
+    {
+      "tag": 845000,
+      "x": 68.8,
+      "y": 15.425,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "845"
+    },
+    {
+      "tag": 847000,
+      "x": 69.95,
+      "y": 27.45,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "847"
+    },
+    {
+      "tag": 847001,
+      "x": 69.95,
+      "y": 27.45,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "847"
+    },
+    {
+      "tag": 847003,
+      "x": 69.95,
+      "y": 27.45,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "847"
+    },
+    {
+      "tag": 847005,
+      "x": 69.95,
+      "y": 27.45,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "847"
+    },
+    {
+      "tag": 851000,
+      "x": 69.95,
+      "y": 20.75,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "851"
+    },
+    {
+      "tag": 851001,
+      "x": 69.95,
+      "y": 20.75,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "851"
+    },
+    {
+      "tag": 851003,
+      "x": 69.95,
+      "y": 20.75,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "851"
+    },
+    {
+      "tag": 851005,
+      "x": 69.95,
+      "y": 20.75,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "851"
+    },
+    {
+      "tag": 852000,
+      "x": 69.95,
+      "y": 16.175,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "852"
+    },
+    {
+      "tag": 852001,
+      "x": 69.95,
+      "y": 16.175,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "852"
+    },
+    {
+      "tag": 852003,
+      "x": 69.95,
+      "y": 16.175,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "852"
+    },
+    {
+      "tag": 852005,
+      "x": 69.95,
+      "y": 16.175,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "852"
+    },
+    {
+      "tag": 853000,
+      "x": 69.95,
+      "y": 11.0,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "853"
+    },
+    {
+      "tag": 853002,
+      "x": 69.95,
+      "y": 11.0,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "853"
+    },
+    {
+      "tag": 853004,
+      "x": 69.95,
+      "y": 11.0,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "853"
+    },
+    {
+      "tag": 853006,
+      "x": 69.95,
+      "y": 11.0,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "853"
+    },
+    {
+      "tag": 853008,
+      "x": 69.95,
+      "y": 11.0,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "853"
+    },
+    {
+      "tag": 887002,
+      "x": 66.35,
+      "y": 15.575,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "887"
+    },
+    {
+      "tag": 887004,
+      "x": 66.35,
+      "y": 15.575,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "887"
+    },
+    {
+      "tag": 887006,
+      "x": 66.35,
+      "y": 15.575,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "887"
+    },
+    {
+      "tag": 887008,
+      "x": 66.35,
+      "y": 15.575,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "887"
+    },
+    {
+      "tag": 888002,
+      "x": 67.4,
+      "y": 15.575,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "grid",
+      "source_point_id": "888"
+    },
+    {
+      "tag": 888004,
+      "x": 67.4,
+      "y": 15.575,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "grid",
+      "source_point_id": "888"
+    },
+    {
+      "tag": 888006,
+      "x": 67.4,
+      "y": 15.575,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "grid",
+      "source_point_id": "888"
+    },
+    {
+      "tag": 888008,
+      "x": 67.4,
+      "y": 15.575,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "grid",
+      "source_point_id": "888"
+    },
+    {
+      "tag": 1384000,
+      "x": 65.2,
+      "y": 27.45,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "grid",
+      "source_point_id": "1384"
+    },
+    {
+      "tag": 1384001,
+      "x": 65.2,
+      "y": 27.45,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "grid",
+      "source_point_id": "1384"
+    },
+    {
+      "tag": 1384003,
+      "x": 65.2,
+      "y": 27.45,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "grid",
+      "source_point_id": "1384"
+    },
+    {
+      "tag": 1384005,
+      "x": 65.2,
+      "y": 27.45,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "grid",
+      "source_point_id": "1384"
+    },
+    {
+      "tag": 1384007,
+      "x": 65.2,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "grid",
+      "source_point_id": "1384"
+    },
+    {
+      "tag": 1384009,
+      "x": 65.2,
+      "y": 27.45,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "kind": "grid",
+      "source_point_id": "1384"
+    },
+    {
+      "tag": 9015007,
+      "x": 57.25,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "structural_node": 15007,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9015009,
+      "x": 57.25,
+      "y": 27.45,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 15009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9020008,
+      "x": 61.0,
+      "y": 11.0,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "structural_node": 20008,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9020009,
+      "x": 61.0,
+      "y": 11.0,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 20009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9034009,
+      "x": 45.55,
+      "y": 27.45,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 34009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9036009,
+      "x": 45.55,
+      "y": 20.75,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 36009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9041007,
+      "x": 61.0,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "structural_node": 41007,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9041009,
+      "x": 61.0,
+      "y": 20.75,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 41009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9659008,
+      "x": 68.8,
+      "y": 11.0,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "structural_node": 659008,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9659009,
+      "x": 68.8,
+      "y": 11.0,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 659009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9786007,
+      "x": 68.8,
+      "y": 20.75,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "structural_node": 786007,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9786009,
+      "x": 68.8,
+      "y": 20.75,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 786009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9791009,
+      "x": 53.3,
+      "y": 11.0,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 791009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9792007,
+      "x": 68.8,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "structural_node": 792007,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9792009,
+      "x": 68.8,
+      "y": 27.45,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 792009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9795009,
+      "x": 53.3,
+      "y": 20.75,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 795009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 9827009,
+      "x": 53.05,
+      "y": 27.45,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 827009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 10384007,
+      "x": 65.2,
+      "y": 27.45,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "structural_node": 1384007,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 10384009,
+      "x": 65.2,
+      "y": 27.45,
+      "z": 0.0,
+      "story": "Base",
+      "story_index": 9,
+      "structural_node": 1384009,
+      "kind": "spring_ground"
+    },
+    {
+      "tag": 10384010,
+      "x": 60.99065201754386,
+      "y": 20.960964912280705,
+      "z": 14.775000000000002,
+      "story": "11_P6",
+      "story_index": 0,
+      "kind": "diaphragm_master"
+    },
+    {
+      "tag": 10384011,
+      "x": 59.4406245631068,
+      "y": 22.26067961165048,
+      "z": 13.300000000000002,
+      "story": "08_P5",
+      "story_index": 1,
+      "kind": "diaphragm_master"
+    },
+    {
+      "tag": 10384012,
+      "x": 62.04204545454548,
+      "y": 13.297727272727274,
+      "z": 11.750000000000002,
+      "story": "07_P5_m155",
+      "story_index": 2,
+      "kind": "diaphragm_master"
+    },
+    {
+      "tag": 10384013,
+      "x": 59.4406245631068,
+      "y": 22.26067961165048,
+      "z": 10.200000000000001,
+      "story": "04_P4",
+      "story_index": 3,
+      "kind": "diaphragm_master"
+    },
+    {
+      "tag": 10384014,
+      "x": 62.04204545454548,
+      "y": 13.297727272727274,
+      "z": 8.65,
+      "story": "05_P4_m155",
+      "story_index": 4,
+      "kind": "diaphragm_master"
+    },
+    {
+      "tag": 10384015,
+      "x": 59.4406245631068,
+      "y": 22.26067961165048,
+      "z": 7.1000000000000005,
+      "story": "04_P3",
+      "story_index": 5,
+      "kind": "diaphragm_master"
+    },
+    {
+      "tag": 10384016,
+      "x": 62.04204545454548,
+      "y": 13.297727272727274,
+      "z": 5.4,
+      "story": "03_P3_m170",
+      "story_index": 6,
+      "kind": "diaphragm_master"
+    },
+    {
+      "tag": 10384017,
+      "x": 58.184068804347866,
+      "y": 22.314673913043475,
+      "z": 3.7,
+      "story": "02_P2",
+      "story_index": 7,
+      "kind": "diaphragm_master"
+    },
+    {
+      "tag": 10384018,
+      "x": 62.04204545454548,
+      "y": 13.297727272727274,
+      "z": 2.0,
+      "story": "01_P2_m170",
+      "story_index": 8,
+      "kind": "diaphragm_master"
+    }
+  ],
+  "counts": {
+    "total": 737,
+    "grid": 709,
+    "master": 9,
+    "spring_ground": 19
+  },
+  "version": 1
+}
